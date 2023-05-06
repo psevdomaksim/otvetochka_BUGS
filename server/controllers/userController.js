@@ -1,0 +1,154 @@
+const ApiError = require("../error/error");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const uuid = require("uuid");
+const path = require("path");
+const { User } = require("../models/models");
+
+const generateJwt = (id, email, role) => {
+  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
+    expiresIn: "12h",
+  });
+};
+class userController {
+  async registration(req, res, next) {
+    const { fullname, email, password } = req.body;
+
+    if (!email || !password || !fullname) {
+      return next(ApiError.errorRequest("Uncorrect data"));
+    }
+    const candidate = await User.findOne({ where: { email } });
+    if (candidate) {
+      return next(
+        ApiError.errorRequest("An account with this data is already exist")
+      );
+    }
+
+    const hashPassword = await bcrypt.hash(password, 6);
+    const user = await User.create({ fullname, email, password: hashPassword });
+    const token = generateJwt(user.id, user.email, user.role);
+    return res.json({ token });
+  }
+
+  async login(req, res, next) {
+    const { email, password } = req.body;
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return next(
+        ApiError.internal("An account with this login does not exist")
+      );
+    }
+    let comparePassword = bcrypt.compareSync(password, user.password);
+    if (!comparePassword) {
+      return next(ApiError.internal("Wrong password"));
+    }
+    const token = generateJwt(user.id, user.email, user.role);
+
+    return res.json({ token });
+  }
+
+  async checkAuth(req, res) {
+    const token = generateJwt(req.user.id, req.user.email, req.user.role);
+    return res.json({ token });
+  }
+
+  async getOneUser(req, res, next) {
+    const { id } = req.params;
+    const user = await User.findOne({
+      where: { id },
+    });
+    return res.json(user);
+  }
+
+  async getAllUsers(req, res, next) {
+    User.findAll({ raw: true })
+      .then((users) => {
+        res.send(users);
+      })
+      .catch((err) => {
+        return next(ApiError.internal(err));
+      });
+  }
+
+  async deleteUser(req, res, next) {
+    const id = req.params.id;
+    User.destroy({
+      where: {
+        id: id,
+      },
+    })
+      .then((res) => {
+        return res.json({ message: "User has been deleted successfully." });
+      })
+      .catch((err) => {
+        return next(ApiError.internal(err));
+      });
+  }
+
+  async updateUser(req, res) {
+    try {
+      const { id } = req.params;
+      const { fullname, status, role } = req.body;
+
+      await User.findOne({ where: { id } }).then(async (data) => {
+        if (data) {
+          let newVal = {};
+          fullname ? (newVal.fullname = fullname) : false;
+          status ? (newVal.status = status) : false;
+          role ? (newVal.role = role) : false;
+          if (req.files) {
+            const { img } = req.files;
+            const type = img.mimetype.split("/")[1];
+            let fileName = uuid.v4() + `.${type}`;
+            img.mv(path.resolve(__dirname, "..", "static", fileName));
+            newVal.avatarImage = fileName;
+          }
+
+          await User.update(
+            {
+              ...newVal,
+            },
+            { where: { id } }
+          ).then(() => {
+            return res.json("User has been updated");
+          });
+        } else {
+          return res.json("Error 404");
+        }
+      });
+    } catch (e) {
+      return res.json(e);
+    }
+  }
+
+  async changeUserRole(req, res, next) {
+    const id = req.params.id;
+    const { role } = req.body;
+
+    if (role === "USER") {
+      User.update(
+        {
+          role: "MODER",
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      ).then((res) => {});
+    } else if (role === "MODER") {
+      User.update(
+        {
+          role: "USER",
+        },
+        {
+          where: {
+            id: id,
+          },
+        }
+      ).then((res) => {});
+    }
+  }
+}
+
+module.exports = new userController();
