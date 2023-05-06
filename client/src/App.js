@@ -1,19 +1,22 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import FooterContainer from './components/Footer/FooterContainer';
+import ProfileContainer from './components/Footer/Profile/ProfileContainer';
 import HeaderContainer from './components/Header/HeaderComponent';
 import HomePageContainer from './components/HomePage/HomePageContainer';
 
 const App = (props) => {
   return (
     <div className="app-wrapper">
+      <HeaderContainer />
       <div>
-        <HeaderContainer />
-        <HomePageContainer />
+        <Routes>
+          <Route path="homepage" element={<HomePageContainer />} />
+          <Route path="profile" element={<ProfileContainer />} />
+        </Routes>
       </div>
-      <div>
-        <FooterContainer />
-      </div>
+      <FooterContainer />
     </div>
   );
 }
