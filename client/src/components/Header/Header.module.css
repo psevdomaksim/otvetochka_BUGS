@@ -1,0 +1,12 @@
+.header {
+    background: black;
+    display: grid;
+}
+
+.upper_header {
+    background: green;
+}
+
+.lower_header {
+    background: rgb(85, 180, 228);
+}
