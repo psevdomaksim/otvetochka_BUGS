@@ -4,27 +4,44 @@ const jwt = require("jsonwebtoken");
 
 class reportController {
   async getAllReports(req, res) {
-    let { answerId, userId } = req.query;
+    let { answerId, questionId, userId } = req.query;
 
     let reports;
 
-    if (!answerId && !userId) {
+    if (!answerId && !userId && !questionId) {
       reports = await Report.findAndCountAll();
     }
 
-    if (answerId && !userId) {
-      reports = await Report.findAndCountAll({
-        where: { answerId },
-      });
-    }
-    if (!answerId && userId) {
+
+    if (!answerId && userId && !questionId) {
       reports = await Report.findAndCountAll({
         where: { userId },
       });
     }
-    if (answerId && userId) {
+
+
+    if (answerId && !userId && !questionId) {
+      reports = await Report.findAndCountAll({
+        where: { answerId },
+      });
+    }
+
+    if (answerId && userId && !questionId) {
       reports = await Report.findAndCountAll({
         where: { answerId, userId },
+      });
+    }
+
+
+    if (questionId && !userId && !answerId) {
+      reports = await Report.findAndCountAll({
+        where: { questionId },
+      });
+    }
+
+    if (questionId && userId && !answerId) {
+      reports = await Report.findAndCountAll({
+        where: { questionId, userId },
       });
     }
 
@@ -44,25 +61,51 @@ class reportController {
       });
   }
 
-  async createNewReport(req, res) {
-      const { answerId } = req.body;
+  async createNewReport(req, res, next) {
+      const { answerId, questionId } = req.body;
 
       const token = req.headers.authorization.split(" ")[1];
       const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-      await Report.findOne({
-        where: { userId: decoded.id, answerId },
-      })
-        .then(() => {
-          return res.json({ message: "You have already reported this user" });
+      if(answerId && questionId){
+        return next(ApiError.internal("Error"));
+      }
+
+
+      if(answerId && !questionId){
+        await Report.count({
+          where: { userId: decoded.id, answerId },
         })
+          .then((count) => {
+            if(count!==0) {
+              return res.json({ message: "You have already reported this answer" });
+            }
+          }) 
 
-      const report = await Report.create({
-        userId: decoded.id,
-        answerId,
-      });
+        const report = await Report.create({
+          userId: decoded.id,
+          answerId,
+        });
+        return res.json({ report });  
+      }
 
-      return res.json({ report, decoded });  
+
+      if(!answerId && questionId){
+        await Report.count({
+          where: { userId: decoded.id, questionId },
+        })
+          .then((count) => {
+            if(count!==0) {
+              return res.json({ message: "You have already reported this question" });
+            }
+          }) 
+
+        const report = await Report.create({
+          userId: decoded.id,
+          questionId,
+        });
+        return res.json({ report });  
+      }     
   }
 
   async deleteReport(req, res, next) {

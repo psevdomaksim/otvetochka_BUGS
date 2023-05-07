@@ -34,7 +34,8 @@ const User = sequelize.define("user", {
   const Report = sequelize.define("report", {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
     userId: { type: DataTypes.INTEGER, allowNull: false },
-    answerId: { type: DataTypes.INTEGER, allowNull: false },
+    answerId: { type: DataTypes.INTEGER},
+    questionId: { type: DataTypes.INTEGER},
   });
 
   const AnswerLike = sequelize.define("answer_like", {
@@ -76,6 +77,9 @@ const User = sequelize.define("user", {
 
   User.hasOne(Ban);
   Ban.belongsTo(User);
+
+  Question.hasMany(Report);
+  Report.belongsTo(Question);
 
   Answer.hasMany(Report);
   Report.belongsTo(Answer);
