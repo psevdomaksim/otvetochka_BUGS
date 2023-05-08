@@ -6,11 +6,13 @@ const questionRouter = require("./questionRouter")
 const categoryRouter = require("./categoryRouter")
 const answerRouter = require("./answerRouter")
 const reportRouter = require("./reportRouter")
+const answerLike = require("./answerLikeRouter")
 
 router.use('/user', userRouter )
 router.use('/question', questionRouter )
 router.use('/category', categoryRouter )
 router.use('/answer', answerRouter )
 router.use('/report', reportRouter )
+router.use('/answerLike', answerLike )
 
 module.exports = router;
