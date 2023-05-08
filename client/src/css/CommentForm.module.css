@@ -1,0 +1,20 @@
+.textarea {
+    background: #1F1F1F;
+    resize: none;
+    width: 100%;
+    border: none;
+}
+
+.wrapper {
+    border: #747474 2px solid;
+    border-radius: 15px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 22px;
+    box-sizing: border-box;
+    margin: 37px 0;
+}
+
+.wrapper button {
+    margin-left: 90%;
+}

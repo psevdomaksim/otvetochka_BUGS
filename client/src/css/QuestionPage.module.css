@@ -1,0 +1,15 @@
+.wrapper {
+    padding: 37px 0;
+    margin: 0 auto;
+    width: 940px;
+}
+
+.users_question_wrapper {
+    border: #747474 2px solid;
+    border-radius: 15px;
+    padding: 0px 30px 10px;
+}
+
+.comment {
+    
+}

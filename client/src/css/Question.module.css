@@ -1,0 +1,16 @@
+.question_wrapper {
+    height: 249px;
+    border: #14A76C 2px solid;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.question_wrapper h3 {
+    color: #14A76C;
+}
+
+.ava {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

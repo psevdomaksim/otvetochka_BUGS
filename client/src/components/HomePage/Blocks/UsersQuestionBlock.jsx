@@ -1,6 +1,6 @@
 import React from "react";
-import style from "./UsersQuestionBlock.module.css"
 import ava from "../../../img/ava.jpg"
+import style from "../../../css/UsersQuestionBlock.module.css"
 
 const UsersQuestionBlock = (props) => {
     return(

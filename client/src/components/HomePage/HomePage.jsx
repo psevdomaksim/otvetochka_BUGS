@@ -2,7 +2,7 @@ import React from "react";
 import ActiveUsersBlock from "./Blocks/ActiveUsersBlock";
 import AddQuestionBlock from "./Blocks/AddQuestionBlock";
 import UsersQuestionBlock from "./Blocks/UsersQuestionBlock";
-import style from "./HomePage.module.css";
+import style from "../../css/HomePage.module.css";
 
 const HomePage = (props) => {
   return (

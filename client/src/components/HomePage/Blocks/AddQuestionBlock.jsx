@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./AddQuestionBlock.module.css";
+import style from "../../../css/AddQuestionBlock.module.css";
 
 const AddQuestionBlock = (props) => {
   return (

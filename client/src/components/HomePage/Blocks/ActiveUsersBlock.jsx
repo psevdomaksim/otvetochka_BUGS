@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./ActiveUsersBlock.module.css";
+import style from "../../../css/ActiveUsersBlock.module.css";
 import ava from "../../../img/ava.jpg";
 
 const ActiveUsersBlock = (props) => {
