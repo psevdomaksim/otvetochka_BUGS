@@ -1,0 +1,84 @@
+.reg_wrapper {
+    margin: 26px auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.block {
+    width: 266px;
+    height: 160px;
+    border-radius: 15px;
+    font-size: 32px;
+    margin-bottom: 33px;
+    padding: 18px;
+}
+
+.traffic_light {
+    margin-bottom: 17px;
+    position: relative;
+}
+
+#green {
+    color:#14A76C;
+    border: #14A76C 2px solid;
+}
+
+#yellow {
+    color: #FFE400;
+    border: #FFE400 2px solid;
+}
+#red {
+    color:#FF652F;
+    border: #FF652F 2px solid;
+}
+
+.reg_form {
+    width: 530px;
+    height: 546px;
+    border: #4B4B4B 2px solid;
+    border-radius: 15px;
+    margin: 0;
+    color: #fff;
+}
+
+#reg_head {
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+#text {
+    font-size: 20px;
+}
+
+#input {
+    border-radius: 10px;
+    background: #4B4B4B;
+    width: 306px;
+    color: #fff;
+}
+
+#checkbox {
+    width: 21px;
+    height: 21px;
+}
+
+#check_text {
+    font-size: 18px;
+}
+
+#reg_button {
+    width: 261px;
+    height: 42px;
+    font-size: 20px;
+    background: #4B4B4B;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.indent {
+    margin-bottom: 66px;
+}
+
+.center {
+    margin: 0 auto 33px;
+}

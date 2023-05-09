@@ -7,13 +7,9 @@ import AddQuestionList from "../AddQuestion/AddQuestionList";
 const HomePage = (props) => {
   return (
     <div className={style.home_page_wrapper}>
-      <div>
         <AddQuestionList />
         <ActiveUsersList />
-      </div>
-      <div>
         <UsersQuestionBlock />
-      </div>
       <div>
         <button>Типа стрелка вверх</button>
       </div>
