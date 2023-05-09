@@ -1,6 +1,8 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import s from "../../css/Registration.module.css"
+import { LOGIN_ROUTE } from "../../utils/routes_consts";
 
 const Registration = (props) => {
     return (
@@ -25,6 +27,9 @@ const Registration = (props) => {
                 <Row className={s.indent}>
                     <Col><span id={s.text}>Пароль</span></Col>
                     <Col><input type="password" id={s.input } /></Col>
+                </Row>
+                <Row>
+                    <Col><span>Есть аккаунт?<Link to={LOGIN_ROUTE}> Авторизуйся!</Link></span></Col>
                 </Row>
                 <Row className={s.indent}>
                     <Col md={{span: 1}}><input type="checkbox" id={s.checkbox} /></Col>

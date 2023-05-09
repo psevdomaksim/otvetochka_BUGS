@@ -2,6 +2,7 @@ import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import s from "../../css/Login.module.css"
+import { REGISTRATION_ROUTE } from "../../utils/routes_consts";
 
 const Login = (props) => {
     return (
@@ -24,8 +25,7 @@ const Login = (props) => {
                     <Col><input type="password" id={s.input } /></Col>
                 </Row>
                 <Row>
-                    <Col md={{span: 3, offset: 3}}><span>Нет аккаунта?</span></Col>
-                    <Col md={{span: 4, offset: 0}}><Link to="/reg">Зарегистрируйся</Link></Col>
+                    <Col md={{span: 2, offset: 0}}><span>Нету аккаунта?<Link to={REGISTRATION_ROUTE}> Зарегистрируйся!!</Link></span></Col>
                 </Row>
                 <Row>
                     <Col md={{offset: 3}}><button id={s.reg_button}>Войти</button></Col>
