@@ -7,7 +7,7 @@ const { User } = require("../models/models");
 
 const generateJwt = (id, email, role) => {
   return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
-    expiresIn: "12h",
+    expiresIn: "24h",
   });
 };
 class userController {
@@ -35,12 +35,12 @@ class userController {
     const user = await User.findOne({ where: { email } });
     if (!user) {
       return next(
-        ApiError.internal("An account with this login does not exist")
+        ApiError.errorRequest("An account with this login does not exist")
       );
     }
     let comparePassword = bcrypt.compareSync(password, user.password);
     if (!comparePassword) {
-      return next(ApiError.internal("Wrong password"));
+      return next(ApiError.errorRequest("Wrong password"));
     }
     const token = generateJwt(user.id, user.email, user.role);
 
@@ -88,14 +88,21 @@ class userController {
   async updateUser(req, res) {
     try {
       const { id } = req.params;
-      const { fullname, status, role } = req.body;
+      const { fullname, status } = req.body;
+
+      const token = req.headers.authorization.split(" ")[1];
+      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
+      if (id != decoded.id) {
+        return res.json("No access");
+      }
 
       await User.findOne({ where: { id } }).then(async (data) => {
         if (data) {
           let newVal = {};
           fullname ? (newVal.fullname = fullname) : false;
           status ? (newVal.status = status) : false;
-          role ? (newVal.role = role) : false;
+
           if (req.files) {
             const { img } = req.files;
             const type = img.mimetype.split("/")[1];
@@ -122,32 +129,28 @@ class userController {
   }
 
   async changeUserRole(req, res, next) {
-    const id = req.params.id;
+    const { id } = req.params;
     const { role } = req.body;
 
-    if (role === "USER") {
-      User.update(
-        {
-          role: "MODER",
-        },
-        {
-          where: {
-            id: id,
+    await User.findOne({ where: { id } }).then(async (data) => {
+      if (data) {
+        let newVal = {};
+        role ? (newVal.role = role) : false;
+
+        await User.update(
+          {
+            ...newVal,
           },
-        }
-      ).then((res) => {});
-    } else if (role === "MODER") {
-      User.update(
-        {
-          role: "USER",
-        },
-        {
-          where: {
-            id: id,
-          },
-        }
-      ).then((res) => {});
-    }
+          { where: { id } }
+        )
+          .then(() => {
+            return res.json("Role has been updated");
+          })
+          .catch((err) => {
+            return next(ApiError.internal(err));
+          });
+      }
+    });
   }
 }
 

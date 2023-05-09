@@ -1,11 +1,12 @@
 const Router = require('express')
 const router = new Router()
 const reportController = require('../controllers/reportController');
-//const checkRole = require('../middleware/checkRoleMiddleware')
+const checkRole = require('../middlewares/checkRoleMiddleware')
+const checkBan = require('../middlewares/checkBanMiddleware')
 
-router.get("/", reportController.getAllReports);
-router.get("/:id", reportController.getOneReport);
-router.post("/", reportController.createNewReport);
-router.delete("/:id", reportController.deleteReport);
+router.get("/",checkBan, checkRole(['ADMIN', 'MODER']), reportController.getAllReports);
+router.get("/:id",checkBan, checkRole(['ADMIN', 'MODER']), reportController.getOneReport);
+router.post("/",checkBan, reportController.createNewReport);
+router.delete("/:id",checkBan, checkRole(['ADMIN', 'MODER']), reportController.deleteReport);
 
 module.exports = router;

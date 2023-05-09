@@ -1,11 +1,12 @@
 const Router = require('express')
 const router = new Router()
 const questionController = require('../controllers/questionController');
-//const checkRole = require('../middleware/checkRoleMiddleware')
+const checkRole = require('../middlewares/checkRoleMiddleware')
+const checkBan = require('../middlewares/checkBanMiddleware')
 
-router.get("/", questionController.getAllQuestions);
-router.get("/:id", questionController.getOneQuestion);
-router.post("/", questionController.createNewQuestion);
-router.delete("/:id", questionController.deleteQuestion);
+router.get("/", checkBan, questionController.getAllQuestions);
+router.get("/:id",checkBan, questionController.getOneQuestion);
+router.post("/",checkBan, questionController.createNewQuestion);
+router.delete("/:id",checkBan, checkRole(['ADMIN', 'MODER']), questionController.deleteQuestion);
 
 module.exports = router;

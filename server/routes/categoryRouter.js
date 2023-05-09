@@ -1,11 +1,12 @@
 const Router = require('express')
 const router = new Router()
 const categoryController = require('../controllers/categoryController');
-//const checkRole = require('../middleware/checkRoleMiddleware')
+const checkRole = require('../middlewares/checkRoleMiddleware')
+const checkBan = require('../middlewares/checkBanMiddleware')
 
-router.get("/", categoryController.getAllCategories);
-router.get("/:id", categoryController.getOneCategory);
-router.post("/", categoryController.createNewCategory);
-router.delete("/:id", categoryController.deleteCategory);
+router.get("/",checkBan, categoryController.getAllCategories);
+router.get("/:id",checkBan, categoryController.getOneCategory);
+router.post("/",checkBan, checkRole(['ADMIN', 'MODER']), categoryController.createNewCategory);
+router.delete("/:id",checkBan, checkRole(['ADMIN', 'MODER']), categoryController.deleteCategory);
 
 module.exports = router;

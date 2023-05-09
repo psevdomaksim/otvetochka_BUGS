@@ -44,28 +44,26 @@ class answerLikeController {
       });
   }
 
-  async createNewAnswerLike(req, res) {
+  async createNewAnswerLike(req, res, next) {
     const { answerId } = req.body;
 
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-      await AnswerLike.count({
-        where: { userId: decoded.id, answerId },
-      })
-        .then((count) => {
-          if(count!==0) {
-            return res.json({ message: "You have already liked this answer" });
-          }
-        }) 
-
-      const like = await AnswerLike.create({
-        userId: decoded.id,
-        answerId,
-      });
-      return res.json({ like });  
-  
-}
+    await AnswerLike.count({
+      where: { userId: decoded.id, answerId },
+    }).then(async count=>{
+      if (count !== 0) {
+        return next(ApiError.errorRequest("You have already liked this answer"));
+      } else{
+        const like = await AnswerLike.create({
+          userId: decoded.id,
+          answerId,
+        });
+        return res.json({ like });;
+      }
+    });
+  }
 
   async deleteAnswerLike(req, res, next) {
     const id = req.params.id;
