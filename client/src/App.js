@@ -9,6 +9,7 @@ import QuestionPage from './components/QuestionPage/QuestionPage';
 import Profile from './components/Profile/Profile';
 import Edit from './components/Edit/Edit';
 import Registration from './components/Registration/Registration';
+import Login from './components/Login/Login';
 
 const App = (props) => {
   return (
@@ -21,6 +22,7 @@ const App = (props) => {
           <Route path="/questionpage" element={<QuestionPage />} />
           <Route path="/edit" element={<Edit />} />
           <Route path="/reg" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
       <FooterContainer />

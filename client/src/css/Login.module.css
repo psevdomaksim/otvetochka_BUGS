@@ -6,17 +6,17 @@
 
 .block {
     width: 266px;
-    height: 160px;
+    height: 106px;
     border-radius: 15px;
-    font-size: 40px;
+    font-size: 32px;
     margin-bottom: 33px;
-    padding: 18px;
+    padding: 13px;
+    line-height: 35px;
     text-align: center;
 }
 
 .traffic_light {
     margin-bottom: 17px;
-    position: relative;
 }
 
 #green {
@@ -35,7 +35,7 @@
 
 .reg_form {
     width: 530px;
-    height: 546px;
+    height: 384px;
     border: #4B4B4B 2px solid;
     border-radius: 15px;
     margin: 0;
@@ -74,6 +74,7 @@
     background: #4B4B4B;
     color: #fff;
     border-radius: 15px;
+    margin-top: 20px;
 }
 
 .indent {
@@ -82,4 +83,19 @@
 
 .center {
     margin: 0 auto 33px;
+}
+
+a:link {
+    text-decoration: none;
+    color: #14A76C;
+}
+
+a:visited {
+    text-decoration: none;
+    color: #0c6541;
+}
+
+a:hover {
+    border-bottom: #0c6541 1px solid;
+    color: #0c6541;
 }
