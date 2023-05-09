@@ -10,6 +10,7 @@ import Profile from './components/Profile/Profile';
 import Edit from './components/Edit/Edit';
 import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
+import NewQuestion from './components/NewQuestion/NewQuestion';
 
 const App = (props) => {
   return (
@@ -23,6 +24,7 @@ const App = (props) => {
           <Route path="/edit" element={<Edit />} />
           <Route path="/reg" element={<Registration />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/newq" element={<NewQuestion />} />
         </Routes>
       </div>
       <FooterContainer />
