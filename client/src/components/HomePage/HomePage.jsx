@@ -1,15 +1,15 @@
 import React from "react";
-import ActiveUsersBlock from "./Blocks/ActiveUsersBlock";
-import AddQuestionBlock from "./Blocks/AddQuestionBlock";
-import UsersQuestionBlock from "./Blocks/UsersQuestionBlock";
+import UsersQuestionBlock from "../UsersQuestions/UsersQuestionList";
 import style from "../../css/HomePage.module.css";
+import ActiveUsersList from "../ActiveUsers/ActiveUsersList";
+import AddQuestionList from "../AddQuestion/AddQuestionList";
 
 const HomePage = (props) => {
   return (
     <div className={style.home_page_wrapper}>
       <div>
-        <AddQuestionBlock />
-        <ActiveUsersBlock />
+        <AddQuestionList />
+        <ActiveUsersList />
       </div>
       <div>
         <UsersQuestionBlock />

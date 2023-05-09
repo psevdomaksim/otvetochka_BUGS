@@ -1,6 +1,7 @@
 import React from "react";
 import s from "../../css/Profile.module.css"
 import ava from "../../img/ava.jpg"
+import ProfileComponent from "./ProfileComponent";
 
 const Profile = (props) => {
     return (
@@ -37,48 +38,7 @@ const Profile = (props) => {
                     <span>Вопросы</span>
                     <span>Ответы</span>
                 </div>
-                <div className={s.question}>
-                    <h4>Почему мужчины взраслеют в 45?</h4>
-                    <div>
-                        <img src="!#"/>
-                        <p>Какой-то текст</p>
-                    </div>
-                </div>
-                <div className={s.question}>
-                    <h4>Почему мужчины взраслеют в 45?</h4>
-                    <div>
-                        <img src="!#"/>
-                        <p>Какой-то текст</p>
-                    </div>
-                </div>
-                <div className={s.question}>
-                    <h4>Почему мужчины взраслеют в 45?</h4>
-                    <div>
-                        <img src="!#"/>
-                        <p>Какой-то текст</p>
-                    </div>
-                </div>
-                <div className={s.question}>
-                    <h4>Почему мужчины взраслеют в 45?</h4>
-                    <div>
-                        <img src="!#"/>
-                        <p>Какой-то текст</p>
-                    </div>
-                </div>
-                <div className={s.question}>
-                    <h4>Почему мужчины взраслеют в 45?</h4>
-                    <div>
-                        <img src="!#"/>
-                        <p>Какой-то текст</p>
-                    </div>
-                </div>
-                <div className={s.question}>
-                    <h4>Почему мужчины взраслеют в 45?</h4>
-                    <div>
-                        <img src="!#"/>
-                        <p>Какой-то текст</p>
-                    </div>
-                </div>
+                <ProfileComponent />
             </div>
             <button type="">Наверх</button>
         </div>

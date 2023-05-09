@@ -1,0 +1,11 @@
+.ava {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.common_answer_block_wrapper {
+    border-bottom: #4B4B4B 1px solid;   
+    margin-bottom: 10px;
+    color: #FFFFFF; 
+}

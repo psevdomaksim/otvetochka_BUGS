@@ -1,7 +1,7 @@
 import React from "react";
-import style from "../../../css/AddQuestionBlock.module.css";
+import style from "../../css/AddQuestion.module.css";
 
-const AddQuestionBlock = (props) => {
+const AddQuestionList = (props) => {
   return (
     <div className={style.wrapper}>
       <h3>Есть вопрос?</h3>
@@ -11,4 +11,4 @@ const AddQuestionBlock = (props) => {
   );
 };
 
-export default AddQuestionBlock;
+export default AddQuestionList;

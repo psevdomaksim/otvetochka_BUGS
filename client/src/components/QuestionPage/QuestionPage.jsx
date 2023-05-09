@@ -1,7 +1,6 @@
 import React from "react";
 import s from "../../css/QuestionPage.module.css";
-import AnswerBlock from "./AnswerBlock/AnswerBlock";
-import CommentForm from "./Comment/CommentForm";
+import AnswerList from "./AnswerList/AnswerList";
 import Question from "./Question/Question";
 
 const QuestionPage = (props) => {
@@ -11,10 +10,13 @@ const QuestionPage = (props) => {
         <div className={s.question_wrapper}>
           <Question />
         </div>
-        <CommentForm />
+        <div className={s.textarea_wrapper}>
+            <textarea className={s.textarea} placeholder="Напишите что-нибудь"></textarea>
+            <button>Отправить</button>
+        </div>
         <div className={s.users_question_wrapper}>
           <h3>Ответы пользователей</h3>
-          <AnswerBlock />
+          <AnswerList />
         </div>
       </div>
     </div>

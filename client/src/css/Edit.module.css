@@ -1,0 +1,62 @@
+.edit_wrapper {
+    width: 641px;
+    height: 709px;
+    border: #14A76C 2px solid;
+    border-radius: 15px;
+    margin: 32px auto 172px;
+    color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+.name_row{
+    margin: 50px 0px;
+}
+
+#status {
+    width: 378px;
+    height: 111px;
+}
+
+.name_row input {
+    border-radius: 10px;
+    background: #4B4B4B;
+    width: 378px;
+}
+
+#change_photo {
+    background: #4B4B4B;
+    color: #fff;
+    border-radius: 15px;
+    width: 209px;
+    letter-spacing: 1px;
+}
+
+#large_photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+#small_photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-top: 100px;
+}
+
+#save_button {
+    width: 162px;
+    border: #14A76C 2px solid;
+    background: #4B4B4B;
+    color: #fff;
+    border-radius: 15px;
+}
+
+#back_button {
+    width: 162px;
+    background: #4B4B4B;
+    color: #fff;
+    border-radius: 15px;
+}
