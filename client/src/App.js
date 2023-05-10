@@ -8,11 +8,13 @@ import HeaderContainer from "./components/Header/HeaderComponent";
 const App = () => {
   return (
     <div className="app_wrapper">
-      <HeaderContainer />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
+    <BrowserRouter>
+     <HeaderContainer />
+      <div className="content_wrapper">      
+        <AppRoutes />   
+      </div>
       <FooterContainer />
+    </BrowserRouter>
     </div>
   );
 };

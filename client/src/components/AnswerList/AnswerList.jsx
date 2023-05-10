@@ -1,6 +1,6 @@
 import React from "react";
-import ava from "../../../img/ava.jpg";
-import s from "../../../css/AnswerList.module.css";
+import ava from "../../img/ava.jpg";
+import s from "../../css/AnswerList.module.css";
 import Answer from "./Answer";
 
 const AnswerList = (props) => {

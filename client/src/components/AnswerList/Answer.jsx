@@ -1,6 +1,6 @@
 import React from "react";
-import s from "../../../css/Answer.module.css"
-import ava from "../../../img/ava.jpg"
+import s from "../../css/Answer.module.css"
+import ava from "../../img/ava.jpg"
 
 const Answer = (props) => {
   return (

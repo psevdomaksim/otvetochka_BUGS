@@ -1,7 +1,7 @@
 import React from "react";
-import s from "../../css/Profile.module.css"
-import ava from "../../img/ava.jpg"
-import ProfileComponent from "./ProfileComponent";
+import s from "../css/Profile.module.css"
+import ava from "../img/ava.jpg"
+import ProfileComponent from "../components/Profile/ProfileComponent";
 
 const Profile = (props) => {
     return (

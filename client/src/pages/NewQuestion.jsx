@@ -1,6 +1,6 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import s from "../../css/NewQuestion.module.css";
+import s from "../css/NewQuestion.module.css";
 
 const NewQuestion = (props) => {
   return (

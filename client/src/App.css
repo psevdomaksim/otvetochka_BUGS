@@ -1,3 +1,15 @@
-.app_wrapper {
-    background: #1F1F1F;
+
+
+.app_wrapper{
+  background: #1f1f1f;
+  margin: auto;
+}
+
+* {
+  margin: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
 }

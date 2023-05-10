@@ -1,15 +1,15 @@
 import React from "react";
-import s from "../../css/QuestionPage.module.css";
-import AnswerList from "./AnswerList/AnswerList";
-import Question from "./Question/Question";
+import s from "../css/QuestionPage.module.css";
+import AnswerList from "../components/AnswerList/AnswerList";
+import QuestionComponent from "../components/Question/Question";
 
-const QuestionPage = (props) => {
+const Question = (props) => {
   return (
     <div>
       <div className={s.wrapper}>
-        <div className={s.question_wrapper}>
-          <Question />
-        </div>
+         <div className={s.question_wrapper}>
+          <QuestionComponent />
+        </div> 
         <div className={s.textarea_wrapper}>
             <textarea className={s.textarea} placeholder="Напишите что-нибудь"></textarea>
             <button>Отправить</button>
@@ -23,4 +23,4 @@ const QuestionPage = (props) => {
   );
 };
 
-export default QuestionPage;
+export default Question;

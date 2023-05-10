@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
 import Container from "react-bootstrap/Container"
-import s from "../../css/Edit.module.css"
-import ava from "../../img/ava.jpg"
+import s from "../css/Edit.module.css"
+import ava from "../img/ava.jpg"
 
 const Edit = (props) => {
     return (

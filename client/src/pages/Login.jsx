@@ -1,8 +1,8 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import s from "../../css/Login.module.css"
-import { REGISTRATION_ROUTE } from "../../utils/routes_consts";
+import s from "../css/Login.module.css"
+import { REGISTRATION_ROUTE } from "../utils/routes_consts";
 
 const Login = (props) => {
     return (

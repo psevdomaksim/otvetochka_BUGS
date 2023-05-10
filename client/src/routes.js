@@ -6,24 +6,26 @@ import {
     EDIT_PROFILE_ROUTE, 
     LOGIN_ROUTE, 
     REGISTRATION_ROUTE,
+    RULES_PAGE_ROUTE,
 } from './utils/routes_consts';
 
-import HomePageContainer from "./components/HomePage/HomePageContainer";
-import QuestionPage from "./components/QuestionPage/QuestionPage";
-import Profile from "./components/Profile/Profile";
-import EditProfilePage from "./components/Edit/Edit";
-import Registration from "./components/Registration/Registration";
-import Login from "./components/Login/Login";
-import NewQuestion from "./components/NewQuestion/NewQuestion";
+import Home from "./pages/Home"
+import Question from "./pages/Question";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import Registration from "./pages/Registration";
+import Login from "./pages/Login";
+import NewQuestion from "./pages/NewQuestion";
+import Rules from "./pages/Rules";
 
 export const authRoutes = [
     {
-        path: PROFILE_ROUTE + '/:id',
+        path: PROFILE_ROUTE,
         Component: Profile
     },
     {
-        path: EDIT_PROFILE_ROUTE + '/:id',
-        Component: EditProfilePage
+        path: EDIT_PROFILE_ROUTE,
+        Component: EditProfile
     },
     {
         path: NEW_QUESTION_ROUTE,
@@ -43,11 +45,16 @@ export const publicRoutes = [
     },
     {
         path: HOME_PAGE_ROUTE,
-        Component: HomePageContainer
+        Component: Home
     },
     {
         path: QUESTION_PAGE_ROUTE,
-        Component: QuestionPage
+        Component: Question
+    }
+    ,
+    {
+        path: RULES_PAGE_ROUTE,
+        Component: Rules
     }
 ];
 
