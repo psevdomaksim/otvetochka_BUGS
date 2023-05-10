@@ -2,5 +2,19 @@
     border: #FFE400 2px solid;
     border-radius: 15px;
     color: #fff;
-    width: 691px;
+    width: 37em;
+    padding: 2em;
+}
+
+#title {
+    font-size: 28px;
+    color: #D2D2D2;
+    display: inline-block;
+    margin-bottom: 1em;
+}
+
+.items_container span {
+    margin-right: 1em;
+    font-size: 1.5em;
+    color: #D2D2D2;
 }

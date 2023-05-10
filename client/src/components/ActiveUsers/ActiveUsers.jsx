@@ -6,10 +6,11 @@ const ActiveUsers = (props) => {
   return (
       <div className={style.wrapper}>
           <img className={style.ava} src={ava} />
-          <div>
-            <p>Евгений Торгоня</p>
-            <p>1000 ответов</p>
+          <div id={style.container}>
+            <p id={style.name}>Евгений Торгоня</p>
+            <p id={style.count_answers}>1000 ответов</p>
           </div>
+            
       </div>
   );
 };

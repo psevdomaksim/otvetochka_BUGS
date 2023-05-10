@@ -1,11 +1,31 @@
 .wrapper {
-    background: red;
     width: 266px;
     border-radius: 15px;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 1em 0;
 }
 
 .ava {
     width: 50px;
     height: 50px;
     border-radius: 50%;
+    margin-right: 2em;
+}
+
+#name {
+    color: #fff;
+    font-size: 1.4em;
+    display: block;
+    margin: 0;
+}
+
+#count_answers {
+    color: #747474;
+    display: inline-block;
+    margin: 0;
+}
+
+#container {
+    display: inline-block;
 }

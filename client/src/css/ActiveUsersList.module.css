@@ -1,0 +1,18 @@
+.wrapper {
+    border: #FF652F 2px solid;
+    border-radius: 1em;
+    /* display: inline-block; */
+    width: 18em;
+    padding: 0.5em;
+}
+
+.wrapper span {
+    font-size: 24px;
+    color: #FF652F;
+    display: inline-block;
+}
+
+.container {
+    display: block;
+    text-align: center;
+}

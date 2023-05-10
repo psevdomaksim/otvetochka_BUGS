@@ -5,18 +5,23 @@
 }
 
 .block {
-    width: 266px;
-    height: 106px;
+    width: 230px;
+    box-sizing: border-box;
     border-radius: 15px;
     font-size: 32px;
     margin-bottom: 33px;
     padding: 13px;
     line-height: 35px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 .traffic_light {
-    margin-bottom: 17px;
+    display: flex;
+    flex-direction: column;
+    height: 384px;
 }
 
 #green {
@@ -31,15 +36,20 @@
 #red {
     color:#FF652F;
     border: #FF652F 2px solid;
+    margin-bottom: 0em;
 }
 
 .reg_form {
+    display: flex;
     width: 530px;
-    height: 384px;
+    max-height: 384px;
     border: #4B4B4B 2px solid;
     border-radius: 15px;
     margin: 0;
     color: #fff;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 2em;
 }
 
 #reg_head {

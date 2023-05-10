@@ -16,11 +16,22 @@ const NewQuestion = (props) => {
         </Col>
         <Col>
           <select className={s.select_list} name="category">
-            <option value="1">Значение 1</option>
-            <option value="2">Значение 2</option>
-            <option value="3">Значение 3</option>
-            <option value="4">Значение 4</option>
-            <option value="5">Значение 5</option>
+            <option value="1">Авто, Мото</option>
+            <option value="2">Бизнес, Финансы</option>
+            <option value="3">Города и Страны</option>
+            <option value="4">Гороскопы, Магия, Гадания</option>
+            <option value="5">Досуг, Развлечение</option>
+            <option value="6">Еда, Кулинария</option>
+            <option value="7">Животные, Растения</option>
+            <option value="8">Красота и Здоровье</option>
+            <option value="9">Наука, Техника, Языки</option>
+            <option value="10">Образование</option>
+            <option value="11">Общество, Политика, СМИ</option>
+            <option value="12">Семья, Дом, Дети</option>
+            <option value="13">Спорт</option>
+            <option value="14">Стиль, Мода, Звёзды</option>
+            <option value="15">Темы для взрослых</option>
+            <option value="16">Товары и услуги</option>
           </select>
         </Col>
       </Row>
@@ -40,12 +51,12 @@ const NewQuestion = (props) => {
           <textarea className={s.textarea}></textarea>
         </Col>
       </Row>
-      <Row>
-        <Col xs={{span: 5, offset: 2}}>
+      <Row className={s.row}>
+        <Col className={s.col}>
           <button id={s.publish}>Опубликовать</button>
         </Col>
-        <Col sx={{span: 2, offset: 5}}>
-        <button id={s.return}>Вернуть</button>
+        <Col className={s.col}>
+          <button id={s.return}>Вернуть</button>
         </Col>
       </Row>
     </Container>

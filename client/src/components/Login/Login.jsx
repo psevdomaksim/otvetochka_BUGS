@@ -25,7 +25,7 @@ const Login = (props) => {
                     <Col><input type="password" id={s.input } /></Col>
                 </Row>
                 <Row>
-                    <Col md={{span: 2, offset: 0}}><span>Нету аккаунта?<Link to={REGISTRATION_ROUTE}> Зарегистрируйся!!</Link></span></Col>
+                    <Col md={{span: 2, offset: 0}}><span>Нет аккаунта?<Link to={REGISTRATION_ROUTE}> Зарегистрируйся!!</Link></span></Col>
                 </Row>
                 <Row>
                     <Col md={{offset: 3}}><button id={s.reg_button}>Войти</button></Col>

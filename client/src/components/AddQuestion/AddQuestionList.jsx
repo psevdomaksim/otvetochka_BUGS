@@ -4,9 +4,9 @@ import style from "../../css/AddQuestion.module.css";
 const AddQuestionList = (props) => {
   return (
     <div className={style.wrapper}>
-      <h3>Есть вопрос?</h3>
-      <h3>Спроси у сообщества</h3>
-      <button>Спросить</button>
+      <span id={style.green}>Есть вопрос?</span>
+      <span>Спроси у сообщества</span>
+      <button id={style.ask_button}>Спросить</button>
     </div>
   );
 };

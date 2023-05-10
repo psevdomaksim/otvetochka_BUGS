@@ -6,17 +6,19 @@
 
 .block {
     width: 266px;
-    height: 160px;
     border-radius: 15px;
     font-size: 40px;
     margin-bottom: 33px;
     padding: 18px;
     text-align: center;
+    display: flex;
 }
 
 .traffic_light {
     margin-bottom: 17px;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 #green {
@@ -34,6 +36,9 @@
 }
 
 .reg_form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 530px;
     height: 546px;
     border: #4B4B4B 2px solid;

@@ -1,6 +1,5 @@
 .quest_wrapper {
     width: 691px;
-    height: 629px;
     border: 2px solid #FFE400;
     border-radius: 15px;
     margin: 38px auto 200px;
@@ -61,4 +60,14 @@
 
 .item {
     margin-bottom: 27px;
+}
+
+.col {
+    width: auto;
+    display: inline-block;
+}
+
+.row {
+    display: flex;
+    justify-content: space-evenly;
 }
