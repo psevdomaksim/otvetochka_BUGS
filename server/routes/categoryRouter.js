@@ -4,8 +4,8 @@ const categoryController = require('../controllers/categoryController');
 const checkRole = require('../middlewares/checkRoleMiddleware')
 const checkBan = require('../middlewares/checkBanMiddleware')
 
-router.get("/",checkBan, categoryController.getAllCategories);
-router.get("/:id",checkBan, categoryController.getOneCategory);
+router.get("/", categoryController.getAllCategories);
+router.get("/:id", categoryController.getOneCategory);
 router.post("/",checkBan, checkRole(['ADMIN', 'MODER']), categoryController.createNewCategory);
 router.delete("/:id",checkBan, checkRole(['ADMIN', 'MODER']), categoryController.deleteCategory);
 

@@ -14,8 +14,34 @@ import {
   REGISTRATION_ROUTE,
   LOGIN_ROUTE
 } from "../../utils/routes_consts";
+import { useContext } from "react";
+import { StoreContext } from "../..";
+import { fetchCategoriesTC } from "../../Redux/ActionCreators/categoryAC";
+import { useEffect } from "react";
+import { useState } from "react";
 
-const Header = (props) => {
+
+const Header = () => {
+
+  const store = useContext(StoreContext);
+
+  const [categories, setCategories] = useState([])
+
+  const fetchCategories = () => {
+    store.dispatch(fetchCategoriesTC());
+  };
+
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+
+  store.subscribe(() => {
+    setCategories(store.getState().categoryPage.categories);
+  });
+
+
   return (
     <header>
       <Container className={s.container}>
@@ -33,7 +59,17 @@ const Header = (props) => {
           <Col xs={2}>
             <Link to={NEW_QUESTION_ROUTE}>Спросить</Link>
           </Col>
-          <Col xs={2}>Категории</Col>
+          <Col xs={2}>
+          <select className={s.select_list} name="Категории">
+              {
+                categories.map((category)=>(
+                  <option value={category.id}>{category.name}</option>
+                ))
+              }
+
+          
+            </select>
+            </Col>
           <Col xs={2}>
             <Link to={RULES_PAGE_ROUTE}>Правила</Link>
           </Col>
