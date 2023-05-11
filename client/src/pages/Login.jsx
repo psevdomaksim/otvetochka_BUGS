@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import s from "../css/Login.module.css";
 import { REGISTRATION_ROUTE } from "../utils/routes_consts";
@@ -29,7 +29,7 @@ const Login = (props) => {
             <span id={s.text}>Почта</span>
           </Col>
           <Col>
-            <input id={s.input} />
+          <Form.Control type="text" id={s.input} />
           </Col>
         </Row>
         <Row className={s.indent}>
@@ -37,7 +37,7 @@ const Login = (props) => {
             <span id={s.text}>Пароль</span>
           </Col>
           <Col>
-            <input type="password" id={s.input} />
+            <Form.Control type="password" id={s.input} />
           </Col>
         </Row>
         <Row>
