@@ -1,22 +1,21 @@
 .reg_wrapper {
-    margin: 26px auto;
+    margin: 1em auto;
     display: flex;
-    justify-content: space-evenly;
 }
 
 .block {
-    width: 266px;
+    width: 7em;
     border-radius: 15px;
-    font-size: 40px;
-    margin-bottom: 33px;
-    padding: 18px;
+    font-size: 2.5em;
+    margin-bottom: 0.3em;
+    padding: 0.2em;
     text-align: center;
     display: flex;
 }
 
 .traffic_light {
-    margin-bottom: 17px;
-    position: relative;
+    margin-bottom: 1em;
+    margin-left: 18.5em;
     display: flex;
     flex-direction: column;
 }
@@ -33,58 +32,66 @@
 #red {
     color:#FF652F;
     border: #FF652F 2px solid;
+    margin-bottom: 0;
 }
 
 .reg_form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 530px;
-    height: 546px;
+    width: 35em;
     border: #4B4B4B 2px solid;
-    border-radius: 15px;
-    margin: 0;
+    border-radius: 1em;
     color: #fff;
+    display: block;
+    margin-left: 5em;
 }
 
 #reg_head {
-    font-size: 32px;
+    font-size: 2em;
     letter-spacing: 1px;
 }
 
 #text {
-    font-size: 20px;
+    font-size: 1.25em;
 }
 
 #input {
-    border-radius: 10px;
+    border-radius: 0.625em;
     background: #4B4B4B;
-    width: 306px;
+    width: 19em;
     color: #fff;
 }
 
 #checkbox {
-    width: 21px;
-    height: 21px;
+    width: 1.3125em;
+    height: 1.3125em;
+    vertical-align: middle;
 }
 
 #check_text {
-    font-size: 18px;
+    font-size: 1.125em;
+    margin-left: 1em;
+    vertical-align: middle;
 }
 
 #reg_button {
-    width: 261px;
-    height: 42px;
-    font-size: 20px;
+    width: 13em;
+    height: 2em;
+    font-size: 1.3em;
     background: #4B4B4B;
     color: #fff;
-    border-radius: 15px;
+    border-radius: 1em;
 }
 
 .indent {
-    margin-bottom: 30px;
+    margin-bottom: 2em;
+    display: flex;
 }
 
 .center {
-    margin: 0 auto 33px;
+    margin: 0 auto 2em;
+}
+
+#middle {
+    display: flex;
+    margin: 0 auto 2em;
+    justify-content: center;
 }

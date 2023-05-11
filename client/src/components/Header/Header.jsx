@@ -51,7 +51,7 @@ const Header = () => {
           <Col md={{ span: 2, offset: 2 }}><Link to={LOGIN_ROUTE}>Войти</Link></Col>
         </Row>
         <Row className={s.lower_header}>
-          <Col xs={3}>
+          <Col xs={2}>
             <Link to={HOME_PAGE_ROUTE}>
               <Image src={logo} />
             </Link>
@@ -59,15 +59,13 @@ const Header = () => {
           <Col xs={2}>
             <Link to={NEW_QUESTION_ROUTE}>Спросить</Link>
           </Col>
-          <Col xs={2}>
+          <Col xs={3}>
           <select className={s.select_list} name="Категории">
               {
                 categories.map((category)=>(
                   <option value={category.id}>{category.name}</option>
                 ))
               }
-
-          
             </select>
             </Col>
           <Col xs={2}>

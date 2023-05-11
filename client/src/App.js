@@ -4,6 +4,7 @@ import "./App.css";
 import AppRoutes from "./components/AppRoutes";
 import FooterContainer from "./components/Footer/FooterContainer";
 import HeaderContainer from "./components/Header/HeaderComponent";
+import "../node_modules/bootstrap-icons/font/bootstrap-icons.css"
 
 const App = () => {
   return (

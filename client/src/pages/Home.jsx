@@ -8,21 +8,24 @@ import { Link } from "react-router-dom";
 const Home = (props) => {
   return (
     <div className={style.home_page_wrapper}>
-      <div>
+      <div className={style.left_box_wrapper}>
         <div className={style.wrapper}>
           <span id={style.green}>Есть вопрос?</span>
           <Link to={NEW_QUESTION_ROUTE}>
             <span>Спроси у сообщества</span>
           </Link>
-
-          <button id={style.ask_button}>Спросить</button>
+          <button type="button" class="btn btn-success">
+            Спросить
+          </button>
         </div>
         <ActiveUsersList />
       </div>
       <UsersQuestionList />
       <div className={style.break}></div>
       <div>
-        <button>Типа стрелка вверх</button>
+        <button id={style.button_up} type="button" class="btn btn-outline-success">
+          <i class="bi bi-chevron-up"></i>
+        </button>
       </div>
     </div>
   );
