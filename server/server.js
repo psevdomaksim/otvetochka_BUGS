@@ -5,6 +5,7 @@ const router = require("./routes/index")
 var cors = require('cors')
 const sequelize = require("./db")
 const path = require('path')
+const errorHandler = require('./middlewares/errorHandlingMiddleware')
 
 const app = express()
 
@@ -12,7 +13,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.static(path.resolve(__dirname,'static')))
 app.use('/api', router)
-
+app.use(errorHandler)
 
 //  const localtunnel = require('localtunnel');
 // (async () => {

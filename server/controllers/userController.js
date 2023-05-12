@@ -5,8 +5,8 @@ const uuid = require("uuid");
 const path = require("path");
 const { User } = require("../models/models");
 
-const generateJwt = (id, email, role) => {
-  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
+const generateJwt = (id, fullname, email, role, avatarImage, status, createdAt) => {
+  return jwt.sign({ id, fullname, email, role, avatarImage, status, createdAt }, process.env.SECRET_KEY, {
     expiresIn: "24h",
   });
 };
@@ -26,7 +26,8 @@ class userController {
 
     const hashPassword = await bcrypt.hash(password, 6);
     const user = await User.create({ fullname, email, password: hashPassword });
-    const token = generateJwt(user.id, user.email, user.role);
+    const token = generateJwt(user.id, user.fullname, user.email, user.role, user.avatarImage, user.status, user.createdAt);
+   
     return res.json({ token });
   }
 
@@ -42,13 +43,12 @@ class userController {
     if (!comparePassword) {
       return next(ApiError.errorRequest("Wrong password"));
     }
-    const token = generateJwt(user.id, user.email, user.role);
-
+    const token = generateJwt(user.id, user.fullname, user.email, user.role, user.avatarImage, user.status, user.createdAt);
     return res.json({ token });
   }
 
   async checkAuth(req, res) {
-    const token = generateJwt(req.user.id, req.user.email, req.user.role);
+    const token = generateJwt(req.user.id, req.user.fullname, req.user.email, req.user.role, req.user.avatarImage, req.user.status, req.user.createdAt);
     return res.json({ token });
   }
 

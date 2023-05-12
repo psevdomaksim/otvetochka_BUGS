@@ -20,11 +20,11 @@ import Rules from "./pages/Rules";
 
 export const authRoutes = [
     {
-        path: PROFILE_ROUTE,
+        path: PROFILE_ROUTE + "/:id",
         Component: Profile
     },
     {
-        path: EDIT_PROFILE_ROUTE,
+        path: EDIT_PROFILE_ROUTE + "/:id",
         Component: EditProfile
     },
     {
