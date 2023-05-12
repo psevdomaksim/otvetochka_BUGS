@@ -4,7 +4,7 @@ let initialState = {
   categories: [],
 };
 
-const usersReducer = (state = initialState, action) => {
+const categoryReducer = (state = initialState, action) => {
   switch (action.type) {
 
     case FETCH_CATEGORIES: {
@@ -18,4 +18,4 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export default usersReducer;
+export default categoryReducer;

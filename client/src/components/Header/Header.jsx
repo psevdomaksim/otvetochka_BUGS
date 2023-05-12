@@ -12,7 +12,8 @@ import {
   NEW_QUESTION_ROUTE,
   RULES_PAGE_ROUTE,
   REGISTRATION_ROUTE,
-  LOGIN_ROUTE
+  LOGIN_ROUTE,
+  PROFILE_ROUTE
 } from "../../utils/routes_consts";
 import { useContext } from "react";
 import { StoreContext } from "../..";
@@ -20,6 +21,7 @@ import { fetchCategoriesTC } from "../../Redux/ActionCreators/categoryAC";
 import { useEffect } from "react";
 import { useState } from "react";
 import { logoutAC } from "../../Redux/ActionCreators/authAC";
+import { BASE_URL } from "../../utils/baseURL_const";
 
 
 const Header = () => {
@@ -28,6 +30,7 @@ const Header = () => {
 
   const [categories, setCategories] = useState([])
   const [isAuth, setAuth] = useState(false)
+  const [curLogin, setCurLogin] = useState(store.getState().authPage.currentLogin)
 
   const fetchCategories = () => {
     store.dispatch(fetchCategoriesTC());
@@ -42,6 +45,8 @@ const Header = () => {
   store.subscribe(() => {
     setCategories(store.getState().categoryPage.categories);
     setAuth(store.getState().authPage.isAuth)
+    setCurLogin(store.getState().authPage.currentLogin)
+
   });
 
   const logout = () =>{
@@ -53,10 +58,25 @@ const Header = () => {
     <header>
       <Container className={s.container}>
         <Row className={s.upper_header}>
-          <Col md={10}></Col>
+          <Col md={8}></Col>
           {isAuth ?
-           
+          <>
+          <Col xs={2}>
+            <Link to = {PROFILE_ROUTE + `/${curLogin.id}`}>
+           <Image
+            src={BASE_URL+`/${curLogin?.avatarImage}`}
+            style={{width:'50px', height:'50px'}}
+            roundedCircle
+           >
+           </Image>
+           {
+            curLogin.fullname
+           }
+          </Link>
+          </Col>
              <Col xs={2}><Button onClick={logout}>Выйти</Button></Col>
+          </>
+            
          :
           <>
            <Col md={{ span: 2, offset: 2 }}><Link to={REGISTRATION_ROUTE}>Регистрация</Link></Col>
