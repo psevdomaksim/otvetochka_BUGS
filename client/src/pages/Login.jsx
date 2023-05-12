@@ -44,7 +44,7 @@ const Login = (props) => {
           <Col md={{ span: 2, offset: 0 }}>
             <span>
               Нет аккаунта?
-              <Link to={REGISTRATION_ROUTE}> Зарегистрируйся!!</Link>
+              <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!!</Link>
             </span>
           </Col>
         </Row>

@@ -11,6 +11,7 @@ const UsersQuestionList = (props) => {
         <span>Популярные</span>
         <span>Лучшие</span>
       </div>
+      <hr />
       <UsersQuestion />
     </div>
   );
