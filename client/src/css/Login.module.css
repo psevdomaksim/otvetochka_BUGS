@@ -1,7 +1,7 @@
 .reg_wrapper {
     margin: 26px auto;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .block {
@@ -21,7 +21,7 @@
 .traffic_light {
     display: flex;
     flex-direction: column;
-    height: 384px;
+    margin-right: 3em;
 }
 
 #green {
@@ -41,7 +41,7 @@
 
 .reg_form {
     display: flex;
-    width: 530px;
+    width: 40%;
     max-height: 384px;
     border: #4B4B4B 2px solid;
     border-radius: 15px;
@@ -61,10 +61,10 @@
     font-size: 20px;
 }
 
-#input {
+.input {
     border-radius: 10px;
     background: #4B4B4B;
-    width: 306px;
+    width: 20em;
     color: #fff;
 }
 

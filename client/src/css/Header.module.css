@@ -1,8 +1,6 @@
-
 .container{
     color: white;
     max-width: 100%;
-    
 }
 
 .upper_header {
@@ -32,3 +30,8 @@
    font-size: 18px;
 }
 
+.select_list {
+    background: #4B4B4B;
+    color: #fff;
+    border-radius: 0.3em;
+}

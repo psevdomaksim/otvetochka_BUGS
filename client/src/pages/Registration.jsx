@@ -28,12 +28,11 @@ const Registration = (props) => {
                     <Col><span id={s.text}>Пароль</span></Col>
                     <Col><input type="password" id={s.input } /></Col>
                 </Row>
-                <Row className={s.indent}>
-                    <Col><span>Есть аккаунт?<Link to={LOGIN_ROUTE}> Авторизуйся!</Link></span></Col>
+                <Row>
+                    <Col id={s.middle}><span>Есть аккаунт?<Link to={LOGIN_ROUTE}> Авторизуйся!</Link></span></Col>
                 </Row>
                 <Row className={s.indent}>
-                    <Col xs={{span: 1, offset: 0}}><input type="checkbox" id={s.checkbox} /><span id={s.check_text}>Ознакомлен и согласен с правилами проекта</span></Col>
-                    {/* <Col xs={{span: 1, offset: 1}}></Col> */}
+                    <Col xs={{span: 10, offset: 1}}><input type="checkbox" id={s.checkbox} /><span id={s.check_text}>Ознакомлен и согласен с правилами проекта</span></Col>
                 </Row>
                 <Row>
                     <Col md={{offset: 3}}><button id={s.reg_button}>Зарегистрироваться</button></Col>
