@@ -17,7 +17,6 @@ export const login = async (email, password) => {
     password
   });
   localStorage.setItem("token", data.token);  
-  //localStorage.removeItem('token')
   return jwt_token(data.token);
 };
 

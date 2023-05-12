@@ -16,7 +16,7 @@ const authReducer = (state = initialState, action) => {
     }
 
     case LOG_OUT:{
-
+      
       state = { ...state, currentLogin: null, isAuth: false};
       return state;
     }

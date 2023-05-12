@@ -69,11 +69,12 @@ export const loginTC = (email, password) => {
 
 // // log out
 
-// export const logoutActionCreator = () => {
-//   return {
-//     type: LOG_OUT
-//   };
-// };
+export const logoutAC = () => {
+  localStorage.removeItem("token");
+  return {
+    type: LOG_OUT,
+  };
+};
 
 // set login
 

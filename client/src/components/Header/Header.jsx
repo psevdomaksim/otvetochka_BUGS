@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Image } from "react-bootstrap";
+import { Button, Form, Image } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -19,6 +19,7 @@ import { StoreContext } from "../..";
 import { fetchCategoriesTC } from "../../Redux/ActionCreators/categoryAC";
 import { useEffect } from "react";
 import { useState } from "react";
+import { logoutAC } from "../../Redux/ActionCreators/authAC";
 
 
 const Header = () => {
@@ -26,6 +27,7 @@ const Header = () => {
   const store = useContext(StoreContext);
 
   const [categories, setCategories] = useState([])
+  const [isAuth, setAuth] = useState(false)
 
   const fetchCategories = () => {
     store.dispatch(fetchCategoriesTC());
@@ -39,16 +41,29 @@ const Header = () => {
 
   store.subscribe(() => {
     setCategories(store.getState().categoryPage.categories);
+    setAuth(store.getState().authPage.isAuth)
   });
+
+  const logout = () =>{
+    store.dispatch(logoutAC());
+  }
 
 
   return (
     <header>
       <Container className={s.container}>
         <Row className={s.upper_header}>
-          <Col md={4}></Col>
-          <Col md={{ span: 2, offset: 2 }}><Link to={REGISTRATION_ROUTE}>Регистрация</Link></Col>
-          <Col md={{ span: 2, offset: 2 }}><Link to={LOGIN_ROUTE}>Войти</Link></Col>
+          <Col md={10}></Col>
+          {isAuth ?
+           
+             <Col xs={2}><Button onClick={logout}>Выйти</Button></Col>
+         :
+          <>
+           <Col md={{ span: 2, offset: 2 }}><Link to={REGISTRATION_ROUTE}>Регистрация</Link></Col>
+           <Col md={{ span: 2, offset: 2 }}><Link to={LOGIN_ROUTE}>Войти</Link></Col>
+           </>
+          }
+         
         </Row>
         <Row className={s.lower_header}>
           <Col xs={2}>
