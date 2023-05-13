@@ -12,11 +12,13 @@ const Home = (props) => {
         <div className={style.wrapper}>
           <span id={style.green}>Есть вопрос?</span>
           <span className={style.ask_text}>
-            <Link to={NEW_QUESTION_ROUTE}>Спроси у сообщества</Link>
+          Спроси у сообщества
           </span>
+          <Link to={NEW_QUESTION_ROUTE}>
           <button type="button" class="btn btn-success">
             Спросить
           </button>
+          </Link>
         </div>
         <ActiveUsersList />
       </div>

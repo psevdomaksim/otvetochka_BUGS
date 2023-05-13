@@ -108,7 +108,6 @@ const Profile = (props) => {
         <h3>Активность пользователся</h3>
         <div>
           <span>Вопросы</span>
-          <span>Ответы</span>
         </div>
         <ProfileComponent />
       </div>

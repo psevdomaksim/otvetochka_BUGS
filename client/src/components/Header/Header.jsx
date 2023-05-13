@@ -1,5 +1,10 @@
 import React from "react";
-import { DropdownButton, Form, Image, Dropdown, ButtonGroup, Button } from "react-bootstrap";
+import {
+  Form,
+  Image,
+  Dropdown,
+  Button,
+} from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -11,7 +16,6 @@ import {
   HOME_PAGE_ROUTE,
   NEW_QUESTION_ROUTE,
   RULES_PAGE_ROUTE,
-  REGISTRATION_ROUTE,
   LOGIN_ROUTE,
   PROFILE_ROUTE,
 } from "../../utils/routes_consts";
@@ -25,7 +29,6 @@ import DropdownItem from "react-bootstrap/esm/DropdownItem";
 import { logoutAC } from "../../Redux/ActionCreators/authAC";
 import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
-
 
 import { BASE_URL } from "../../utils/baseURL_const";
 
@@ -62,14 +65,31 @@ const Header = () => {
         <Row>
           {isAuth ? (
             <Col className={s.upper_header}>
-              <Button id={s.enter_button} variant="success" size="sm" onClick={logout}>
+              <Link to={PROFILE_ROUTE + `/${curLogin.id}`}>
+                <Image
+                  src={BASE_URL + `/${curLogin?.avatarImage}`}
+                  className="me-2"
+                  style={{ width: "50px", height: "50px" }}
+                  roundedCircle
+                />
+           
+              </Link>
+               <Link  className="me-5" to={PROFILE_ROUTE + `/${curLogin.id}`}>{curLogin.fullname}</Link>
+              <Button
+                id={s.enter_button}
+                variant="success"
+                size="sm"
+                onClick={logout}
+              >
                 Выйти
               </Button>
             </Col>
           ) : (
             <>
               <Col className={s.upper_header}>
-                  <Button id={s.enter_button} variant="success" size="sm"><Link  to={LOGIN_ROUTE}>Войти</Link></Button>
+                <Button id={s.enter_button} variant="success" size="sm">
+                  <Link to={LOGIN_ROUTE}>Войти</Link>
+                </Button>
               </Col>
             </>
           )}
@@ -85,10 +105,10 @@ const Header = () => {
           </Col>
           <Col xs={3}>
             <Dropdown>
-              <DropdownToggle size="lg" variant="dark" id="dropdown-basic">
+              <DropdownToggle size="lg" variant="dark" >
                 Категории
               </DropdownToggle>
-              <DropdownMenu>
+              <DropdownMenu variant="dark">
                 {categories.map((category) => (
                   <DropdownItem eventKey={category.id}>
                     {category.name}
