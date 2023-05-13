@@ -7,12 +7,12 @@ const UsersQuestion = (props) => {
         <div className={s.wrapper}>
             <div>
                 <h4>Название вопроса</h4>
-                <div>
+                <div className={s.question_container}>
                     <img className={s.ava} src={ava} />
                     <p>Подробнее о вопросе</p>
                 </div>
                 <div>
-                    <p>Пользователь, время, категория</p>
+                    <p className={s.signature}>Пользователь, время, категория</p>
                 </div>
             </div>
         </div>

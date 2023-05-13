@@ -106,7 +106,7 @@ const Login = (props) => {
 
             <span>
               Нет аккаунта?
-              <Link to={REGISTRATION_ROUTE}> Зарегистрируйся!!</Link>
+              <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!!</Link>
             </span>
 
         </Row>
