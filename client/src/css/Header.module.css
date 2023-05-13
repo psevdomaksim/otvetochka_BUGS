@@ -8,18 +8,15 @@
     display: flex;
     justify-content: end;
     align-items: center;
-    padding: 0.2em;
+    padding: 0.3em;
 }
 
-
+.upper_header > button > a {
+    font-size: 1.2em;
+}
 
 #enter_button {
     color: #151515;
-}
-
-.upper_header a {
-    margin-right: 1em;
-
 }
 
 .upper_header a:hover {

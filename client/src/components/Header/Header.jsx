@@ -59,15 +59,14 @@ const Header = () => {
         <Row>
           {isAuth ? (
             <Col className={s.upper_header}>
-              <Button size="sm" onClick={logout}>
+              <Button variant="success" size="sm" onClick={logout}>
                 Выйти
               </Button>
             </Col>
           ) : (
             <>
               <Col className={s.upper_header}>
-                <Link to={REGISTRATION_ROUTE}>Регистрация</Link>
-                <Link to={LOGIN_ROUTE}>Войти</Link>
+                  <Button variant="success" size="sm"><Link id={s.enter_button}  to={LOGIN_ROUTE}>Войти</Link></Button>
               </Col>
             </>
           )}
@@ -83,13 +82,15 @@ const Header = () => {
           </Col>
           <Col xs={3}>
             <Dropdown>
-              <DropdownToggle variant="success" id="dropdown-basic">
+              <DropdownToggle size="lg" variant="dark" id="dropdown-basic">
                 Категории
               </DropdownToggle>
               <DropdownMenu>
-              {categories.map((category)=>(
-                <DropdownItem eventKey={category.id}>{category.name}</DropdownItem>
-              ))}
+                {categories.map((category) => (
+                  <DropdownItem eventKey={category.id}>
+                    {category.name}
+                  </DropdownItem>
+                ))}
               </DropdownMenu>
             </Dropdown>
           </Col>

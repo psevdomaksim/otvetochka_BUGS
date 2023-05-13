@@ -105,7 +105,7 @@ a:visited {
     color: #0c6541;
 }
 
-a:hover {
+span a:hover {
     border-bottom: #0c6541 1px solid;
     color: #0c6541;
 }
