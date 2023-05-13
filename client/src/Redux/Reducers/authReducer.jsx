@@ -1,37 +1,61 @@
-import { API_ERROR, LOGIN, SET_LOGIN, LOG_OUT, SET_LOADING } from "../../utils/AC_consts";
+import {
+  API_ERROR,
+  LOGIN,
+  SET_LOGIN,
+  LOG_OUT,
+  SET_LOADING,
+  UPDATE_PROFILE_DATA,
+} from "../../utils/AC_consts";
 
 let initialState = {
   currentLogin: null,
   isAuth: false,
   isLoading: true,
-  error: null
+  error: null,
+  msg: null,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-
-    case LOGIN:{    
-      state = { ...state, currentLogin: action.user, isAuth: true, isLoading: false};
+    case LOGIN: {
+      state = {
+        ...state,
+        currentLogin: action.user,
+        isAuth: true,
+        isLoading: false,
+      };
       return state;
     }
 
-    case LOG_OUT:{
-      
-      state = { ...state, currentLogin: null, isAuth: false};
+    case LOG_OUT: {
+      state = { ...state, currentLogin: null, isAuth: false };
       return state;
     }
 
-    case SET_LOGIN:{    
-      state = { ...state, currentLogin: action.user, isAuth: true, isLoading: false};
+    case SET_LOGIN: {
+      state = {
+        ...state,
+        currentLogin: action.user,
+        isAuth: true,
+        isLoading: false,
+      };
       return state;
     }
 
-    case API_ERROR:{
+    case UPDATE_PROFILE_DATA: {
+      state = {
+        ...state,
+        currentLogin: action.user,
+      };
+      return state;
+    }
+
+    case API_ERROR: {
       state = { ...state, error: action.data };
       return state;
     }
 
-    case SET_LOADING:{
+    case SET_LOADING: {
       state = { ...state, isLoading: false };
     }
 

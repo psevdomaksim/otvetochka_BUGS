@@ -11,9 +11,9 @@ const Home = (props) => {
       <div className={style.left_box_wrapper}>
         <div className={style.wrapper}>
           <span id={style.green}>Есть вопрос?</span>
-          <Link to={NEW_QUESTION_ROUTE}>
-            <span>Спроси у сообщества</span>
-          </Link>
+          <span className={style.ask_text}>
+            <Link to={NEW_QUESTION_ROUTE}>Спроси у сообщества</Link>
+          </span>
           <button type="button" class="btn btn-success">
             Спросить
           </button>
@@ -23,7 +23,11 @@ const Home = (props) => {
       <UsersQuestionList />
       <div className={style.break}></div>
       <div>
-        <button id={style.button_up} type="button" class="btn btn-outline-success">
+        <button
+          id={style.button_up}
+          type="button"
+          class="btn btn-outline-success"
+        >
           <i class="bi bi-chevron-up"></i>
         </button>
       </div>

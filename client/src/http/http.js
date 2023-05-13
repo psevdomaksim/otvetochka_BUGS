@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/baseURL_const";
 
 const $host = axios.create({
     baseURL: BASE_URL
+
 })
 
 const $authHost = axios.create({

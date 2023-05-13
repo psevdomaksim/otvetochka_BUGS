@@ -12,7 +12,8 @@ import {
   NEW_QUESTION_ROUTE,
   RULES_PAGE_ROUTE,
   REGISTRATION_ROUTE,
-  LOGIN_ROUTE
+  LOGIN_ROUTE,
+  PROFILE_ROUTE,
 } from "../../utils/routes_consts";
 import { useContext } from "react";
 import { StoreContext } from "../..";
@@ -26,32 +27,34 @@ import DropdownToggle from "react-bootstrap/esm/DropdownToggle";
 import DropdownMenu from "react-bootstrap/esm/DropdownMenu";
 
 
+import { BASE_URL } from "../../utils/baseURL_const";
 
 const Header = () => {
   const store = useContext(StoreContext);
 
-  const [categories, setCategories] = useState([])
-  const [isAuth, setAuth] = useState(false)
+  const [categories, setCategories] = useState([]);
+  const [isAuth, setAuth] = useState(false);
+  const [curLogin, setCurLogin] = useState(
+    store.getState().authPage.currentLogin
+  );
 
   const fetchCategories = () => {
     store.dispatch(fetchCategoriesTC());
   };
 
-
   useEffect(() => {
     fetchCategories();
   }, []);
 
-
   store.subscribe(() => {
     setCategories(store.getState().categoryPage.categories);
-    setAuth(store.getState().authPage.isAuth)
+    setAuth(store.getState().authPage.isAuth);
+    setCurLogin(store.getState().authPage.currentLogin);
   });
 
-  const logout = () =>{
+  const logout = () => {
     store.dispatch(logoutAC());
-  }
-
+  };
 
   return (
     <header>
@@ -59,14 +62,14 @@ const Header = () => {
         <Row>
           {isAuth ? (
             <Col className={s.upper_header}>
-              <Button variant="success" size="sm" onClick={logout}>
+              <Button id={s.enter_button} variant="success" size="sm" onClick={logout}>
                 Выйти
               </Button>
             </Col>
           ) : (
             <>
               <Col className={s.upper_header}>
-                  <Button variant="success" size="sm"><Link id={s.enter_button}  to={LOGIN_ROUTE}>Войти</Link></Button>
+                  <Button id={s.enter_button} variant="success" size="sm"><Link  to={LOGIN_ROUTE}>Войти</Link></Button>
               </Col>
             </>
           )}

@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import s from "../css/Registration.module.css"
 import { LOGIN_ROUTE } from "../utils/routes_consts";
@@ -35,7 +35,7 @@ const Registration = (props) => {
                     <Col xs={{span: 10, offset: 1}}><input type="checkbox" id={s.checkbox} /><span id={s.check_text}>Ознакомлен и согласен с правилами проекта</span></Col>
                 </Row>
                 <Row>
-                    <Col md={{offset: 3}}><button id={s.reg_button}>Зарегистрироваться</button></Col>
+                    <Col md={{offset: 3}}><Button variant="dark" id={s.reg_button}>Зарегистрироваться</Button></Col>
                 </Row>
             </Container>
         </div>

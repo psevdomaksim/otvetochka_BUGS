@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import { Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "..";
 import s from "../css/Login.module.css";
@@ -73,12 +73,12 @@ const Login = (props) => {
             />
           </Col>
           {email === "" ? (
-              <Col xs={2} className="d-flex align-items-center">
-                <b style={{ color: "red" }}>Введите почту</b>
-              </Col>
-            ) : (
-              <></>
-            )}
+            <Col xs={2} className="d-flex align-items-center">
+              <b style={{ color: "red" }}>Введите почту</b>
+            </Col>
+          ) : (
+            <></>
+          )}
         </Row>
         <Row className="mb-3">
           <Col className="d-flex align-items-center" xs={2}>
@@ -95,31 +95,27 @@ const Login = (props) => {
             />
           </Col>
           {password === "" ? (
-              <Col xs={2} className="d-flex align-items-center">
-                <b style={{ color: "red" }}>Введите пароль</b>
-              </Col>
-            ) : (
-              <></>
-            )}
+            <Col xs={2} className="d-flex align-items-center">
+              <b style={{ color: "red" }}>Введите пароль</b>
+            </Col>
+          ) : (
+            <></>
+          )}
         </Row>
         <Row className="d-flex justify-content-between mt-3 pr-3 pl-3">
-
-            <span>
-              Нет аккаунта?
-              <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!!</Link>
-            </span>
-
+          <span className={s.text_regr}>
+            Нет аккаунта?
+            <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!!</Link>
+          </span>
         </Row>
         <Row>
           <Col xs={12}>
-            <button id={s.reg_button} onClick={login}>
+            <Button variant="dark" id={s.reg_button} onClick={login}>
               Войти
-            </button>
+            </Button>
           </Col>
         </Row>
-        <Row>
-          {errorMsg}
-        </Row>
+        <Row>{errorMsg}</Row>
       </Container>
     </div>
   );

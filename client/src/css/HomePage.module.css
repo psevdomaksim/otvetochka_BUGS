@@ -36,6 +36,15 @@
     color: #14A76C;
 }
 
+.ask_text a {
+    color: #14A76C;
+}
+
+.ask_text a:hover {
+    border-bottom: #0c6541 1px solid;
+    color: #0c6541;
+}
+
 #ask_button {
     font-size: 20px;
     margin-top: 1em;
