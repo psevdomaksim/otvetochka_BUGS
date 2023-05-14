@@ -25,7 +25,7 @@ const UserQuestion = (props) => {
         </Row>
 
         <Row className={s.question_container}>
-          <Col xs={1}>
+          <Col xs={2}>
             <Link to={PROFILE_ROUTE + `/${props.question?.userId}`}>
               <Image
                 src={BASE_URL + `/${props.question?.userAvatar}`}
@@ -35,7 +35,7 @@ const UserQuestion = (props) => {
             </Link>
           </Col>
 
-          <Col xs={11}>
+          <Col xs={10}>
             {" "}
             <p>{props.question?.body}</p>{" "}
           </Col>
