@@ -115,7 +115,7 @@ const Login = (props) => {
             </Button>
           </Col>
         </Row>
-        <Row>{errorMsg}</Row>
+        <Row className="mb-2"><b style={{ color: "red" }}>{errorMsg}</b></Row>
       </Container>
     </div>
   );

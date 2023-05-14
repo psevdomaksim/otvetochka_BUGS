@@ -15,7 +15,7 @@ router.use('/question', questionRouter )
 router.use('/category', categoryRouter )
 router.use('/answer', answerRouter )
 router.use('/report', reportRouter )
-router.use('/answerLike', answerLikeRouter )
+router.use('/answer/like', answerLikeRouter )
 router.use('/ban', banRouter )
 router.use('/rule', ruleRouter )
 

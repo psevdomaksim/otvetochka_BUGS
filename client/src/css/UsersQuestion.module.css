@@ -1,5 +1,4 @@
 .wrapper {
-    display: flex;
     border-bottom: #808080 1px solid;
 }
 
@@ -10,6 +9,9 @@
 .question_container {
     display: flex;
     margin: 1em auto;
+}
+p{
+    color: #FFFFFF;
 }
 
 .signature {

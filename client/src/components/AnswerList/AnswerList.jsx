@@ -12,7 +12,10 @@ const AnswerList = (props) => {
         <p>Типа очень многоооооооооооооооооооооооооо текста</p>
         <p>Сергей Нечаев, 10 минут назад</p>
       </div>
-      <Answer />
+      { props.answers?.map((answer) => (
+           <Answer key={answer.id} answer={answer} />
+        ))}
+     
     </div>
   );
 };

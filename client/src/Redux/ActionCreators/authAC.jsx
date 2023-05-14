@@ -9,7 +9,7 @@ import {
   UPDATE_PROFILE_DATA,
 } from "../../utils/AC_consts";
 
-//no found error
+// error
 export const ApiError = (data) => {
   return {
     type: API_ERROR,

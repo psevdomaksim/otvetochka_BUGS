@@ -35,21 +35,30 @@ class questionController {
     const { id } = req.params;
     const question = await Question.findOne({
       where: { id },
-    })
-      .then(() => {
-        return res.json(question);
-      })
-      .catch((err) => {
-        return next(ApiError.internal(err));
-      });
+    });
+    return res.json(question);
   }
 
 
-  async createNewQuestion(req, res) {
+
+  async createNewQuestion(req, res ,next) {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
       const { title, body, categoryId } = req.body;
+
+      if (!title || !body || !categoryId) {
+        return next(ApiError.errorRequest("Uncorrect data"));
+      }
+
+      if(title.length<10){
+        return next(ApiError.errorRequest("Too short question title"));
+      }
+
+      if(body.length<10){
+        return next(ApiError.errorRequest("Too short question body"));
+      }
+
       const question = await Question.create({
         title,
         body,
@@ -57,7 +66,7 @@ class questionController {
         categoryId,
       });
 
-      return res.json({ question });  
+      return res.json({ question, message: "Question has been published successfully." });  
   }
 
   async deleteQuestion(req, res, next) {

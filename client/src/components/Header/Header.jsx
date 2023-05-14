@@ -110,7 +110,7 @@ const Header = () => {
               </DropdownToggle>
               <DropdownMenu variant="dark">
                 {categories.map((category) => (
-                  <DropdownItem eventKey={category.id}>
+                  <DropdownItem key={category.id} eventKey={category.id}>
                     {category.name}
                   </DropdownItem>
                 ))}

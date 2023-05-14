@@ -20,7 +20,7 @@ const Home = (props) => {
           Спроси у сообщества
           </span>
           <Link to={NEW_QUESTION_ROUTE}>
-          <button type="button" class="btn btn-success">
+          <button type="button" className="btn btn-success">
             Спросить
           </button>
           </Link>

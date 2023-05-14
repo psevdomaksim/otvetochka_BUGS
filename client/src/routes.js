@@ -48,7 +48,7 @@ export const publicRoutes = [
         Component: Home
     },
     {
-        path: QUESTION_PAGE_ROUTE,
+        path: QUESTION_PAGE_ROUTE + "/:id",
         Component: Question
     }
     ,
