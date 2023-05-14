@@ -51,9 +51,9 @@ const UserQuestionList = (props) => {
       
      { userQuestions?.map((question) => (
      
-      console.log(question.hasOwnProperty("category")),
+     // console.log(question.hasOwnProperty("category")),
       
-          console.log(question),
+         // console.log(question),
            <UserQuestion key={question.id} category={question.caterory} question={question} />
         ))}
      
