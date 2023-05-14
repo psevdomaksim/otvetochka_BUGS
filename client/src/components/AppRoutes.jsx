@@ -20,6 +20,7 @@ const AppRoutes = () => {
   store.subscribe(() => {
     setIsAuth(store.getState().authPage.isAuth);
     setLoading(store.getState().authPage.isLoading);
+    console.log(loading)
   });
 
   if (loading) {

@@ -1,8 +1,8 @@
 import React from "react";
-import UsersQuestion from "./UsersQuestion";
+import UserQuestion from "./UserQuestion";
 import s from "../../css/UsersQuestionList.module.css";
 
-const UsersQuestionList = (props) => {
+const UserQuestionList = (props) => {
   return (
     <div className={s.list_wrapper}>
       <span id={s.title}>Вопросы пользователей</span>
@@ -12,9 +12,9 @@ const UsersQuestionList = (props) => {
         <span>Лучшие</span>
       </div>
       <hr />
-      <UsersQuestion />
+      <UserQuestion />
     </div>
   );
 };
 
-export default UsersQuestionList;
+export default UserQuestionList;

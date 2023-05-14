@@ -2,7 +2,7 @@ import React from "react";
 import ava from "../../img/ava.jpg"
 import s from "../../css/UsersQuestion.module.css"
 
-const UsersQuestion = (props) => {
+const UserQuestion = (props) => {
     return(
         <div className={s.wrapper}>
             <div>
@@ -19,4 +19,4 @@ const UsersQuestion = (props) => {
     )
 }
 
-export default UsersQuestion;
+export default UserQuestion;
