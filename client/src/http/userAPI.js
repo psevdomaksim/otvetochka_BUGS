@@ -13,7 +13,7 @@ export const fetchUsers = async (limit, page) => {
 };
 
 export const fetchOneUser = async (id) => {
-  const { data } = await $authHost.get("api/user/" + id);
+  const { data } = await $host.get("api/user/" + id);
   return data;
 };
 

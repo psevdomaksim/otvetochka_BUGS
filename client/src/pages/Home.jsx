@@ -10,7 +10,7 @@ const Home = (props) => {
 
 
 
-  
+
   return (
     <div className={style.home_page_wrapper}>
       <div className={style.left_box_wrapper}>
@@ -33,9 +33,9 @@ const Home = (props) => {
         <button
           id={style.button_up}
           type="button"
-          class="btn btn-outline-success"
+          className="btn btn-outline-success"
         >
-          <i class="bi bi-chevron-up"></i>
+          <i className="bi bi-chevron-up"></i>
         </button>
       </div>
     </div>

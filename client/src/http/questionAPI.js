@@ -9,3 +9,9 @@ export const fetchQuestions = async (categoryId, userId) => {
   });
   return data;
 };
+
+
+export const fetchOneQuestion = async (id) => {
+  const { data } = await $host.get("api/question/" + id);
+  return data;
+};
