@@ -16,13 +16,8 @@ class categoryController {
     const { id } = req.params;
     const category = await Category.findOne({
       where: { id },
-    })
-      .then(() => {
-        return res.json(category);
-      })
-      .catch((err) => {
-        return next(ApiError.internal(err));
-      });
+    });
+    return res.json(category);
   }
 
   async createNewCategory(req, res) {

@@ -10,8 +10,8 @@ const questionReducer = (state = initialState, action) => {
     case FETCH_QUESTIONS: {
       state = {
         ...state,
-        questions: action.data.rows,
-        count: action.data.count,
+        questions: action.questions.rows,
+        count: action.questions.count,
       };
       return state;
     }

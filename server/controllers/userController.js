@@ -3,6 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const uuid = require("uuid");
 const path = require("path");
+const validator = require('validator')
+
 const { User } = require("../models/models");
 
 const generateJwt = (
@@ -29,6 +31,19 @@ class userController {
     if (!email || !password || !fullname) {
       return next(ApiError.errorRequest("Uncorrect data"));
     }
+
+    if(!validator.isEmail(email)){
+      return next(ApiError.errorRequest("Uncorrect email"));
+    }
+
+    if(fullname.length<4){
+      return next(ApiError.errorRequest("Too short fullname"));
+    }
+
+    if(password.length<5){
+      return next(ApiError.errorRequest("Too short password"));
+    }
+
     const candidate = await User.findOne({ where: { email } });
     if (candidate) {
       return next(

@@ -1,4 +1,4 @@
-import { checkAuth, login } from "../../http/authAPI";
+import { checkAuth, login, registration } from "../../http/authAPI";
 import { editUserProfile } from "../../http/userAPI";
 import {
   LOGIN,
@@ -38,36 +38,21 @@ export const loginTC = (email, password) => {
   };
 };
 
-// export const registrationThunkCreator = (login, name, password, role) => {
-//   return (dispatch) => {
+export const registrationTC = (fullname, email, password) => {
 
-//     fetchOneUserByLogin(login).then((user) => {
 
-//           let newUser = {
-//             id: Math.floor(Math.random() * 10000) + 1,
-//             login: login,
-//             password: bcrypt.hashSync(password, 6),
-//             data: {
-//               name: name,
-//               status: "",
-//               avatarImage: "default-image.jpg",
-//               ownerPageCover: "default-image.jpg",
-//               dateOfBirth: "",
-//               city: "",
-//               education: ""
-//             }
-//       }
+  return (dispatch) => {
 
-//       createUser(newUser).then((user) => {
-//         generateJWT(user.id, user.login, role).then((token) => {
-//           dispatch(loginActionCreator(user, token));
-//         }).catch(e=>alert(e));
-//       });
+    registration(fullname, email, password)
+    .then((user) => {
+      dispatch(loginAC(user));
+    })
+    .catch((err) => {
+      dispatch(ApiError(err.response.data.message));
+    });
 
-//     });
-
-//   };
-// };
+  };
+};
 
 // // log out
 

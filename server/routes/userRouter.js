@@ -7,7 +7,7 @@ const checkBan = require('../middlewares/checkBanMiddleware')
 
 router.get("/auth",authMiddleware, userController.checkAuth );
 router.get("/",checkBan, userController.getAllUsers );
-router.get("/:id",checkBan, userController.getOneUser );
+router.get("/:id", userController.getOneUser );
 router.post("/registration", userController.registration );
 router.post("/login", userController.login);
 router.delete("/:id",checkBan,checkRole(['ADMIN']), userController.deleteUser);

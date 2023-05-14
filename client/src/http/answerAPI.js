@@ -9,3 +9,9 @@ export const fetchAnswers = async (questionId, userId) => {
   });
   return data;
 };
+
+
+export const fetchOneAnswer = async (id) => {
+  const { data } = await $host.get("api/answer/" + id);
+  return data;
+};

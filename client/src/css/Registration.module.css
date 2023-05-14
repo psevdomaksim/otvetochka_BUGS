@@ -53,12 +53,14 @@
     font-size: 1.25em;
 }
 
-#input {
-    border-radius: 0.625em;
-    background: #4B4B4B;
-    width: 19em;
-    color: #fff;
+.input,
+.input:focus {
+  border-radius: 10px;
+  background: #4b4b4b;
+  width: 20em;
+  color: #fff;
 }
+
 
 #checkbox {
     width: 1.3125em;
