@@ -21,19 +21,16 @@
     color: #fff;
 }
 
-.input {
+.input,.input:focus {
     background: #4B4B4B;
     border-radius: 9px;
     color: #fff;
-    width: 640px;
 }
 
-.textarea {
+.textarea, .textarea:focus {
     background: #4B4B4B;
     border-radius: 9px;
     color: #fff;
-    width: 640px;
-    height: 192px;
     resize: none;
 }
 

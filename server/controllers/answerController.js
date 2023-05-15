@@ -14,7 +14,7 @@ class answerController {
 
     if (questionId && !userId) {
       answers = await Answer.findAndCountAll({
-        where: { categoryId },
+        where: { questionId },
       });
     }
     if (!questionId && userId) {

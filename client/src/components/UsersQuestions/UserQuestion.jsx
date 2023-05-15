@@ -1,48 +1,57 @@
 import React from "react";
-import ava from "../../img/ava.jpg";
 import s from "../../css/UsersQuestion.module.css";
 import { FcLike } from "react-icons/fc";
 import { GoReport } from "react-icons/go";
 import { FaCommentDots } from "react-icons/fa";
 import { Col, Row, Stack, Image, Container } from "react-bootstrap";
 import { BASE_URL } from "../../utils/baseURL_const";
+import { PROFILE_ROUTE, QUESTION_PAGE_ROUTE } from "../../utils/routes_consts";
+import { Link } from "react-router-dom";
 
 const UserQuestion = (props) => {
   return (
-    <div className={s.wrapper}>
-      <Container>
-        <Row>
-          <Col className={s.question_title}>
-            <h4>{props.question.title}</h4>
-            <GoReport size={24} />
-          </Col>
-        </Row>
+    <Container className={s.wrapper}>
+      <Row>
+        <Col>
+          <Link to={QUESTION_PAGE_ROUTE + `/${props.question?.id}`}>
+            <h4>{props.question?.title}</h4>
+          </Link>
+        </Col>
+        <Col>
+          {props.answersCount}
+          <GoReport style={{ color: "white" }} size={24} />
+        </Col>
+      </Row>
 
-        <Row className={s.question_container}>
-          <Col xs={2}>
+      <Row className={s.question_container}>
+        <Col xs={2}>
+          <Link to={PROFILE_ROUTE + `/${props.question?.userId}`}>
             <Image
               src={BASE_URL + `/${props.question?.userAvatar}`}
               style={{ width: "50px", height: "50px" }}
               roundedCircle
             />
-          </Col>
+          </Link>
+        </Col>
 
-          <Col xs={10}>
-            {" "}
-            <p>{props.question.body}</p>{" "}
-          </Col>
-        </Row>
+        <Col xs={10}>
+          {" "}
+          <p>{props.question?.body}</p>{" "}
+        </Col>
+      </Row>
 
-        <Stack direction="horizontal" gap={4}>
-          <span className={s.signature}>{props.question?.user}</span>
-          <span className={s.signature}>{props.question?.createdAt}</span>
-          <span className={s.signature}>{props.question?.category}</span>
-
-          <FcLike size={24} className="ms-auto" />
-          <FaCommentDots size={24} />
-        </Stack>
-      </Container>
-    </div>
+      <Stack direction="horizontal" gap={4}>
+        <span className={s.signature}>{props.question?.user}</span>
+        <span className={s.signature}>{props.question?.createdAt}</span>
+        <span className={s.signature}>{props.question?.category}</span>
+        <span>
+          <span style={{ color: "white" }} className="me-2">
+            {props.answersCount}
+          </span>
+        </span>
+        <FaCommentDots style={{ color: "white" }} size={24} />
+      </Stack>
+    </Container>
   );
 };
 

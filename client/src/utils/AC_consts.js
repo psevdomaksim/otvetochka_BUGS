@@ -1,3 +1,13 @@
+export const DATE_OPTIONS = {
+    weekday: "short",
+    hour: "numeric",
+    minute: "numeric",
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    timezone: "UTC",
+  };
+
 export const REGISTRATION = "REGISTRATION";
 export const LOGIN = "LOGIN";
 export const LOG_OUT = "LOG-OUT";
@@ -10,8 +20,11 @@ export const UPDATE_PROFILE_DATA = "UPDATE-PROFILE-DATA";
 export const FETCH_CATEGORIES = 'FETCH-CATEGORIES'
 
 export const FETCH_QUESTIONS = 'FETCH-QUESTIONS'
+export const FETCH_ONE_QUESTION = 'FETCH-ONE-QUESTION'
+export const ADD_QUESTION = 'ADD-QUESTION'
 
 export const FETCH_ANSWERS = 'FETCH-ANSWERS'
+export const ADD_ANSWER = 'ADD-ASNWER'
 
 export const FETCH_USERS = 'FETCH-USERS'
 export const FETCH_ONE_USER = 'FETCH-ONE-USER'

@@ -14,7 +14,7 @@ class answerLikeController {
 
     if (answerId && !userId) {
       answerLikes = await AnswerLike.findAndCountAll({
-        where: { categoryId },
+        where: { answerId },
       });
     }
     if (!answerId && userId) {
@@ -30,18 +30,16 @@ class answerLikeController {
 
     return res.json(answerLikes);
   }
+  async getOneQuestion(req, res, next) {
+   
+  }
 
   async getOneAnswerLike(req, res, next) {
     const { id } = req.params;
     const answerLike = await AnswerLike.findOne({
       where: { id },
-    })
-      .then(() => {
-        return res.json(answerLike);
-      })
-      .catch((err) => {
-        return next(ApiError.internal(err));
-      });
+    });
+    return res.json(answerLike);
   }
 
   async createNewAnswerLike(req, res, next) {

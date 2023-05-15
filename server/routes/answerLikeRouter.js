@@ -4,8 +4,8 @@ const answerLikeController = require('../controllers/answerLikeController');
 //const checkRole = require('../middleware/checkRoleMiddleware')
 const checkBan = require('../middlewares/checkBanMiddleware')
 
-router.get("/", checkBan, answerLikeController.getAllAnswerLikes);
-router.get("/:id",checkBan, answerLikeController.getOneAnswerLike);
+router.get("/", answerLikeController.getAllAnswerLikes);
+router.get("/:id", answerLikeController.getOneAnswerLike);
 router.post("/",checkBan, answerLikeController.createNewAnswerLike);
 router.delete("/:id",checkBan, answerLikeController.deleteAnswerLike);
 

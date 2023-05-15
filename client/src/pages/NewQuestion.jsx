@@ -1,8 +1,57 @@
 import React from "react";
-import { Col, Container, Row } from "react-bootstrap";
+import { useEffect } from "react";
+import { useState } from "react";
+import { useContext } from "react";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { StoreContext } from "..";
 import s from "../css/NewQuestion.module.css";
+import { fetchCategoriesTC } from "../Redux/ActionCreators/categoryAC";
+import { addNewQuestionTC } from "../Redux/ActionCreators/questionAC";
 
 const NewQuestion = (props) => {
+  const store = useContext(StoreContext);
+
+  const [categories, setCategories] = useState([]);
+
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [category, setCategory] = useState(null);
+
+  const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+
+  const fetchCategories = () => {
+    setCategories(store.getState().categoryPage.categories);
+    setCategory(store.getState().categoryPage.categories[0].id);
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  store.subscribe(() => {
+    setCategories(store.getState().categoryPage.categories);
+    setCategory(store.getState().categoryPage.categories[0].id);
+    setErrorMsg(store.getState().questionPage.error);
+    setSuccessMsg(store.getState().questionPage.msg)
+  });
+
+  const onChange = (event) => {
+    setErrorMsg("");
+    setSuccessMsg("");
+    if (event.target.id == "title") {
+      setTitle(event.target.value);
+    } else if (event.target.id == "body") {
+      setBody(event.target.value);
+    } else if (event.target.id == "category") {
+      setCategory(+event.target.value);
+    }
+  };
+
+  const sendQuestion = () => {
+    store.dispatch(addNewQuestionTC(title, body, category));
+  };
+
   return (
     <Container className={s.quest_wrapper}>
       <Row className={s.item}>
@@ -15,24 +64,17 @@ const NewQuestion = (props) => {
           <span id={s.small_text}>Категория</span>
         </Col>
         <Col>
-          <select className={s.select_list} name="category">
-            <option value="1">Авто, Мото</option>
-            <option value="2">Бизнес, Финансы</option>
-            <option value="3">Города и Страны</option>
-            <option value="4">Гороскопы, Магия, Гадания</option>
-            <option value="5">Досуг, Развлечение</option>
-            <option value="6">Еда, Кулинария</option>
-            <option value="7">Животные, Растения</option>
-            <option value="8">Красота и Здоровье</option>
-            <option value="9">Наука, Техника, Языки</option>
-            <option value="10">Образование</option>
-            <option value="11">Общество, Политика, СМИ</option>
-            <option value="12">Семья, Дом, Дети</option>
-            <option value="13">Спорт</option>
-            <option value="14">Стиль, Мода, Звёзды</option>
-            <option value="15">Темы для взрослых</option>
-            <option value="16">Товары и услуги</option>
-          </select>
+          <Form.Select
+            className={s.select_list}
+            id="category"
+            onChange={onChange}
+          >
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </Form.Select>
         </Col>
       </Row>
       <Row className={s.item}>
@@ -40,7 +82,7 @@ const NewQuestion = (props) => {
           <span id={s.small_text}>Вопрос</span>
         </Col>
         <Col>
-          <input className={s.input} />
+          <Form.Control className={s.input} id="title" onChange={onChange} />
         </Col>
       </Row>
       <Row className={s.item}>
@@ -48,15 +90,31 @@ const NewQuestion = (props) => {
           <span id={s.small_text}>Текст вопроса</span>
         </Col>
         <Col>
-          <textarea className={s.textarea}></textarea>
+          <Form.Control
+            as="textarea"
+            rows={3}
+            className={s.textarea}
+            id="body"
+            onChange={onChange}
+          />
         </Col>
+      </Row>
+      <Row className="mb-2">
+        {" "}
+        <b style={{ color: "lime" }}>{successMsg}</b>
+      </Row>
+      <Row className="mb-2">
+        {" "}
+        <b style={{ color: "red" }}>{errorMsg}</b>
       </Row>
       <Row className={s.row}>
         <Col className={s.col}>
-          <button id={s.publish}>Опубликовать</button>
+          <Button id={s.publish} onClick={sendQuestion}>
+            Опубликовать
+          </Button>
         </Col>
         <Col className={s.col}>
-          <button id={s.return}>Вернуть</button>
+          <Button id={s.return}>Вернуть</Button>
         </Col>
       </Row>
     </Container>
