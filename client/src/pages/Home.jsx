@@ -1,5 +1,4 @@
 import React from "react";
-
 import style from "../css/HomePage.module.css";
 import ActiveUsersList from "../components/ActiveUsers/ActiveUsersList";
 import { NEW_QUESTION_ROUTE } from "../utils/routes_consts";

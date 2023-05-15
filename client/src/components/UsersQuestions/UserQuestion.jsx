@@ -12,12 +12,10 @@ const UserQuestion = (props) => {
   return (
     <Container className={s.wrapper}>
       <Row>
-        <Col>
+        <Col className={s.question_title}>
           <Link to={QUESTION_PAGE_ROUTE + `/${props.question?.id}`}>
             <h4>{props.question?.title}</h4>
           </Link>
-        </Col>
-        <Col>
           {props.answersCount}
           <GoReport style={{ color: "white" }} size={24} />
         </Col>

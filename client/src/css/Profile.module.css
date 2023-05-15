@@ -6,6 +6,12 @@
 
 .main_wrapper {
     background: #1F1F1F;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
 }
 
 .profile h2 {
@@ -14,6 +20,16 @@
 
 .profile p {
     color: #747474;
+}
+
+.profile_left_col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#member_text {
+    font-size: 0.9em;
 }
 
 .profile_block {
@@ -25,13 +41,19 @@
     top: 152px;
     left: 225px;
     border-radius: 15px;
+    padding: 0.7em;
 }
 
 .question_block {
     border: #FF652F 2px solid;
-    border-radius: 15px;
-    width: 313px;
-    height: 259px;
+    border-radius: 0.8em;
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+#number {
+    align-self: end;
 }
 
 .question_block h3 {
@@ -49,6 +71,8 @@
 
 .info_block {
     display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
 }
 
 .info_block p {
@@ -56,23 +80,34 @@
 }
 
 .activity_block {
-    border: #FFE400 2px solid;
-    width: 691px;
-    height: 1020px;
-    border-radius: 15px;
+    border: #FFE400 0.1em solid;
+    border-radius: 0.8em;
     color: #F5F5F5;
+    display: inline-block;
+    padding: 1em;
+    max-width: 45em;
 }
 
-
-
 .activity_block h3 {
-    font-family: 'Sansation';
-    font-style: normal;
-    font-weight: 700;
     font-size: 28px;
     line-height: 31px;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.1em;
     color: #D2D2D2;
 }
 
+.activity_block span {
+    font-style: normal;
+    font-size: 1.3em;
+    line-height: 31px;
+    color: #D2D2D2;
+}
 
+#button_up {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+}
+
+.active_span {
+    border-bottom: #FFE400 0.1em solid;
+}
