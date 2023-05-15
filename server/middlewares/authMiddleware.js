@@ -9,10 +9,16 @@ module.exports = function (req, res, next) {
     if (!token) {
       return res.status(401).json({ message: "Not authorized" });
     }
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    req.user = decoded;
-    next();
+    jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
+      if (err) {
+        return res.status(400).json({ message: "JWT EXPIRED" });
+      } else {
+        req.user = decoded;
+        next();
+      }
+    });
   } catch (e) {
+    console.log(e);
     res.status(401).json({ message: "Not authorized" });
   }
 };

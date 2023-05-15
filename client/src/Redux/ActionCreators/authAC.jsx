@@ -79,6 +79,9 @@ export const setLoginTC = () => {
           dispatch(loginAC(user));
         })
         .catch((err) => {
+         if(err.response.data.message==="JWT EXPIRED"){
+          dispatch(logoutAC());
+         }
           dispatch(ApiError(err.response.data.message));
         });
     } else {

@@ -58,7 +58,7 @@ class questionController {
       if(body.length<10){
         return next(ApiError.errorRequest("Too short question body"));
       }
-
+z
       const question = await Question.create({
         title,
         body,

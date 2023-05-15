@@ -53,7 +53,7 @@ class answerLikeController {
     }).then(async count=>{
       if (count !== 0) {
         return next(ApiError.errorRequest("You have already liked this answer"));
-      } else{
+      } else{z
         const like = await AnswerLike.create({
           userId: decoded.id,
           answerId,

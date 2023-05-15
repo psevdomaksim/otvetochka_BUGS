@@ -8,6 +8,7 @@
     "jsonwebtoken": "^9.0.0",
     "localtunnel": "^2.0.2",
     "mysql2": "^3.2.4",
+    "node-localstorage": "^2.2.1",
     "path": "^0.12.7",
     "sequelize": "^6.31.1",
     "uuid": "^9.0.0",
