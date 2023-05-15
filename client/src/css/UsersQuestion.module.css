@@ -12,6 +12,11 @@
     margin: 1em auto;
 }
 
+.question_title {
+    display: flex;
+    justify-content: space-between;
+}
+
 .signature {
     color: #747474;
 }

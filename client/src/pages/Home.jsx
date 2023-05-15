@@ -7,10 +7,6 @@ import { Link } from "react-router-dom";
 import UserQuestionList from "../components/UsersQuestions/UserQuestionList";
 
 const Home = (props) => {
-
-
-
-
   return (
     <div className={style.home_page_wrapper}>
       <div className={style.left_box_wrapper}>
@@ -27,7 +23,7 @@ const Home = (props) => {
         </div>
         <ActiveUsersList />
       </div>
-      <UserQuestionList />
+    <UserQuestionList />
       <div className={style.break}></div>
       <div>
         <button

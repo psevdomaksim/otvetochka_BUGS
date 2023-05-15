@@ -5,6 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import evg from "../../img/evg.png";
 import morvus from "../../img/morvus.png";
 import dan from "../../img/dan.png";
+import kerl from "../../img/kerl2.png"
 import edelweiss from "../../img/edelweiss.png";
 
 const Footer = (props) => {

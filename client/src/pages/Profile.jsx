@@ -10,7 +10,7 @@ import { Link, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { fetchOneUserTC } from "../Redux/ActionCreators/userAC";
 import { BASE_URL } from "../utils/baseURL_const";
-import { Button, Image } from "react-bootstrap";
+import { Button, Container, Image } from "react-bootstrap";
 import { EDIT_PROFILE_ROUTE } from "../utils/routes_consts";
 import { fetchQuestionsTC } from "../Redux/ActionCreators/questionAC";
 import { fetchAnswersTC } from "../Redux/ActionCreators/answerAC";
@@ -70,7 +70,7 @@ const Profile = (props) => {
       {/* Блок профиля и кол-во заданных вопросов (стата крч) */}
       <div className={s.info_block}>
         {/* Профиль с возможностью редактирования */}
-        <div className={s.profile_block}>
+        <Container className={s.profile_block}>
           <Image
             src={BASE_URL + `/${curUser?.avatarImage}`}
             style={{ width: "150px", height: "150px" }}
@@ -92,7 +92,8 @@ const Profile = (props) => {
           <div>
             <p>Участник проекта с {formatDate(curUser?.createdAt)}</p>
           </div>
-        </div>
+        </Container>
+        {/* Блок профиля КОНЕЦ */}
 
         {/* Блок с количеством вопросов */}
         <div className={s.question_block}>
@@ -102,6 +103,7 @@ const Profile = (props) => {
           <span>{userAnswersCount}</span>
         </div>
       </div>
+      {/* Блок профиля КОНЕЦ */}
 
       {/* Активность пользователя */}
       <div className={s.activity_block}>
