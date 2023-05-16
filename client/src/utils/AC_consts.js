@@ -29,3 +29,7 @@ export const ADD_ANSWER = 'ADD-ANSWER'
 export const FETCH_USERS = 'FETCH-USERS'
 export const FETCH_ACTIVE_USERS = 'FETCH-ACTIVE_USERS'
 export const FETCH_ONE_USER = 'FETCH-ONE-USER'
+
+export const FETCH_RULES = 'FETCH-RULES'
+export const ADD_RULE = 'ADD-RULE'
+export const FETCH_ONE_RULE = 'FETCH-ONE-RULE'

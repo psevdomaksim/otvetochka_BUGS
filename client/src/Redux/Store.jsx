@@ -5,6 +5,7 @@ import authReducer from "./Reducers/authReducer";
 import userReducer from "./Reducers/userReducer";
 import questionReducer from "./Reducers/questionReducer";
 import answerReducer from "./Reducers/answerReducer";
+import ruleReducer from "./Reducers/ruleReducer";
 
 const Reducers = combineReducers({
   categoryPage: categoryReducer,
@@ -12,6 +13,7 @@ const Reducers = combineReducers({
   userPage: userReducer,
   questionPage: questionReducer,
   answerPage: answerReducer,
+  rulePage: ruleReducer,
 });
 
 const store = createStore(Reducers, applyMiddleware(thunk));
