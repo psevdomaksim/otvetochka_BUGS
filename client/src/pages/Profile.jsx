@@ -1,7 +1,7 @@
 import React from "react";
 import s from "../css/Profile.module.css";
 import ava from "../img/ava.jpg";
-import ProfileComponent from "../components/Profile/ProfileComponent";
+//import ProfileComponent from "../components/Profile/ProfileComponent";
 import { useContext } from "react";
 import { StoreContext } from "..";
 import { useState } from "react";
@@ -85,7 +85,7 @@ const Profile = (props) => {
                 </Col>
               </Row>
               <div className={s.profile}>
-                {store.getState().authPage.currentLogin.id === +id ? (
+                {store.getState().authPage.currentLogin?.id === +id ? (
                   <Link to={EDIT_PROFILE_ROUTE + `/${id}`}>
                     <Button variant="secondary">Редактировать профиль</Button>
                   </Link>
@@ -119,7 +119,7 @@ const Profile = (props) => {
             <Col xs="2"><span>Ответы</span></Col>
           </Row>
         </Container>
-        <ProfileComponent />
+    
       </div>
       <button
           id={s.button_up}

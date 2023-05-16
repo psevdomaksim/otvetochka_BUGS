@@ -92,9 +92,11 @@ export const addNewQuestionTC = (title, body, categoryId) => {
   return (dispatch) => {
     addNewQuestion(title, body, categoryId)
       .then((data) => {
+        console.log(data)
         dispatch(addNewQuestionAC(data));
       })
       .catch((err) => {
+        console.log(err)
         dispatch(ApiError(err.response.data.message));
       });
   };

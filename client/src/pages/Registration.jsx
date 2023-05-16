@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "..";
-import s from "../css/Registration.module.css";
+import s from "../css/Auth.module.css";
 import { registrationTC } from "../Redux/ActionCreators/authAC";
 import { LOGIN_ROUTE } from "../utils/routes_consts";
 
@@ -18,6 +18,7 @@ const Registration = (props) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
+  
   const registration = () => { 
     if (checkbox){
         store.dispatch(registrationTC(fullname, email, password)); 

@@ -1,6 +1,6 @@
 import React from "react";
 import style from "../css/HomePage.module.css";
-import ActiveUsersList from "../components/ActiveUsers/ActiveUsersList";
+import ActiveUsersList from "../components/ActiveUsers/ActiveUserList";
 import { NEW_QUESTION_ROUTE } from "../utils/routes_consts";
 import { Link } from "react-router-dom";
 import UserQuestionList from "../components/UsersQuestions/UserQuestionList";

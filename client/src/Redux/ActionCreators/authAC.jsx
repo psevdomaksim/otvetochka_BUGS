@@ -93,11 +93,12 @@ export const setLoginTC = () => {
 
 //edit profile
 
-export const editProfileDataAC = (user) => {
+export const editProfileDataAC = (user, msg) => {
 
   return {
     type: UPDATE_PROFILE_DATA,
-    user: user
+    user: user,
+    msg: msg
   };
 };
 
@@ -109,8 +110,10 @@ export const editProfileDataTC = (id, fullname,status, imgFile) => {
   formData.append("img", imgFile);
 
   return (dispatch) => {
-    editUserProfile(id, formData).then((user)=>{
-       dispatch(editProfileDataAC(user));
-     })
+    editUserProfile(id, formData).then((data)=>{
+       dispatch(editProfileDataAC(data.user, data.message));
+     }).catch((err) => {
+       dispatch(ApiError(err.response.data.message));
+     });
   }
 }

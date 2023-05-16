@@ -1,16 +1,17 @@
-import { $host, $authHost} from "./http";
+import { $host, $authHost } from "./http";
 import jwt_token from "jwt-decode";
 
-export const fetchUsers = async (limit, page) => {
-  const { data } = await $authHost.get("api/user", {
-    params:{
-      _limit: limit,
-      _page: page,
-    }
- }
-);
+export const fetchUsers = async () => {
+  const { data } = await $host.get("api/user");
   return data;
 };
+
+
+export const fetchActiveUsers = async () => {
+  const { data } = await $host.get("api/user/active");
+  return data;
+};
+
 
 export const fetchOneUser = async (id) => {
   const { data } = await $host.get("api/user/" + id);
@@ -24,5 +25,8 @@ export const editUserProfile = async (id, body) => {
     data: body,
   });
   localStorage.setItem("token", data.token);
-  return jwt_token(data.token);
+  return {
+    user: jwt_token(data.token),
+    message: data.message,
+  };
 };

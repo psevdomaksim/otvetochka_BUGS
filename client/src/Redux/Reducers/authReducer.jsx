@@ -43,15 +43,19 @@ const authReducer = (state = initialState, action) => {
     }
 
     case UPDATE_PROFILE_DATA: {
+
       state = {
         ...state,
         currentLogin: action.user,
+        msg: action.msg,
+        error: null,
       };
       return state;
     }
 
     case API_ERROR: {
-      state = { ...state, error: action.data };
+      
+      state = { ...state, error: action.data, msg:null };
       return state;
     }
 

@@ -3,28 +3,33 @@ const { Question } = require("../models/models");
 const jwt = require("jsonwebtoken");
 
 class questionController {
-  async getAllQuestions(req, res, next) {
+  async getAllQuestions(req, res) {
     let { categoryId, userId } = req.query;
 
     let questions;
 
     if (!categoryId && !userId) {
-      questions = await Question.findAndCountAll();
+      questions = await Question.findAndCountAll({
+        order:[['createdAt', 'DESC'],]
+      });
     }
 
     if (categoryId && !userId) {
       questions = await Question.findAndCountAll({
         where: { categoryId },
+        order:[['createdAt', 'DESC'],]
       });
     }
     if (!categoryId && userId) {
       questions = await Question.findAndCountAll({
         where: { userId },
+        order:[['createdAt', 'DESC'],]
       });
     }
     if (categoryId && userId) {
       questions = await Question.findAndCountAll({
         where: { categoryId, userId },
+        order:[['createdAt', 'DESC'],]
       });
     }
 
@@ -58,7 +63,6 @@ class questionController {
       if(body.length<10){
         return next(ApiError.errorRequest("Too short question body"));
       }
-z
       const question = await Question.create({
         title,
         body,

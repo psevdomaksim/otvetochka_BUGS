@@ -1,8 +1,11 @@
-import { FETCH_ANSWERS } from "../../utils/AC_consts";
+import { ADD_ANSWER, API_ERROR, FETCH_ANSWERS } from "../../utils/AC_consts";
 
 let initialState = {
   answers: [],
+  bestAnswer: null,
   count: null,
+  error: null, 
+  msg: null
 };
 
 const answerReducer = (state = initialState, action) => {
@@ -13,6 +16,17 @@ const answerReducer = (state = initialState, action) => {
         answers: action.data.rows,
         count: action.data.count,
       };
+      return state;
+    }
+
+    case ADD_ANSWER: {
+      state.answers.unshift(action.answer)
+      state = { ...state, error: null, msg: action.message };
+      return state;
+    }
+
+    case API_ERROR: {
+      state = { ...state, error: action.data, msg: null };
       return state;
     }
 

@@ -5,8 +5,9 @@ const authMiddleware = require('../middlewares/authMiddleware')
 const checkRole = require('../middlewares/checkRoleMiddleware')
 const checkBan = require('../middlewares/checkBanMiddleware')
 
-router.get("/auth",authMiddleware, userController.checkAuth );
-router.get("/",checkBan, userController.getAllUsers );
+router.get("/auth", authMiddleware, userController.checkAuth );
+router.get("/", userController.getAllUsers );
+router.get("/active", userController.getActiveUsers );
 router.get("/:id", userController.getOneUser );
 router.post("/registration", userController.registration );
 router.post("/login", userController.login);

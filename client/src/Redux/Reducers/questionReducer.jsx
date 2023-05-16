@@ -39,7 +39,7 @@ const questionReducer = (state = initialState, action) => {
     }
 
     case API_ERROR: {
-      state = { ...state, error: action.data };
+      state = { ...state, error: action.data, msg: null };
       return state;
     }
 

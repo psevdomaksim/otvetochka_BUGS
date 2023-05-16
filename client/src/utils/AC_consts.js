@@ -24,7 +24,8 @@ export const FETCH_ONE_QUESTION = 'FETCH-ONE-QUESTION'
 export const ADD_QUESTION = 'ADD-QUESTION'
 
 export const FETCH_ANSWERS = 'FETCH-ANSWERS'
-export const ADD_ANSWER = 'ADD-ASNWER'
+export const ADD_ANSWER = 'ADD-ANSWER'
 
 export const FETCH_USERS = 'FETCH-USERS'
+export const FETCH_ACTIVE_USERS = 'FETCH-ACTIVE_USERS'
 export const FETCH_ONE_USER = 'FETCH-ONE-USER'

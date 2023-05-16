@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "..";
-import s from "../css/Login.module.css";
+import s from "../css/Auth.module.css";
 import { loginTC } from "../Redux/ActionCreators/authAC";
 import { REGISTRATION_ROUTE } from "../utils/routes_consts";
 
@@ -52,7 +52,7 @@ const Login = (props) => {
       </div>
       <Container className={s.reg_form}>
         <Row className="mb-4">
-          <Col xs={12}>
+          <Col  className={s.center}>
             <h3 className="m-auto" id={s.reg_head}>
               Вход
             </h3>

@@ -6,9 +6,13 @@ import { useContext } from "react";
 import { StoreContext } from "..";
 import { useEffect } from "react";
 import { fetchOneQuestionTC } from "../Redux/ActionCreators/questionAC";
-import { fetchAnswersTC } from "../Redux/ActionCreators/answerAC";
+import {
+  addNewAnswerTC,
+  fetchAnswersTC,
+} from "../Redux/ActionCreators/answerAC";
 import { useState } from "react";
 import UserQuestion from "../components/UsersQuestions/UserQuestion";
+import { Button, Container, Form, Row } from "react-bootstrap";
 
 const Question = (props) => {
   const { id } = useParams();
@@ -19,6 +23,11 @@ const Question = (props) => {
 
   const [questionAnswers, setQuestionAnswers] = useState(null);
   const [questionAnswersCount, setQuestionAnswersCount] = useState(null);
+
+  const [body, setBody] = useState("");
+
+  const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   const fetchQuestion = () => {
     store.dispatch(fetchOneQuestionTC(id));
@@ -35,33 +44,61 @@ const Question = (props) => {
 
   store.subscribe(() => {
     setCurQuestion(store.getState().questionPage.curQuestion);
-    setQuestionAnswers(store.getState().answerPage.answers)
-    setQuestionAnswersCount(store.getState().answerPage.count)
+    setQuestionAnswers(store.getState().answerPage.answers);
+    setQuestionAnswersCount(store.getState().answerPage.count);
+    setErrorMsg(store.getState().answerPage.error);
+    setSuccessMsg(store.getState().answerPage.msg);
   });
 
+  const onChange = (event) => {
+    setErrorMsg("");
+    setSuccessMsg("");
+    if (event.target.id == "body") {
+      setBody(event.target.value);
+    }
+  };
 
+  const sendAnswer = () => {
+    setBody("");
+    store.dispatch(addNewAnswerTC(body, +id));
+  
+  };
 
   return (
-    <div>
-      <div className={s.wrapper}>
-        
-        <UserQuestion key={curQuestion?.id} answersCount={questionAnswersCount} question={curQuestion} />
+      <Container className={s.wrapper}>
+        <UserQuestion
+          key={curQuestion?.id}
+          answersCount={questionAnswersCount}
+          question={curQuestion}
+        />
 
-
-      
         <div className={s.textarea_wrapper}>
-          <textarea
+          <Form.Control
+            as="textarea"
+            placeholder="Ваш ответ..."
+            rows={4}
+            value={body}
             className={s.textarea}
-            placeholder="Напишите что-нибудь"
-          ></textarea>
-          <button>Отправить</button>
+            id="body"
+            onChange={onChange}
+          />
+          <Row className="mb-2">
+            {" "}
+            <b style={{ color: "lime" }}>{successMsg}</b>
+          </Row>
+          <Row className="mb-2">
+            {" "}
+            <b style={{ color: "red" }}>{errorMsg}</b>
+          </Row>
+          <Button variant="dark" className="mt-3" onClick={sendAnswer}>
+            Отправить
+          </Button>
         </div>
         <div className={s.users_question_wrapper}>
           <h3>Ответы пользователей</h3>
-          <AnswerList answers={questionAnswers}/>
+          <AnswerList answers={questionAnswers}  />
         </div>
-      </div>
-    </div>
+      </Container>
   );
 };
 

@@ -1,9 +1,9 @@
 .wrapper {
-    width: 266px;
     border-radius: 15px;
     display: flex;
     flex-wrap: nowrap;
     margin: 1em 0;
+    align-items: center;
 }
 
 .ava {

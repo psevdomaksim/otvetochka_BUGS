@@ -1,7 +1,7 @@
 import { $host, $authHost } from "./http";
 
 export const fetchAnswerLikes = async (answerId, userId) => {
-  const { data } = await $host.get("api/answer/like", {
+  const { data } = await $host.get("api/answer-like", {
     params: {
       answerId: answerId,
       userId: userId,
@@ -10,9 +10,14 @@ export const fetchAnswerLikes = async (answerId, userId) => {
   return data;
 };
 
+export const fetchOneAnswerLike = async (id) => {
+  const { data } = await $host.get("api/answer-like/" + id);
+  return data;
+};
+
 
 export const addLike = async (title, body, categoryId) => {
-  const { data } = await $authHost.post("api/answer/like", {
+  const { data } = await $authHost.post("api/answer-like", {
     title,
     body,
     categoryId,
@@ -22,6 +27,6 @@ export const addLike = async (title, body, categoryId) => {
 
 
 export const deleteLike = async (id) => {
-  const { data } = await $host.delete("api/answer/like/" + id);
+  const { data } = await $host.delete("api/answer-like" + id);
   return data;
 };

@@ -9,22 +9,27 @@ class answerController {
     let answers;
 
     if (!questionId && !userId) {
-      answers = await Answer.findAndCountAll();
+      answers = await Answer.findAndCountAll({
+        order:[['createdAt', 'DESC'],]
+      });
     }
 
     if (questionId && !userId) {
       answers = await Answer.findAndCountAll({
         where: { questionId },
+        order:[['createdAt', 'DESC'],]
       });
     }
     if (!questionId && userId) {
       answers = await Answer.findAndCountAll({
         where: { userId },
+        order:[['createdAt', 'DESC'],]
       });
     }
     if (questionId && userId) {
       answers = await Answer.findAndCountAll({
         where: { questionId, userId },
+        order:[['createdAt', 'DESC'],]
       });
     }
 
@@ -44,18 +49,27 @@ class answerController {
       });
   }
 
-  async createNewAnswer(req, res) {
+  async createNewAnswer(req, res, next) {
   
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
     const { body, questionId } = req.body;
+
+    if (!body || !questionId) {
+      return next(ApiError.errorRequest("Uncorrect data"));
+    }
+
+    if(body.length<5){
+      return next(ApiError.errorRequest("Too short answer body"));
+    }
+
     const answer = await Answer.create({
       body,
       userId: decoded.id,
       questionId,
     })
-     return res.json( {answer} );
+    return res.json({ answer, message: "Answer has been published successfully." });  
   }
 
   async deleteAnswer(req, res, next) {

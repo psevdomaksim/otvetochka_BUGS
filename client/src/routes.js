@@ -19,10 +19,7 @@ import NewQuestion from "./pages/NewQuestion";
 import Rules from "./pages/Rules";
 
 export const authRoutes = [
-    {
-        path: PROFILE_ROUTE + "/:id",
-        Component: Profile
-    },
+ 
     {
         path: EDIT_PROFILE_ROUTE + "/:id",
         Component: EditProfile
@@ -35,6 +32,10 @@ export const authRoutes = [
 ];
 
 export const publicRoutes = [
+    {
+        path: PROFILE_ROUTE + "/:id",
+        Component: Profile
+    },
     {
         path: LOGIN_ROUTE,
         Component: Login

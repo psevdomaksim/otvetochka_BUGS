@@ -1,6 +1,5 @@
 import React from "react";
-import s from "../../css/RulesPage.module.css";
-import Rule from "./Rule";
+import s from "../../css/RulesPage.module.css";;
 
 const RuleList = (props) => {
   return (

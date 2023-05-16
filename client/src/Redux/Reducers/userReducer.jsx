@@ -1,8 +1,13 @@
-import { CLEAN_ALL_USERS, FETCH_ONE_USER } from "../../utils/AC_consts";
+import {
+  CLEAN_ALL_USERS,
+  FETCH_ACTIVE_USERS,
+  FETCH_ONE_USER,
+} from "../../utils/AC_consts";
 import { FETCH_USERS, FETCH_CURRENT_LOGIN } from "../../utils/AC_consts";
 
 let initialState = {
-  users: [],
+  allUsers: [],
+  activeUsers: [],
   currentUser: null,
   limit: 6,
   page: 1,
@@ -11,16 +16,21 @@ let initialState = {
 const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case FETCH_ONE_USER: {
-
       state = { ...state, currentUser: action.user };
       return state;
     }
 
     case FETCH_USERS: {
-      const resultPosts = [...state.allUsers, ...action.data];
-      state = { ...state, allUsers: resultPosts, users: action.data };
+      //const resultPosts = [...state.users, ...action.data];
+      // state = { ...state, allUsers: resultPosts, users: action.data };
 
-      // state = { ...state, users: action.data };
+      state = { ...state, allUsers: action.data };
+      return state;
+    }
+
+    case FETCH_ACTIVE_USERS: {
+      state = { ...state, activeUsers: action.data };
+
       return state;
     }
 

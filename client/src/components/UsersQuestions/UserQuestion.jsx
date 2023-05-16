@@ -16,7 +16,7 @@ const UserQuestion = (props) => {
           <Link to={QUESTION_PAGE_ROUTE + `/${props.question?.id}`}>
             <h4>{props.question?.title}</h4>
           </Link>
-          {props.answersCount}
+       
           <GoReport style={{ color: "white" }} size={24} />
         </Col>
       </Row>
@@ -43,10 +43,9 @@ const UserQuestion = (props) => {
         <span className={s.signature}>{props.question?.createdAt}</span>
         <span className={s.signature}>{props.question?.category}</span>
         <span>
-          <span style={{ color: "white" }} className="me-2">
-            {props.answersCount}
-          </span>
+        <span style={{color:"white", marginRight:"-20px"}}>{props.answersCount}</span>
         </span>
+        
         <FaCommentDots style={{ color: "white" }} size={24} />
       </Stack>
     </Container>

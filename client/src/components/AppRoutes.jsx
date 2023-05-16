@@ -27,15 +27,16 @@ const AppRoutes = () => {
   }
 
   if (
-    (location.pathname === LOGIN_ROUTE && isAuth === true) ||
-    (location.pathname === REGISTRATION_ROUTE && isAuth === true)
+    (location.pathname === LOGIN_ROUTE && isAuth) ||
+    (location.pathname === REGISTRATION_ROUTE && isAuth )
   ) {
     return <Navigate to={HOME_PAGE_ROUTE} />;
   }
 
+
   return (
     <Routes>
-      {isAuth === true &&
+      {isAuth &&
         authRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} exact />
         ))}
@@ -43,7 +44,7 @@ const AppRoutes = () => {
         <Route key={path} path={path} element={<Component />} exact />
       ))}
 
-      <Route path="*" element={<Navigate to={HOME_PAGE_ROUTE} />} />
+      <Route path="*" element={<Navigate to={LOGIN_ROUTE} />} />
     </Routes>
   );
 };

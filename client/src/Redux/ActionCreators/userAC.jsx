@@ -1,5 +1,5 @@
-import { FETCH_ONE_USER, FETCH_USERS } from "../../utils/AC_consts";
-import { fetchOneUser } from "../../http/userAPI";
+import { FETCH_ACTIVE_USERS, FETCH_ONE_USER, FETCH_USERS } from "../../utils/AC_consts";
+import { fetchActiveUsers, fetchOneUser } from "../../http/userAPI";
 import { fetchUsers } from "../../http/userAPI";
 
 // fetch users
@@ -15,6 +15,25 @@ export const fetchUsersTC = (limit, page) => {
     fetchUsers(limit, page)
       .then((data) => {
         dispatch(fetchUsersAC(data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+// fetch active users
+export const fetchActiveUsersAC = (data) => {
+  return {
+    type: FETCH_ACTIVE_USERS,
+    data: data,
+  };
+};
+
+export const fetchActiveUsersTC = () => {
+  return (dispatch) => {
+    fetchActiveUsers().then((data) => {
+        dispatch(fetchActiveUsersAC(data));
       })
       .catch((err) => {
         console.log(err);

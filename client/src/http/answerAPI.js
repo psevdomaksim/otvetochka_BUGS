@@ -15,3 +15,12 @@ export const fetchOneAnswer = async (id) => {
   const { data } = await $host.get("api/answer/" + id);
   return data;
 };
+
+
+export const addNewAnswer = async (body, questionId) => {
+  const { data } = await $authHost.post("api/answer", {
+    body,
+    questionId,
+  });
+  return data;
+};

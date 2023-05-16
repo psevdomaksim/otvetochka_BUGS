@@ -25,18 +25,20 @@ const Edit = (props) => {
   const [img, setImg] = useState("");
   const [imgFile, setImgFile] = useState(null);
 
-  const [showMsg, setShowMsg] = useState(false);
-  const [msg, setMsg] = useState(store.getState().authPage.msg);
+  const [msg, setMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   const [isDisabledPutBtn, setIsDisabledPutBt] = useState(false);
 
   store.subscribe(() => {
     setCurLogin(store.getState().authPage.currentLogin);
+    setErrorMsg(store.getState().authPage.error);
+    setMsg(store.getState().authPage.msg);
   });
 
   const imgHandler = (e) => {
     setIsDisabledPutBt(false);
-    setShowMsg(false);
-    
+    setMsg("");
+    setErrorMsg("");
     e.preventDefault();
 
     const reader = new FileReader();
@@ -49,7 +51,8 @@ const Edit = (props) => {
 
   const onChange = (event) => {
     setIsDisabledPutBt(false);
-    setShowMsg(false);
+    setMsg("");
+    setErrorMsg("");
 
     if (event.target.id == "fullname") {
       setFullname(event.target.value);
@@ -59,10 +62,10 @@ const Edit = (props) => {
   };
 
   const editProfile = () => {
+    // if (fullname==="")
     store.dispatch(editProfileDataTC(curLogin.id, fullname, status, imgFile));
     setIsDisabledPutBt(true);
-    setShowMsg(true);
-    setImg("")
+    setImg("");
   };
 
   return (
@@ -74,7 +77,7 @@ const Edit = (props) => {
       </Row>
       <Row className={s.name_row}>
         <Col>
-          <span>Имя и Фамилия</span>
+          <span>Имя</span>
         </Col>
         <Col>
           <Form.Control id="fullname" value={fullname} onChange={onChange} />
@@ -116,10 +119,18 @@ const Edit = (props) => {
           )}
         </Col>
       </Row>
+      <Row className="mb-2">
+        <b style={{ color: "red" }}>{errorMsg}</b>
+      </Row>
+      <Row className="mb-2">
+        <b style={{ color: "lime" }}>{msg}</b>
+      </Row>
       <Row>
         <Col md={{ span: 2, offset: 2 }}>
           {isDisabledPutBtn ? (
-            <Button disabled id={s.save_button}>Сохранить</Button>
+            <Button disabled id={s.save_button}>
+              Сохранить
+            </Button>
           ) : (
             <Button id={s.save_button} onClick={editProfile}>
               Сохранить

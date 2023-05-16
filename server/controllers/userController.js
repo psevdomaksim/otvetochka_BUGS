@@ -3,7 +3,8 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const uuid = require("uuid");
 const path = require("path");
-const validator = require('validator')
+const validator = require("validator");
+const sequelize = require("../db");
 
 const { User } = require("../models/models");
 
@@ -32,15 +33,15 @@ class userController {
       return next(ApiError.errorRequest("Uncorrect data"));
     }
 
-    if(!validator.isEmail(email)){
+    if (!validator.isEmail(email)) {
       return next(ApiError.errorRequest("Uncorrect email"));
     }
 
-    if(fullname.length<4){
+    if (fullname.length < 4) {
       return next(ApiError.errorRequest("Too short fullname"));
     }
 
-    if(password.length<5){
+    if (password.length < 5) {
       return next(ApiError.errorRequest("Too short password"));
     }
 
@@ -121,6 +122,31 @@ class userController {
       });
   }
 
+  async getActiveUsers(req, res, next) {
+    User.findAll({
+      raw: true,
+      attributes: [
+        "user.id",
+        "user.fullname",
+        "user.avatarImage",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM answers WHERE answers.userId = user.id)"
+          ),
+          "answersCount",
+        ],
+      ],
+      limit: 3,
+      order: [[sequelize.literal("answersCount"), "DESC"]],
+    })
+      .then((users) => {
+        res.send(users);
+      })
+      .catch((err) => {
+        return next(ApiError.internal(err));
+      });
+  }
+
   async deleteUser(req, res, next) {
     const id = req.params.id;
     User.destroy({
@@ -136,19 +162,27 @@ class userController {
       });
   }
 
-  async updateUser(req, res) {
-    try {
-      const { id } = req.params;
-      const { fullname, status } = req.body;
+  async updateUser(req, res, next) {
+    const { id } = req.params;
+    const { fullname, status } = req.body;
 
-      const token = req.headers.authorization.split(" ")[1];
-      const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-      if (id != decoded.id) {
-        return res.json("No access");
-      }
+    if (id != decoded.id) {
+      return next(ApiError.errorRequest("No access"));
+    }
 
-      await User.findOne({ where: { id } }).then(async (data) => {
+    if (!fullname) {
+      return next(ApiError.errorRequest("Fullname shouldn't be empty"));
+    }
+
+    if (fullname.length < 4) {
+      return next(ApiError.errorRequest("Too short fullname"));
+    }
+
+    await User.findOne({ where: { id } })
+      .then(async (data) => {
         if (data) {
           let newVal = {};
           fullname ? (newVal.fullname = fullname) : false;
@@ -167,28 +201,32 @@ class userController {
               ...newVal,
             },
             { where: { id } }
-          ).then(async () => {
-            await User.findOne({ where: { id } }).then((data) => {
-              const token = generateJwt(
-                data.id,
-                data.fullname,
-                data.email,
-                data.role,
-                data.avatarImage,
-                data.status,
-                data.createdAt
-              );
+          )
+            .then(async () => {
+              await User.findOne({ where: { id } }).then((data) => {
+                const token = generateJwt(
+                  data.id,
+                  data.fullname,
+                  data.email,
+                  data.role,
+                  data.avatarImage,
+                  data.status,
+                  data.createdAt
+                );
 
-              return res.json({ token });
+                return res.json({ token, message: "Profile has been updated" });
+              });
+            })
+            .catch((err) => {
+              return next(ApiError.internal(err));
             });
-          });
         } else {
-          return res.json("Error 404");
+          return next(ApiError.internal(err));
         }
+      })
+      .catch((err) => {
+        return next(ApiError.internal(err));
       });
-    } catch (e) {
-      return res.json(e);
-    }
   }
 
   async changeUserRole(req, res, next) {

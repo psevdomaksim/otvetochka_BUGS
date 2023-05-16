@@ -1,5 +1,5 @@
 .rules_wrapper {
-    width: 60em;
+    max-width: 60em;
     border: #747474 0.1em solid;
     border-radius: 0.8em;
     margin: 1em auto;
