@@ -2,7 +2,13 @@ import { addNewAnswer, fetchAnswers } from "../../http/answerAPI";
 import { fetchAnswerLikes } from "../../http/answerLikeAPI";
 import { fetchOneCategory } from "../../http/categoryAPI";
 import { fetchOneUser } from "../../http/userAPI";
-import { ADD_ANSWER, API_ERROR, DATE_OPTIONS, FETCH_ANSWERS } from "../../utils/AC_consts";
+import {
+  ADD_ANSWER,
+  API_ERROR,
+  DATE_OPTIONS,
+  FETCH_ANSWERS,
+  GET_BEST_ANSWER,
+} from "../../utils/AC_consts";
 
 // error
 export const ApiError = (data) => {
@@ -14,33 +20,42 @@ export const ApiError = (data) => {
 
 // fetch answers
 export const fetchAnswersAC = (data) => {
-    return {
-      type: FETCH_ANSWERS,
-      data: data
-    };   
-}
+  return {
+    type: FETCH_ANSWERS,
+    data: data,
+  };
+};
 
 export const fetchAnswersTC = (questionId, userId) => {
-    return (dispatch) => {
-      fetchAnswers(questionId, userId).then(async (answers) => {
-        await Promise.all(
-          answers.rows.map(async (answer) => {
-            const user = await fetchOneUser(answer.userId);
-            const likeCount = await fetchAnswerLikes(answer.id);
-            const date = new Date(Date.parse(answer.createdAt));
-            answer.createdAt = date.toLocaleString("ru", DATE_OPTIONS);
-            answer.user = user.fullname;
-            answer.userAvatar = user.avatarImage;
-            answer.likeCount = likeCount.count;
-          })
-        ).then(() => {
-          dispatch(fetchAnswersAC(answers));
+  return (dispatch) => {
+    fetchAnswers(questionId, userId)
+      .then((answers) => {
+        answers.rows.map((answer) => {
+          const date = new Date(Date.parse(answer.createdAt));
+          answer.createdAt = date.toLocaleString("ru", DATE_OPTIONS);
         });
+        if (answers.rows.length !== 0) {
+           dispatch(getBestAnswerAC(answers.rows.reduce((prev, current) =>+prev.likeCount > +current.likeCount ? prev : current))
+          )
+        } else {
+          dispatch(getBestAnswerAC(null));
+        }
+        dispatch(fetchAnswersAC(answers));
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    }
-}
+  };
+};
 
+//get best answer
 
+export const getBestAnswerAC = (answer) => {
+  return {
+    type: GET_BEST_ANSWER,
+    answer: answer,
+  };
+};
 
 // add new answer
 
@@ -51,15 +66,13 @@ export const addNewAnswerAC = (data) => {
     message: data.message,
   };
 };
+
 export const addNewAnswerTC = (body, questionId) => {
   return (dispatch) => {
     addNewAnswer(body, questionId)
-      .then(async(data) => {
-        const user = await fetchOneUser(data.answer.userId);
+      .then((data) => {
         const date = new Date(Date.parse(data.answer.createdAt));
         data.answer.createdAt = date.toLocaleString("ru", DATE_OPTIONS);
-        data.answer.user = user.fullname;
-        data.answer.userAvatar = user.avatarImage;
         dispatch(addNewAnswerAC(data));
       })
       .catch((err) => {

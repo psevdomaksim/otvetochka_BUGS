@@ -27,6 +27,6 @@ export const addLike = async (title, body, categoryId) => {
 
 
 export const deleteLike = async (id) => {
-  const { data } = await $host.delete("api/answer-like" + id);
+  const { data } = await $authHost.delete("api/answer-like" + id);
   return data;
 };

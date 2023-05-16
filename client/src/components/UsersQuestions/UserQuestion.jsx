@@ -9,6 +9,8 @@ import { PROFILE_ROUTE, QUESTION_PAGE_ROUTE } from "../../utils/routes_consts";
 import { Link } from "react-router-dom";
 
 const UserQuestion = (props) => {
+
+
   return (
     <Container className={s.wrapper}>
       <Row>
@@ -23,9 +25,9 @@ const UserQuestion = (props) => {
 
       <Row className={s.question_container}>
         <Col xs={2}>
-          <Link to={PROFILE_ROUTE + `/${props.question?.userId}`}>
+          <Link to={PROFILE_ROUTE + `/${props.question?.user?.id}`}>
             <Image
-              src={BASE_URL + `/${props.question?.userAvatar}`}
+              src={BASE_URL + `/${props.question?.user?.avatarImage}`}
               style={{ width: "50px", height: "50px" }}
               roundedCircle
             />
@@ -39,11 +41,11 @@ const UserQuestion = (props) => {
       </Row>
 
       <Stack direction="horizontal" gap={4}>
-        <span className={s.signature}>{props.question?.user}</span>
+        <span className={s.signature}>{props.question?.user?.fullname}</span>
         <span className={s.signature}>{props.question?.createdAt}</span>
-        <span className={s.signature}>{props.question?.category}</span>
+        <span className={s.signature}>{props.question?.category?.name}</span>
         <span>
-        <span style={{color:"white", marginRight:"-20px"}}>{props.answersCount}</span>
+        <span style={{color:"white", marginRight:"-20px"}}>{props.question?.answersCount}</span>
         </span>
         
         <FaCommentDots style={{ color: "white" }} size={24} />

@@ -13,8 +13,6 @@ import {
   FETCH_QUESTIONS,
 } from "../../utils/AC_consts";
 
-
-
 // error
 export const ApiError = (data) => {
   return {
@@ -33,22 +31,17 @@ export const fetchQuestionsAC = (questions) => {
 
 export const fetchQuestionsTC = (categoryId, userId) => {
   return (dispatch) => {
-    fetchQuestions(categoryId, userId).then(async (questions) => {
-      await Promise.all(
-        questions.rows.map(async (question) => {
-          const user = await fetchOneUser(question.userId);
-          const category = await fetchOneCategory(question.categoryId);
-
+    fetchQuestions(categoryId, userId)
+      .then((questions) => {
+        questions.rows.map((question) => {
           const date = new Date(Date.parse(question.createdAt));
           question.createdAt = date.toLocaleString("ru", DATE_OPTIONS);
-          question.user = user.fullname;
-          question.userAvatar = user.avatarImage;
-          question.category = category.name;
-        })
-      ).then(() => {
+        });
         dispatch(fetchQuestionsAC(questions));
+      })
+      .catch((err) => {
+        console.log(err)
       });
-    });
   };
 };
 
@@ -62,20 +55,11 @@ export const fetchOneQuestionAC = (question) => {
 
 export const fetchOneQuestionTC = (id) => {
   return (dispatch) => {
-    fetchOneQuestion(id).then(async (question) => {
-
-        const user = await fetchOneUser(question.userId);
-        const category = await fetchOneCategory(question.categoryId);
-
-        const date = new Date(Date.parse(question.createdAt));
-        question.createdAt = date.toLocaleString("ru", DATE_OPTIONS);
-        question.user = user.fullname;
-        question.userAvatar = user.avatarImage;
-        question.category = category.name;
-       
-        dispatch(fetchOneQuestionAC(question));
-      })
-      
+    fetchOneQuestion(id).then((question) => {
+      const date = new Date(Date.parse(question.createdAt));
+      question.createdAt = date.toLocaleString("ru", DATE_OPTIONS);
+      dispatch(fetchOneQuestionAC(question));
+    });
   };
 };
 
@@ -92,11 +76,11 @@ export const addNewQuestionTC = (title, body, categoryId) => {
   return (dispatch) => {
     addNewQuestion(title, body, categoryId)
       .then((data) => {
-        console.log(data)
+        console.log(data);
         dispatch(addNewQuestionAC(data));
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         dispatch(ApiError(err.response.data.message));
       });
   };

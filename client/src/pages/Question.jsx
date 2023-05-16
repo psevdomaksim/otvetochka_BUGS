@@ -23,6 +23,7 @@ const Question = (props) => {
 
   const [questionAnswers, setQuestionAnswers] = useState(null);
   const [questionAnswersCount, setQuestionAnswersCount] = useState(null);
+  const [bestAnswer, setBestAnswer] = useState(null);
 
   const [body, setBody] = useState("");
 
@@ -46,6 +47,7 @@ const Question = (props) => {
     setCurQuestion(store.getState().questionPage.curQuestion);
     setQuestionAnswers(store.getState().answerPage.answers);
     setQuestionAnswersCount(store.getState().answerPage.count);
+    setBestAnswer(store.getState().answerPage.bestAnswer)
     setErrorMsg(store.getState().answerPage.error);
     setSuccessMsg(store.getState().answerPage.msg);
   });
@@ -68,7 +70,6 @@ const Question = (props) => {
       <Container className={s.wrapper}>
         <UserQuestion
           key={curQuestion?.id}
-          answersCount={questionAnswersCount}
           question={curQuestion}
         />
 
@@ -96,7 +97,7 @@ const Question = (props) => {
         </div>
         <div className={s.users_question_wrapper}>
           <h3>Ответы пользователей</h3>
-          <AnswerList answers={questionAnswers}  />
+          <AnswerList bestAnswer={bestAnswer} answers={questionAnswers}  />
         </div>
       </Container>
   );

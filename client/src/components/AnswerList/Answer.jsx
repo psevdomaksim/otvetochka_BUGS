@@ -8,13 +8,16 @@ import { BASE_URL } from "../../utils/baseURL_const";
 import { PROFILE_ROUTE } from "../../utils/routes_consts";
 
 const Answer = (props) => {
+
+  console.log(props)
+  
   return (
     <Container className="mb-3">
     <Row className="mb-2">
       <Col xs={1}>
-        <Link to={PROFILE_ROUTE + `/${props.answer?.userId}`}>
+        <Link to={PROFILE_ROUTE + `/${props.answer?.user?.id}`}>
           <Image
-            src={BASE_URL + `/${props.answer?.userAvatar}`}
+            src={BASE_URL + `/${props.answer?.user?.avatarImage}`}
             style={{ width: "50px", height: "50px" }}
             roundedCircle
           />
@@ -32,7 +35,7 @@ const Answer = (props) => {
     </Row>
     <Row className="mb-2">
     <Stack className="mb-2" direction="horizontal" style={{color:"#747474"}} gap={4}>
-      <span>{props.answer?.user}</span>
+      <span>{props.answer?.user?.fullname}</span>
       <span>{props.answer?.createdAt}</span>
       <span style={{color:"white", marginRight:"-20px"}}>{props.answer?.likeCount}</span>
       

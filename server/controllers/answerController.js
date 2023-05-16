@@ -1,35 +1,99 @@
 const ApiError = require("../error/error");
-const { Answer } = require("../models/models");
+const { Answer, User, AnswerLike, Question } = require("../models/models");
 const jwt = require("jsonwebtoken");
+const sequelize = require("../db");
 
 class answerController {
   async getAllAnswers(req, res, next) {
     let { questionId, userId } = req.query;
 
+    //answer.user = user.fullname;
+    //answer.userAvatar = user.avatarImage;
+    //answer.likeCount = likeCount.count;
+
     let answers;
 
     if (!questionId && !userId) {
       answers = await Answer.findAndCountAll({
-        order:[['createdAt', 'DESC'],]
+        attributes: [
+          "id",
+          "body",
+          "createdAt",
+          [
+            sequelize.literal(
+              "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
+            ),
+            "likeCount",
+          ],
+        ],
+        include: [
+          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+        ],
+        order: [["createdAt", "DESC"]],
       });
     }
 
     if (questionId && !userId) {
       answers = await Answer.findAndCountAll({
         where: { questionId },
-        order:[['createdAt', 'DESC'],]
+        attributes: [
+          "id",
+          "body",
+          "createdAt",
+          "questionId",
+          [
+            sequelize.literal(
+              "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
+            ),
+            "likeCount",
+          ],
+        ],
+        include: [
+          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+        ],
+        order: [["createdAt", "DESC"]],
       });
     }
     if (!questionId && userId) {
       answers = await Answer.findAndCountAll({
         where: { userId },
-        order:[['createdAt', 'DESC'],]
+        attributes: [
+          "id",
+          "body",
+          "createdAt",
+          "questionId",
+          [
+            sequelize.literal(
+              "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
+            ),
+            "likeCount",
+          ],
+        ],
+        include: [
+          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+        ],
+        order: [["createdAt", "DESC"]],
       });
     }
     if (questionId && userId) {
       answers = await Answer.findAndCountAll({
         where: { questionId, userId },
-        order:[['createdAt', 'DESC'],]
+        attributes: [
+          "id",
+          "body",
+          "createdAt",
+          "questionId",
+          [
+            sequelize.literal(
+              "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
+            ),
+            "likeCount",
+          ],
+        ],
+        include: [
+          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+        ],
+        order: [["createdAt", "DESC"]],
       });
     }
 
@@ -40,17 +104,25 @@ class answerController {
     const { id } = req.params;
     const answer = await Answer.findOne({
       where: { id },
-    })
-      .then(() => {
-        return res.json(answer);
-      })
-      .catch((err) => {
-        return next(ApiError.internal(err));
-      });
+      attributes: [
+        "id",
+        "body",
+        "createdAt",
+        "questionId",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
+          ),
+          "likeCount",
+        ],
+      ],
+      include: [{ model: User, attributes: ["id", "fullname", "avatarImage"] }],
+    });
+
+    return res.json(answer);
   }
 
   async createNewAnswer(req, res, next) {
-  
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
@@ -60,16 +132,40 @@ class answerController {
       return next(ApiError.errorRequest("Uncorrect data"));
     }
 
-    if(body.length<5){
+    if (body.length < 5) {
       return next(ApiError.errorRequest("Too short answer body"));
     }
 
-    const answer = await Answer.create({
+    await Answer.create({
       body,
       userId: decoded.id,
       questionId,
-    })
-    return res.json({ answer, message: "Answer has been published successfully." });  
+    }).then(async (data) => {
+      const id = data.id;
+
+      const answer = await Answer.findOne({
+        where: { id },
+        attributes: [
+          "id",
+          "body",
+          "createdAt",
+          "questionId",
+          [
+            sequelize.literal(
+              "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
+            ),
+            "likeCount",
+          ],
+        ],
+        include: [
+          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+        ],
+      });
+      return res.json({
+        answer,
+        message: "Answer has been published successfully.",
+      });
+    });
   }
 
   async deleteAnswer(req, res, next) {

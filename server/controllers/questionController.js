@@ -1,6 +1,7 @@
 const ApiError = require("../error/error");
-const { Question } = require("../models/models");
+const { Question, User, Category } = require("../models/models");
 const jwt = require("jsonwebtoken");
+const sequelize = require("../db");
 
 class questionController {
   async getAllQuestions(req, res) {
@@ -10,26 +11,36 @@ class questionController {
 
     if (!categoryId && !userId) {
       questions = await Question.findAndCountAll({
-        order:[['createdAt', 'DESC'],]
+        attributes: ["id", "title", "body", "createdAt",
+        [sequelize.literal(
+          "(SELECT COUNT(*) FROM answers WHERE answers.questionId = question.id)"
+        ),
+        "answersCount"]
+      ],
+        include: [
+          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+          { model: Category, attributes: ["id","name"] },
+        ],
+        order: [["createdAt", "DESC"]],
       });
     }
 
     if (categoryId && !userId) {
       questions = await Question.findAndCountAll({
         where: { categoryId },
-        order:[['createdAt', 'DESC'],]
+        order: [["createdAt", "DESC"]],
       });
     }
     if (!categoryId && userId) {
       questions = await Question.findAndCountAll({
         where: { userId },
-        order:[['createdAt', 'DESC'],]
+        order: [["createdAt", "DESC"]],
       });
     }
     if (categoryId && userId) {
       questions = await Question.findAndCountAll({
         where: { categoryId, userId },
-        order:[['createdAt', 'DESC'],]
+        order: [["createdAt", "DESC"]],
       });
     }
 
@@ -40,37 +51,48 @@ class questionController {
     const { id } = req.params;
     const question = await Question.findOne({
       where: { id },
+      attributes: ["id", "title", "body", "createdAt",
+      [sequelize.literal(
+        "(SELECT COUNT(*) FROM answers WHERE answers.questionId = question.id)"
+      ),
+      "answersCount"]
+    ],
+      include: [
+        { model: User, attributes: ["id", "fullname", "avatarImage"] },
+        { model: Category, attributes: ["id","name"] },
+      ],
     });
     return res.json(question);
   }
 
-
-
-  async createNewQuestion(req, res ,next) {
+  async createNewQuestion(req, res, next) {
     const token = req.headers.authorization.split(" ")[1];
     const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-      const { title, body, categoryId } = req.body;
+    const { title, body, categoryId } = req.body;
 
-      if (!title || !body || !categoryId) {
-        return next(ApiError.errorRequest("Uncorrect data"));
-      }
+    if (!title || !body || !categoryId) {
+      return next(ApiError.errorRequest("Uncorrect data"));
+    }
 
-      if(title.length<10){
-        return next(ApiError.errorRequest("Too short question title"));
-      }
+    if (title.length < 10) {
+      return next(ApiError.errorRequest("Too short question title"));
+    }
 
-      if(body.length<10){
-        return next(ApiError.errorRequest("Too short question body"));
-      }
-      const question = await Question.create({
-        title,
-        body,
-        userId: decoded.id,
-        categoryId,
-      });
+    if (body.length < 10) {
+      return next(ApiError.errorRequest("Too short question body"));
+    }
+    const question = await Question.create({
+      title,
+      body,
+      userId: decoded.id,
+      categoryId,
+    });
 
-      return res.json({ question, message: "Question has been published successfully." });  
+    return res.json({
+      question,
+      message: "Question has been published successfully.",
+    });
   }
 
   async deleteQuestion(req, res, next) {

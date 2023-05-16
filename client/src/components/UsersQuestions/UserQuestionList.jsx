@@ -11,7 +11,6 @@ const UserQuestionList = (props) => {
   const store = useContext(StoreContext);
 
   const [userQuestions, setUserQuestions] = useState(null);
-  const [userQuestionsCount, setUserQuestionsCount] = useState(null);
 
   const [userAnswers, setUserAnswers] = useState(null);
   const [userAnswersCount, setUserAnswersCount] = useState(null);
@@ -31,7 +30,6 @@ const UserQuestionList = (props) => {
 
   store.subscribe(() => {
     setUserQuestions(store.getState().questionPage.questions);
-    setUserQuestionsCount(store.getState().questionPage.count);
     setUserAnswers(store.getState().answerPage.answers);
     setUserAnswersCount(store.getState().answerPage.count);
   });
