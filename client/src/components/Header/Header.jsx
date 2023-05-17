@@ -101,7 +101,7 @@ const Header = () => {
             </Link>
           </Col>
           <Col xs={2}>
-            <Link to={NEW_QUESTION_ROUTE}>Спросить</Link>
+            <Link id={s.link} to={NEW_QUESTION_ROUTE}>Спросить</Link>
           </Col>
           <Col xs={3}>
             <Dropdown>
@@ -110,7 +110,7 @@ const Header = () => {
               </DropdownToggle>
               <DropdownMenu variant="dark">
                 {categories.map((category) => (
-                  <DropdownItem key={category.id} eventKey={category.id}>
+                  <DropdownItem id={s.dropdown_text} key={category.id} eventKey={category.id}>
                     {category.name}
                   </DropdownItem>
                 ))}
@@ -118,7 +118,7 @@ const Header = () => {
             </Dropdown>
           </Col>
           <Col xs={2}>
-            <Link to={RULES_PAGE_ROUTE}>Правила</Link>
+            <Link id={s.link} to={RULES_PAGE_ROUTE}>Правила</Link>
           </Col>
           <Col xs={3}>
             <Form.Control

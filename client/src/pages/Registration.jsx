@@ -1,7 +1,16 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  Row,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "..";
 import s from "../css/Auth.module.css";
@@ -18,14 +27,12 @@ const Registration = (props) => {
   const [errorMsg, setErrorMsg] = useState("");
   const [checkbox, setCheckbox] = useState(false);
 
-  
-  const registration = () => { 
-    if (checkbox){
-        store.dispatch(registrationTC(fullname, email, password)); 
-    } else{
-        setErrorMsg("Для регистрации вы должны согласиться с правилами проекта");
+  const registration = () => {
+    if (checkbox) {
+      store.dispatch(registrationTC(fullname, email, password));
+    } else {
+      setErrorMsg("Для регистрации вы должны согласиться с правилами проекта");
     }
-     
   };
 
   const onChange = (event) => {
@@ -57,18 +64,18 @@ const Registration = (props) => {
           Делись мнением
         </div>
       </div>
-      <Container className={s.reg_form}>
-        <Row>
-          <Col md="auto" className={s.center}>
+
+      <Form className={s.reg_form}>
+        <Row className="mb-4">
+          <Col>
             <span id={s.reg_head}>Регистрация</span>
           </Col>
         </Row>
-        <Row className="mb-3">
-          <Col className="d-flex align-items-center" xs={2}>
-            <p id={s.text}>Имя</p>
-          </Col>
-          <Col xs={8}>
-            <Form.Control
+
+        <Row className="mb-3" md="16">
+          <FormGroup>
+            <FormLabel id={s.text}>Имя</FormLabel>
+            <FormControl
               type="text"
               placeholder="Введите имя"
               className={s.input}
@@ -76,21 +83,112 @@ const Registration = (props) => {
               value={fullname}
               onChange={onChange}
             />
-          </Col>
-          {fullname === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
+            {fullname === "" ? (
               <b style={{ color: "red" }}>Введите имя</b>
-            </Col>
-          ) : (
-            <></>
-          )}
+            ) : (
+              <></>
+            )}
+          </FormGroup>
         </Row>
 
         <Row className="mb-3">
-          <Col className="d-flex align-items-center" xs={2}>
+          <FormGroup as={Col} md="13">
+            <FormLabel id={s.text}>Почта</FormLabel>
+            <FormControl
+              type="text"
+              placeholder="Введите почту"
+              className={s.input}
+              id="email"
+              value={email}
+              onChange={onChange}
+            />
+            {email === "" ? (
+              <b style={{ color: "red" }}>Введите почту</b>
+            ) : (
+              <></>
+            )}
+          </FormGroup>
+        </Row>
+
+        <Row className="mb-3">
+          <FormGroup as={Col} md="13">
+            <FormLabel id={s.text}>Пароль</FormLabel>
+            <FormControl
+              type="password"
+              placeholder="Введите пароль"
+              className={s.input}
+              id="password"
+              value={password}
+              onChange={onChange}
+            />
+            {email === "" ? (
+              <b style={{ color: "red" }}>Введите пароль</b>
+            ) : (
+              <></>
+            )}
+          </FormGroup>
+        </Row>
+
+        <Row className="mb-3">
+          <Col>
+            <span>
+              Есть аккаунт?
+              <Link id={s.link} to={LOGIN_ROUTE}>
+                Авторизуйся!
+              </Link>
+            </span>
+          </Col>
+        </Row>
+        <Row>
+          {/* <Col xs={{ span: 10, offset: 1 }}> */}
+          <Col>
+            <input
+              type="checkbox"
+              id={s.checkbox}
+              onClick={() =>
+                checkbox
+                  ? setCheckbox(false)
+                  : (setCheckbox(true), setErrorMsg(""))
+              }
+              checked={checkbox}
+            />
+            <span id={s.check_text}>
+              Ознакомлен и согласен с правилами проекта
+            </span>
+          </Col>
+        </Row>
+
+        <Row>
+          <Row className="mb-2">
+            {" "}
+            <b style={{ color: "red" }}>{errorMsg}</b>
+          </Row>
+          {/* <Col md={{ offset: 3 }}> */}
+          <Col>
+            <Button
+              variant="dark"
+              id={s.reg_button}
+              onClick={registration}
+              type="submit"
+            >
+              Зарегистрироваться
+            </Button>
+          </Col>
+        </Row>
+      </Form>
+    </div>
+  );
+};
+
+export default Registration;
+
+
+
+        {/* <Row className="mb-3"> */}
+        {/* <Col>
             <p id={s.text}>Почта</p>
           </Col>
-          <Col xs={8}>
+          <Col>
             <Form.Control
               type="text"
               placeholder="Введите почту"
@@ -101,19 +199,39 @@ const Registration = (props) => {
             />
           </Col>
           {email === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
+            <Col>
               <b style={{ color: "red" }}>Введите почту</b>
             </Col>
           ) : (
             <></>
-          )}
-        </Row>
+          )} */}
+        {/* <Col>
+            <Form>
+              <FormGroup>
+                <FormLabel id={s.text}>Почта</FormLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Введите почту"
+                  className={s.input}
+                  id="email"
+                  value={email}
+                  onChange={onChange}
+                />
+                {email === "" ? (
+                    <b style={{ color: "red" }}>Введите почту</b>
+                ) : (
+                  <></>
+                )}
+              </FormGroup>
+            </Form>
+          </Col> */}
+        {/* </Row> */}
 
-        <Row className="mb-3">
-          <Col className="d-flex align-items-center" xs={2}>
+        {/* <Row className="mb-3">
+          <Col>
             <p id={s.text}>Пароль</p>
           </Col>
-          <Col xs={8}>
+          <Col>
             <Form.Control
               type="password"
               placeholder="Введите пароль"
@@ -124,40 +242,32 @@ const Registration = (props) => {
             />
           </Col>
           {password === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
+            <Col>
               <b style={{ color: "red" }}>Введите пароль</b>
             </Col>
           ) : (
             <></>
           )}
-        </Row>
+        </Row> */}
 
-        <Row>
-          <Col id={s.middle}>
-            <span>
-              Есть аккаунт?<Link to={LOGIN_ROUTE}> Авторизуйся!</Link>
-            </span>
+        {/* <Col className="d-flex align-items-center" xs={2}> */}
+          {/* <Col>
+            <p id={s.text}>Имяㅤ</p>
           </Col>
-        </Row>
-        <Row className="mb-2">
-          <Col xs={{ span: 10, offset: 1 }}>
-            <input  type="checkbox" id={s.checkbox} onClick={()=>checkbox ? setCheckbox(false) : (setCheckbox(true), setErrorMsg(""))} checked={checkbox} />
-            <span id={s.check_text}>
-              Ознакомлен и согласен с правилами проекта
-            </span>
+          <Col>
+            <Form.Control
+              type="text"
+              placeholder="Введите имя"
+              className={s.input}
+              id="fullname"
+              value={fullname}
+              onChange={onChange}
+            />
           </Col>
-        </Row>
-        <Row>
-        <Row className="mb-2">  <b style={{ color: "red" }}>{errorMsg}</b></Row>
-          <Col md={{ offset: 3 }}>
-            <Button variant="dark" id={s.reg_button} onClick={registration} type="submit">
-              Зарегистрироваться
-            </Button>
-          </Col>
-        </Row>
-      </Container>
-    </div>
-  );
-};
-
-export default Registration;
+          {fullname === "" ? (
+            <Col>
+              <b style={{ color: "red" }}>Введите имя</b>
+            </Col>
+          ) : (
+            <></>
+          )} */}

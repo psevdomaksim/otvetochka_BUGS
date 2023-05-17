@@ -1,7 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { useContext } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  FormControl,
+  FormGroup,
+  FormLabel,
+  FormText,
+  Row,
+} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { StoreContext } from "..";
 import s from "../css/Auth.module.css";
@@ -32,7 +42,6 @@ const Login = (props) => {
     }
   };
 
-
   store.subscribe(() => {
     setErrorMsg(store.getState().authPage.error);
   });
@@ -50,19 +59,22 @@ const Login = (props) => {
           Делись мнением
         </div>
       </div>
+
       <Container className={s.reg_form}>
         <Row className="mb-4">
-          <Col  className={s.center}>
+          <Col>
             <h3 className="m-auto" id={s.reg_head}>
               Вход
             </h3>
           </Col>
         </Row>
         <Row className="mb-5">
-          <Col className="d-flex align-items-center" xs={2}>
+          {/* <Col className="d-flex align-items-center" xs={2}> */}
+          {/* <Col xs={8}> */}
+          {/* <Col>
             <p id={s.text}>Почта</p>
           </Col>
-          <Col xs={8}>
+          <Col>
             <Form.Control
               type="text"
               placeholder="Введите почту"
@@ -71,20 +83,50 @@ const Login = (props) => {
               value={email}
               onChange={onChange}
             />
+          </Col> */}
+          <Col>
+            <Form>
+              <FormGroup className="mb-3">
+                <FormLabel id={s.text}>Почта</FormLabel>
+                <FormControl
+                  type="text"
+                  placeholder="Введите почту"
+                  className={s.input}
+                  id="email"
+                  value={email}
+                  onChange={onChange}
+                />
+                {email === "" ? (
+                  // <Col xs={2} className="d-flex align-items-center">
+                  <b style={{ color: "red" }}>Введите почту</b>
+                ) : (
+                  <></>
+                )}
+              </FormGroup>
+              <FormGroup>
+                <FormLabel id={s.text}>Пароль</FormLabel>
+                <FormControl
+                  type="password"
+                  placeholder="Введите пароль"
+                  className={s.input}
+                  id="password"
+                  value={password}
+                  onChange={onChange}
+                />
+                {password === "" ? (
+                    <b style={{ color: "red" }}>Введите пароль</b>
+                ) : (
+                  <></>
+                )}
+              </FormGroup>
+            </Form>
           </Col>
-          {email === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
-              <b style={{ color: "red" }}>Введите почту</b>
-            </Col>
-          ) : (
-            <></>
-          )}
         </Row>
-        <Row className="mb-3">
-          <Col className="d-flex align-items-center" xs={2}>
+        {/* <Row className="mb-3">
+          <Col>
             <p id={s.text}>Пароль</p>
           </Col>
-          <Col xs={8}>
+          <Col>
             <Form.Control
               type="password"
               placeholder="Введите пароль"
@@ -95,17 +137,19 @@ const Login = (props) => {
             />
           </Col>
           {password === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
+            <Col>
               <b style={{ color: "red" }}>Введите пароль</b>
             </Col>
           ) : (
             <></>
           )}
-        </Row>
-        <Row className="d-flex justify-content-between mt-3 pr-3 pl-3">
+        </Row> */}
+        <Row>
           <span className={s.text_regr}>
             Нет аккаунта?
-            <Link to={REGISTRATION_ROUTE}>Зарегистрируйся!!</Link>
+            <Link id={s.link} to={REGISTRATION_ROUTE}>
+              Зарегистрируйся!!
+            </Link>
           </span>
         </Row>
         <Row>
@@ -115,7 +159,9 @@ const Login = (props) => {
             </Button>
           </Col>
         </Row>
-        <Row className="mb-2"><b style={{ color: "red" }}>{errorMsg}</b></Row>
+        <Row className="mb-2">
+          <b style={{ color: "red" }}>{errorMsg}</b>
+        </Row>
       </Container>
     </div>
   );

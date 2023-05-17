@@ -11,18 +11,16 @@ const Home = (props) => {
       <div className={style.left_box_wrapper}>
         <div className={style.wrapper}>
           <span id={style.green}>Есть вопрос?</span>
-          <span className={style.ask_text}>
-          Спроси у сообщества
-          </span>
+          <span className={style.ask_text}>Спроси у сообщества</span>
           <Link to={NEW_QUESTION_ROUTE}>
-          <button type="button" className="btn btn-success">
-            Спросить
-          </button>
+            <button type="button" className="btn btn-success">
+              Спросить
+            </button>
           </Link>
         </div>
         <ActiveUsersList />
       </div>
-    <UserQuestionList />
+      <UserQuestionList />
       <div className={style.break}></div>
       <div>
         <button
