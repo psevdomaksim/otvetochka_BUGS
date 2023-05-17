@@ -1,4 +1,4 @@
-import { ADD_ANSWER, API_ERROR, FETCH_ANSWERS, GET_BEST_ANSWER } from "../../utils/AC_consts";
+import { ADD_ANSWER, API_ERROR, CLEAR_MSG, FETCH_ANSWERS, GET_BEST_ANSWER } from "../../utils/AC_consts";
 
 let initialState = {
   answers: [],
@@ -32,6 +32,11 @@ const answerReducer = (state = initialState, action) => {
 
     case API_ERROR: {
       state = { ...state, error: action.data, msg: null };
+      return state;
+    }
+
+    case CLEAR_MSG:{
+      state = { ...state, error: null, msg: null };
       return state;
     }
 

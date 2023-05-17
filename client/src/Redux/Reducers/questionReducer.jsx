@@ -1,6 +1,7 @@
 import {
   ADD_QUESTION,
   API_ERROR,
+  CLEAR_MSG,
   FETCH_ONE_QUESTION,
   FETCH_QUESTIONS,
 } from "../../utils/AC_consts";
@@ -33,13 +34,17 @@ const questionReducer = (state = initialState, action) => {
     }
 
     case ADD_QUESTION: {
-      //state.questions.push(action.question)
       state = { ...state, error: null, msg: action.message };
       return state;
     }
 
     case API_ERROR: {
       state = { ...state, error: action.data, msg: null };
+      return state;
+    }
+
+    case CLEAR_MSG:{
+      state = { ...state, error: null, msg: null };
       return state;
     }
 

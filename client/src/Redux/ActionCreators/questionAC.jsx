@@ -8,6 +8,7 @@ import { fetchOneUser } from "../../http/userAPI";
 import {
   ADD_QUESTION,
   API_ERROR,
+  CLEAR_MSG,
   DATE_OPTIONS,
   FETCH_ONE_QUESTION,
   FETCH_QUESTIONS,
@@ -63,6 +64,12 @@ export const fetchOneQuestionTC = (id) => {
   };
 };
 
+export const clearMessages = () => {
+  return {
+    type: CLEAR_MSG,
+  };
+};
+
 // add new questions
 
 export const addNewQuestionAC = (data) => {
@@ -72,11 +79,11 @@ export const addNewQuestionAC = (data) => {
     message: data.message,
   };
 };
+
 export const addNewQuestionTC = (title, body, categoryId) => {
   return (dispatch) => {
     addNewQuestion(title, body, categoryId)
       .then((data) => {
-        console.log(data);
         dispatch(addNewQuestionAC(data));
       })
       .catch((err) => {

@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import { fetchOneQuestionTC } from "../Redux/ActionCreators/questionAC";
 import {
   addNewAnswerTC,
+  clearMessages,
   fetchAnswersTC,
 } from "../Redux/ActionCreators/answerAC";
 import { useState } from "react";
@@ -41,6 +42,7 @@ const Question = (props) => {
   useEffect(() => {
     fetchQuestion();
     fetchQuestionAnswers();
+    store.dispatch(clearMessages());
   }, []);
 
   store.subscribe(() => {

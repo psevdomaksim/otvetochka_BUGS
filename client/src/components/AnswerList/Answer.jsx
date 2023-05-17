@@ -8,8 +8,6 @@ import { BASE_URL } from "../../utils/baseURL_const";
 import { PROFILE_ROUTE } from "../../utils/routes_consts";
 
 const Answer = (props) => {
-
-  console.log(props)
   
   return (
     <Container className="mb-3">

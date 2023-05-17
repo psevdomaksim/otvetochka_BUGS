@@ -32,7 +32,7 @@ class banController {
       }
     });
 
-    await Ban.findAndCountAll({
+    await Ban.count({
       where: { userId },
     }).then(async (count) => {
       if (count !== 0) {

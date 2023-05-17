@@ -5,6 +5,7 @@ import { fetchOneUser } from "../../http/userAPI";
 import {
   ADD_ANSWER,
   API_ERROR,
+  CLEAR_MSG,
   DATE_OPTIONS,
   FETCH_ANSWERS,
   GET_BEST_ANSWER,
@@ -56,6 +57,13 @@ export const getBestAnswerAC = (answer) => {
     answer: answer,
   };
 };
+
+export const clearMessages = () => {
+  return {
+    type: CLEAR_MSG,
+  };
+};
+
 
 // add new answer
 

@@ -6,7 +6,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { StoreContext } from "..";
 import s from "../css/NewQuestion.module.css";
 import { fetchCategoriesTC } from "../Redux/ActionCreators/categoryAC";
-import { addNewQuestionTC } from "../Redux/ActionCreators/questionAC";
+import { addNewQuestionTC, clearMessages } from "../Redux/ActionCreators/questionAC";
 
 const NewQuestion = (props) => {
   const store = useContext(StoreContext);
@@ -27,6 +27,7 @@ const NewQuestion = (props) => {
 
   useEffect(() => {
     fetchCategories();
+    store.dispatch(clearMessages());
   }, []);
 
   store.subscribe(() => {
@@ -82,7 +83,7 @@ const NewQuestion = (props) => {
           <span id={s.small_text}>Вопрос</span>
         </Col>
         <Col>
-          <Form.Control className={s.input} id="title" onChange={onChange} />
+          <Form.Control className={s.input} id="title" onChange={onChange}  value={title} />
         </Col>
       </Row>
       <Row className={s.item}>
@@ -95,6 +96,7 @@ const NewQuestion = (props) => {
             rows={3}
             className={s.textarea}
             id="body"
+            value={body}
             onChange={onChange}
           />
         </Col>
