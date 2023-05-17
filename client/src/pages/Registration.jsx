@@ -46,6 +46,7 @@ const Registration = (props) => {
 
   return (
     <div className={s.reg_wrapper}>
+
       <div className={s.traffic_light}>
         <div className={s.block} id={s.green}>
           Задавай вопросы
@@ -57,15 +58,18 @@ const Registration = (props) => {
           Делись мнением
         </div>
       </div>
+
       <Container className={s.reg_form}>
-        <Row>
-          <Col md="auto" className={s.center}>
+        <Row className="mb-4">
+          <Col>
             <span id={s.reg_head}>Регистрация</span>
           </Col>
         </Row>
+
         <Row className="mb-3">
-          <Col className="d-flex align-items-center" xs={2}>
-            <p id={s.text}>Имя</p>
+          {/* <Col className="d-flex align-items-center" xs={2}> */}
+          <Col>
+            <p id={s.text}>Имяㅤ</p>
           </Col>
           <Col xs={8}>
             <Form.Control
@@ -78,7 +82,8 @@ const Registration = (props) => {
             />
           </Col>
           {fullname === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
+            // <Col xs={2} className="d-flex align-items-center">
+            <Col>
               <b style={{ color: "red" }}>Введите имя</b>
             </Col>
           ) : (
@@ -87,7 +92,8 @@ const Registration = (props) => {
         </Row>
 
         <Row className="mb-3">
-          <Col className="d-flex align-items-center" xs={2}>
+          {/* <Col className="d-flex align-items-center" xs={2}> */}
+          <Col>
             <p id={s.text}>Почта</p>
           </Col>
           <Col xs={8}>
@@ -101,7 +107,8 @@ const Registration = (props) => {
             />
           </Col>
           {email === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
+            // <Col xs={2} className="d-flex align-items-center">
+            <Col>
               <b style={{ color: "red" }}>Введите почту</b>
             </Col>
           ) : (
@@ -110,7 +117,8 @@ const Registration = (props) => {
         </Row>
 
         <Row className="mb-3">
-          <Col className="d-flex align-items-center" xs={2}>
+          {/* <Col className="d-flex align-items-center" xs={2}> */}
+          <Col>
             <p id={s.text}>Пароль</p>
           </Col>
           <Col xs={8}>
@@ -124,7 +132,8 @@ const Registration = (props) => {
             />
           </Col>
           {password === "" ? (
-            <Col xs={2} className="d-flex align-items-center">
+            // <Col xs={2} className="d-flex align-items-center">
+            <Col>
               <b style={{ color: "red" }}>Введите пароль</b>
             </Col>
           ) : (
@@ -132,15 +141,16 @@ const Registration = (props) => {
           )}
         </Row>
 
-        <Row>
-          <Col id={s.middle}>
+        <Row className="mb-3">
+          <Col>
             <span>
-              Есть аккаунт?<Link to={LOGIN_ROUTE}> Авторизуйся!</Link>
+              Есть аккаунт?<Link id={s.link} to={LOGIN_ROUTE}> Авторизуйся!</Link>
             </span>
           </Col>
         </Row>
-        <Row className="mb-2">
-          <Col xs={{ span: 10, offset: 1 }}>
+        <Row>
+          {/* <Col xs={{ span: 10, offset: 1 }}> */}
+          <Col>
             <input  type="checkbox" id={s.checkbox} onClick={()=>checkbox ? setCheckbox(false) : (setCheckbox(true), setErrorMsg(""))} checked={checkbox} />
             <span id={s.check_text}>
               Ознакомлен и согласен с правилами проекта
@@ -149,7 +159,8 @@ const Registration = (props) => {
         </Row>
         <Row>
         <Row className="mb-2">  <b style={{ color: "red" }}>{errorMsg}</b></Row>
-          <Col md={{ offset: 3 }}>
+        {/* <Col md={{ offset: 3 }}> */}
+          <Col>
             <Button variant="dark" id={s.reg_button} onClick={registration} type="submit">
               Зарегистрироваться
             </Button>

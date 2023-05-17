@@ -1,31 +1,27 @@
 .reg_wrapper {
-  margin: 26px auto;
-  display: flex;
+  display: grid;
   justify-content: center;
-  align-items: center;
-  min-height: 28em; 
 }
-
+/* 
 .block {
-  width: 230px;
-  box-sizing: border-box;
-  border-radius: 15px;
-  font-size: 32px;
-  margin-bottom: 33px;
-  padding: 13px;
-  line-height: 35px;
+  width: 230px; 
+   box-sizing: border-box;
+  border-radius: 0.8em;
+  font-size: 1.5em;
+  margin-bottom: 1.2em;
+  padding: 1em;
+  line-height: 1em;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+  flex-direction: column; 
+   flex-wrap: wrap;
+} */
 
 .traffic_light {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-right: 3em;
-  height: 100%; 
+  margin-right: 2em;
 }
 
 #green {
@@ -42,13 +38,16 @@
   border: #ff652f 2px solid;
   margin-bottom: 0em;
 }
+
 .reg_form {
   width: 35em;
   border: #4B4B4B 2px solid;
   border-radius: 1em;
   color: #fff;
-  display: block;
-  margin: auto;
+  display: grid;
+  justify-items: center;
+  padding: 1em;
+  margin: 0;
 }
 
 #reg_head {
@@ -83,24 +82,37 @@
   padding: 0;
   font-size: 1.3em;
   color: #fff;
-  border-radius: 0.7em;
+  border-radius: 0.8em;
   border: #646464 1px solid;
-  margin: 1em auto 1em;
+  margin-top: 1em;
+  /* margin: 1em auto 1em; */
 }
-
+/* 
 .indent {
   margin-bottom: 30px;
+} */
+
+.link_left_margin {
+  margin-left: 0.7em;
 }
 
-.center {
-  margin: 0 auto 33px;
+#link {
+  text-decoration: none;
+  color: #14a76c;
+  margin-left: 0.7em;
 }
 
+#link:hover {
+  color: #0f8656;
+  border-bottom: 2px solid #0f8656;
+}
+
+/*
 a:link {
   text-decoration: none;
   color: #14a76c;
 }
-
+/*
 text_regr a {
   margin-left: 0.3em;
 }
@@ -113,7 +125,9 @@ text_regr a:visited {
 text_regr a:hover {
   border-bottom: #0c6541 1px solid;
   color: #0c6541;
-}
+} */
+
+/* * Registration Page */
 
 
 .reg_wrapper {
@@ -128,29 +142,8 @@ text_regr a:hover {
   margin-bottom: 0.3em;
   padding: 0.2em;
   text-align: center;
-  display: flex;
+  line-height: 1.2em;
 }
-
-.traffic_light {
-  display: flex;
-  flex-direction: column;
-}
-
-#green {
-  color:#14A76C;
-  border: #14A76C 2px solid;
-}
-
-#yellow {
-  color: #FFE400;
-  border: #FFE400 2px solid;
-}
-#red {
-  color:#FF652F;
-  border: #FF652F 2px solid;
-  margin-bottom: 0;
-}
-
 
 #reg_head {
   font-size: 2em;
@@ -190,19 +183,4 @@ color: #fff;
   color: #fff;
   border: #646464 1px solid;
   border-radius: 0.7em;
-}
-
-.indent {
-  margin-bottom: 2em;
-  display: flex;
-}
-
-.center {
-  margin: 0 auto 2em;
-}
-
-#middle {
-  display: flex;
-  margin: 0 auto 2em;
-  justify-content: center;
 }
