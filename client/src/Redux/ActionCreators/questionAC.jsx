@@ -1,10 +1,9 @@
-import { fetchOneCategory } from "../../http/categoryAPI";
+
 import {
   addNewQuestion,
   fetchOneQuestion,
   fetchQuestions,
 } from "../../http/questionAPI";
-import { fetchOneUser } from "../../http/userAPI";
 import {
   ADD_QUESTION,
   API_ERROR,

@@ -10,6 +10,16 @@ export const fetchAnswers = async (questionId, userId) => {
   return data;
 };
 
+export const fetchAnswersCount = async (questionId, userId) => {
+  const { data } = await $host.get("api/answer/count", {
+    params: {
+      questionId: questionId,
+      userId: userId,
+    },
+  });
+  return data;
+};
+
 
 export const fetchOneAnswer = async (id) => {
   const { data } = await $authHost.get("api/answer/" + id);

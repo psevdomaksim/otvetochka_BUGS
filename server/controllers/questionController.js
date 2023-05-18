@@ -42,7 +42,17 @@ class questionController {
     if (!categoryId && userId) {
       questions = await Question.findAndCountAll({
         where: { userId },
-        order: [["createdAt", "DESC"]],
+        attributes: ["id", "title", "body", "createdAt",
+        [sequelize.literal(
+          "(SELECT COUNT(*) FROM answers WHERE answers.questionId = question.id)"
+        ),
+        "answersCount"]
+      ],
+        include: [
+          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+          { model: Category, attributes: ["id","name"] },
+        ],
+        order: [["createdAt", "DESC"]], 
         limit,
         offset,
       });

@@ -1,14 +1,8 @@
-.ava {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-}
-
 .best_answer_block_wrapper {
     border: #FFE400 2px solid;
     border-radius: 15px;
     color: #FFFFFF;
     padding: 10px;
-    margin: 0px 20px 40px 20px;
+    margin: 15px 20px 40px 20px;
 }
 

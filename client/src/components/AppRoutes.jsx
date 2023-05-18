@@ -8,9 +8,16 @@ import {
 import { authRoutes, publicRoutes } from "../routes";
 import { StoreContext } from "..";
 import { Spinner } from "react-bootstrap";
-import {  clearQuestionMessagesAC, clearQuestions, clearQuestionsAC } from "../Redux/ActionCreators/questionAC";
+import {
+  clearQuestionMessagesAC,
+  clearQuestions,
+  clearQuestionsAC,
+} from "../Redux/ActionCreators/questionAC";
 import { useEffect } from "react";
-import { clearAnswerMessagesAC, clearAnswersAC } from "../Redux/ActionCreators/answerAC";
+import {
+  clearAnswerMessagesAC,
+  clearAnswersAC,
+} from "../Redux/ActionCreators/answerAC";
 
 const AppRoutes = () => {
   const store = useContext(StoreContext);
@@ -30,8 +37,8 @@ const AppRoutes = () => {
     store.dispatch(clearQuestionMessagesAC());
     store.dispatch(clearAnswersAC());
     store.dispatch(clearAnswerMessagesAC());
-    
   }, [location.pathname]);
+
 
   if (loading) {
     return <Spinner animation="grow" />;
@@ -45,7 +52,10 @@ const AppRoutes = () => {
   }
 
   return (
+
+
     <Routes>
+ 
       {isAuth &&
         authRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} exact />

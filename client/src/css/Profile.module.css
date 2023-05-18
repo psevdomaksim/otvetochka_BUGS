@@ -80,8 +80,6 @@
 }
 
 .activity_block {
-    border: #FFE400 0.1em solid;
-    border-radius: 0.8em;
     color: #F5F5F5;
     display: inline-block;
     padding: 1em;
@@ -100,12 +98,6 @@
     font-size: 1.3em;
     line-height: 31px;
     color: #D2D2D2;
-}
-
-#button_up {
-    position: fixed;
-    right: 1em;
-    bottom: 1em;
 }
 
 .active_span {

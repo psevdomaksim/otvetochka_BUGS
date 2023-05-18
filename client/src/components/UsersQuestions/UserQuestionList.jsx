@@ -10,12 +10,11 @@ import { useRef } from "react";
 
 const UserQuestionList = (props) => {
   const store = useContext(StoreContext);
-
   const [userQuestions, setUserQuestions] = useState(null);
-  
+
   const [limit, setLimit] = useState(store.getState().questionPage?.limit);
   const [page, setPage] = useState(1);
-  const [loadData, setLoadData] = useState(true);  
+  const [loadData, setLoadData] = useState(true);
 
   const observer = useRef(null);
 
@@ -25,32 +24,43 @@ const UserQuestionList = (props) => {
     setLoadData(false);
   };
 
-  const fetchAnswers = () => {
-    store.dispatch(fetchAnswersTC(null, null));
+  const fetchProfileQuestions = () => {
+    setLoadData(true);
+    store.dispatch(fetchQuestionsTC(null, props.id, limit, page));
+    setLoadData(false);
   };
 
   useEffect(() => {
-    if(page!==1) fetchQuestions();
-   }, [page]);
+      if (!props.profileQuestions) {
+        fetchQuestions();
+      }
+
+      if (props.profileQuestions) {
+        fetchProfileQuestions();
+      }
+  }, [page]);
 
   useEffect(() => {
-    if (!props.trigger && loadData && !page ) return;
+    if (!props.trigger && loadData && !page) return;
     if (observer.current) observer.current.disconnect();
     if (page > limit) return;
     const callback = function (entries, observer) {
-      if (entries[0].isIntersecting) { 
-        console.log(page)
-        setPage(page => page + 1)       
+      if (entries[0].isIntersecting) {
+        setPage((page) => page + 1);
       }
     };
     observer.current = new IntersectionObserver(callback);
     observer.current.observe(props.trigger.current);
   }, []);
 
-
   useEffect(() => {
-    fetchQuestions();
-    fetchAnswers();
+    if (!props.profileQuestions && !props.profileAnswers) {
+      fetchQuestions();
+    }
+
+    if (props.profileQuestions && props.profileAnswers) {
+      fetchProfileQuestions();
+    }
   }, []);
 
   store.subscribe(() => {
@@ -59,14 +69,11 @@ const UserQuestionList = (props) => {
 
   return (
     <div className={s.list_wrapper}>
-      <span id={s.title}>Вопросы пользователей</span>
-      <div className={s.items_container}>
-        <span>Недавние</span>
-      </div>
+   
       <hr />
 
       {userQuestions?.map((question) => (
-        <UserQuestion key={question.id} question={question} />
+        <UserQuestion question={question} />
       ))}
     </div>
   );

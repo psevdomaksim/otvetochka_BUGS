@@ -123,6 +123,38 @@ class answerController {
     return res.json(answers);
   }
 
+  async getAnswersCount(req,res,next){
+    let { questionId, userId } = req.query;
+    
+    if (!questionId && !userId) {
+      let count = await Answer.count({
+      });
+      return res.json(count);
+    }
+
+    if (questionId && !userId) {
+      let count = await Answer.count({
+        where: { questionId }
+      });
+      return res.json(count);
+    }
+
+    if (!questionId && userId) {
+      let count = await Answer.count({
+        where: {userId }
+      });
+      return res.json(count);
+    }
+
+    if (questionId && userId) {
+      let count = await Answer.count({
+        where: { questionId, userId }
+      });
+      return res.json(count);
+    }
+   
+  }
+
   async getOneAnswer(req, res, next) {
     const { id } = req.params;
     const answer = await Answer.findOne({

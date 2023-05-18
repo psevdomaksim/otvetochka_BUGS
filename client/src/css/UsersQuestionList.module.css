@@ -2,8 +2,9 @@
     border: #FFE400 2px solid;
     border-radius: 15px;
     color: #fff;
-    width: 45%;
+    width: 100%;
     padding: 2em;
+    margin-top: 15px;
 }
 
 #title {
@@ -19,10 +20,10 @@
     color: #D2D2D2;
 }
 
-
+/* 
 @media (max-width: 600px) {
     .list_wrapper {
         width: 85%;
         margin-top: 20px;
     }
-  }
+  } */

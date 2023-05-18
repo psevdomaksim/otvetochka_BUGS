@@ -1,4 +1,4 @@
-import { ADD_ANSWER, API_ERROR, CLEAR_ANSWERS, CLEAR_MSG, DISLIKE_ANSWER, FETCH_ANSWERS, GET_BEST_ANSWER, LIKE_ANSWER } from "../../utils/AC_consts";
+import { ADD_ANSWER, API_ERROR, CLEAR_ANSWERS, CLEAR_MSG, DISLIKE_ANSWER, FETCH_ANSWERS, FETCH_ANSWERS_COUNT, GET_BEST_ANSWER, LIKE_ANSWER } from "../../utils/AC_consts";
 
 let initialState = {
   answers: [],
@@ -15,6 +15,14 @@ const answerReducer = (state = initialState, action) => {
         ...state,
         answers: action.data.rows,
         count: action.data.count,
+      };
+      return state;
+    }
+
+    case FETCH_ANSWERS_COUNT:{
+      state = {
+        ...state,
+        count: action.count,
       };
       return state;
     }

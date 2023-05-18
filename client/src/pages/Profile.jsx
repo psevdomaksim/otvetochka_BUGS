@@ -12,46 +12,48 @@ import { fetchOneUserTC } from "../Redux/ActionCreators/userAC";
 import { BASE_URL } from "../utils/baseURL_const";
 import { Button, Col, Container, Image, Row } from "react-bootstrap";
 import { EDIT_PROFILE_ROUTE } from "../utils/routes_consts";
-import { fetchQuestionsTC } from "../Redux/ActionCreators/questionAC";
-import { fetchAnswersTC } from "../Redux/ActionCreators/answerAC";
+import { clearQuestionsAC, fetchQuestionsTC } from "../Redux/ActionCreators/questionAC";
+import { fetchAnswersCountTC, fetchAnswersTC } from "../Redux/ActionCreators/answerAC";
+import UserQuestionList from "../components/UsersQuestions/UserQuestionList";
+import { useRef } from "react";
+import AnswerList from "../components/AnswerList/AnswerList";
 
 const Profile = (props) => {
   const { id } = useParams();
-
+  const trigger = useRef(null);
   const store = useContext(StoreContext);
 
   const [curUser, setCurUser] = useState(null);
 
-  const [userQuestions, setUserQuestions] = useState(null);
+  const [isAnswers, setIsAnswers] = useState(false);
+
   const [userQuestionsCount, setUserQuestionsCount] = useState(null);
 
-  const [userAnswers, setUserAnswers] = useState(null);
   const [userAnswersCount, setUserAnswersCount] = useState(null);
+  const [bestAnswer, setBestAnswer] = useState(null);
 
   const fetchUser = () => {
     store.dispatch(fetchOneUserTC(id));
   };
 
-  const fetchUserQuestions = () => {
-    store.dispatch(fetchQuestionsTC(null, id));
+  const fetchProfileAnswers = () => {
+    store.dispatch(fetchAnswersTC(null, +id));
+    store.dispatch(fetchAnswersCountTC(null, +id));
   };
 
-  const fetchUserAnswers = () => {
-    store.dispatch(fetchAnswersTC(null, id));
-  };
 
   useEffect(() => {
     fetchUser();
-    fetchUserQuestions();
-    fetchUserAnswers();
+    fetchProfileAnswers();
   }, []);
+
+
 
   store.subscribe(() => {
     setCurUser(store.getState().userPage.currentUser);
-    setUserQuestions(store.getState().questionPage.questions);
     setUserQuestionsCount(store.getState().questionPage.count);
-    setUserAnswers(store.getState().answerPage.answers);
     setUserAnswersCount(store.getState().answerPage.count);
+    setBestAnswer(store.getState().answerPage.bestAnswer);
   });
 
   const formatDate = (propsDate) => {
@@ -101,10 +103,10 @@ const Profile = (props) => {
 
           {/* Блок с количеством вопросов */}
           <Col className={s.question_block}>
-              <h3>Вопросов задано:</h3>
-              <span id={s.number}>{userQuestionsCount}</span>
-              <h3>Ответов написано:</h3>
-              <span id={s.number}>{userAnswersCount}</span>
+            <h3>Вопросов задано:</h3>
+            <span id={s.number}>{userQuestionsCount}</span>
+            <h3>Ответов написано:</h3>
+            <span id={s.number}>{userAnswersCount}</span>
           </Col>
           {/* Блок с вопросами КОНЕЦ */}
         </Row>
@@ -115,20 +117,48 @@ const Profile = (props) => {
         <h3>Активность пользователя</h3>
         <Container>
           <Row>
-            <Col xs="2"><span className={s.active_span}>Вопросы</span></Col>
-            <Col xs="2"><span>Ответы</span></Col>
+            {!isAnswers ? (
+              <>
+                <Col xs="2">
+                  <span
+                    className={s.active_span}
+                   
+                  >
+                    Вопросы
+                  </span>
+                </Col>
+                <Col xs="2">
+                  <span  onClick={() => (setIsAnswers(true), store.dispatch(clearQuestionsAC()))}>Ответы</span>
+                </Col>
+              </>
+            ) : (
+              <>
+                <Col xs="2">
+                  <span    
+                  onClick={() => setIsAnswers(false)}                        
+                  >
+                    
+                    Вопросы
+                  </span>
+                </Col>
+                <Col xs="2">
+                  <span  className={s.active_span} >Ответы</span>
+                </Col>
+              </>
+            )}
+          </Row>
+          <Row>
+            {!isAnswers ? (
+              <>
+                <UserQuestionList id={+id} trigger={trigger} profileQuestions />
+                <div ref={trigger} className="trigger"></div>
+              </>
+            ) : (
+              <AnswerList profileAnswers bestAnswer={bestAnswer} userId={id} />
+            )}
           </Row>
         </Container>
-    
       </div>
-      <button
-          id={s.button_up}
-          type="button"
-          className="btn btn-outline-success"
-        >
-          <i className="bi bi-chevron-up"></i>
-        </button>
-      {/* <button type="">Наверх</button> */}
     </div>
   );
 };

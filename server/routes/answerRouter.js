@@ -5,6 +5,8 @@ const checkRole = require('../middlewares/checkRoleMiddleware')
 const checkBan = require('../middlewares/checkBanMiddleware')
 
 router.get("/",checkBan, answerController.getAllAnswers);
+router.get("/count", answerController.getAnswersCount);
+
 router.get("/:id",checkBan, answerController.getOneAnswer);
 router.post("/", checkBan, answerController.createNewAnswer);
 router.delete("/:id", checkRole(['ADMIN', 'MODER']), checkBan, answerController.deleteAnswer);

@@ -13,11 +13,14 @@ import {
 import { useState } from "react";
 import UserQuestion from "../components/UsersQuestions/UserQuestion";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { useRef } from "react";
 
 const Question = (props) => {
   const { id } = useParams();
 
   const store = useContext(StoreContext);
+
+  const trigger = useRef(null);
 
   const [curQuestion, setCurQuestion] = useState(null);
   const [bestAnswer, setBestAnswer] = useState(null);
@@ -105,7 +108,8 @@ const Question = (props) => {
         </div>
         <div className={s.users_question_wrapper}>
           <h3 style={{color:"white", marginLeft:"10px"}}>Ответы пользователей</h3>
-          <AnswerList id={id} bestAnswer={bestAnswer}/>
+          <AnswerList questionId={id} trigger={trigger} bestAnswer={bestAnswer}/>
+          <div ref={trigger} className="trigger"></div>
         </div>
       </Container>
   );

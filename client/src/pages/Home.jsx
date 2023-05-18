@@ -10,25 +10,8 @@ const Home = (props) => {
 
   const trigger = useRef(null);
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth' 
-    });
-  };
-
   return (
     <div className={style.home_page_wrapper}>
-        <div>
-        <button
-          id={style.button_up}
-          type="button"
-          className="btn btn-outline-success"
-          onClick={scrollToTop}
-        >
-          <i className="bi bi-chevron-up"></i>
-        </button>
-      </div>
       <div className={style.left_box_wrapper}>
         <div className={style.wrapper}>
           <span id={style.green}>Есть вопрос?</span>
@@ -41,7 +24,14 @@ const Home = (props) => {
         </div>
         <ActiveUsersList />
       </div>
-      <UserQuestionList trigger={trigger}/>
+      <span id={style.title}>Вопросы пользователей</span>
+      <div className={style.items_container}>
+        <span>Недавние</span>
+      </div>
+      <div className={style.questionListwrapper}>
+       <UserQuestionList trigger={trigger}/>
+      </div>
+     
       <div ref={trigger} className="trigger"></div>
       <div className={style.break}></div>
     
