@@ -22,10 +22,8 @@
 }
 }
 
-<<<<<<< HEAD
-
 @media only screen and (max-width: 768px) {
-=======
+
 /* 
 @media (max-width: 600px) {
 >>>>>>> e67c0a92cc63921f90a939a7d65371f03302724e
@@ -36,7 +34,7 @@
         border-radius: 0.8em;
         padding: 0.7em;
     }
-<<<<<<< HEAD
+
     
     #title {
         font-size: 28px;
@@ -50,7 +48,5 @@
         font-size: 1.5em;
         color: #D2D2D2;
     }
-}
-=======
-  } */
->>>>>>> e67c0a92cc63921f90a939a7d65371f03302724e
+} */
+} 

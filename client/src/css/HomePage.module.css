@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 @media only screen and (min-width: 1024px) {
     .home_page_wrapper {
         background: #1F1F1F;
@@ -12,8 +11,7 @@
         flex-basis: 100%;
         height: 0;
     }
-    
-=======
+
 .home_page_wrapper {
     background: #1F1F1F;
     display: flex;
@@ -33,9 +31,9 @@
     width: 18em;
     margin-right: 2em;
 }
+}
 
 @media (max-width: 600px) {
->>>>>>> e67c0a92cc63921f90a939a7d65371f03302724e
     .left_box_wrapper {
         width: 18em;
         margin-right: 2em;
@@ -75,7 +73,6 @@
     margin-top: 1em;
 }
 
-<<<<<<< HEAD
 #button_up {
     position: fixed;
     right: 0px;
@@ -87,22 +84,23 @@
 
 
 @media only screen and (max-width: 768px) {
-    .home_page_wrapper {
-        background: #1F1F1F;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin: 3em auto;
-    }
-    
-    .break {
-        flex-basis: 100%;
-        height: 0;
-    }
-    .left_box_wrapper {
-        width: 18em;
-        margin-right: 0;
-    }
+.home_page_wrapper {
+    background: #1F1F1F;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 3em auto;
+}
+
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
+.left_box_wrapper {
+    width: 18em;
+    margin-right: 0;
+}
       
 .wrapper {
     background: #272727;
@@ -146,5 +144,3 @@
     width: 3em;
 }
 }
-=======
->>>>>>> e67c0a92cc63921f90a939a7d65371f03302724e
