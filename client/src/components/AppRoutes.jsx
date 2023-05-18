@@ -8,6 +8,9 @@ import {
 import { authRoutes, publicRoutes } from "../routes";
 import { StoreContext } from "..";
 import { Spinner } from "react-bootstrap";
+import {  clearQuestionMessagesAC, clearQuestions, clearQuestionsAC } from "../Redux/ActionCreators/questionAC";
+import { useEffect } from "react";
+import { clearAnswerMessagesAC, clearAnswersAC } from "../Redux/ActionCreators/answerAC";
 
 const AppRoutes = () => {
   const store = useContext(StoreContext);
@@ -22,17 +25,24 @@ const AppRoutes = () => {
     setLoading(store.getState().authPage.isLoading);
   });
 
+  useEffect(() => {
+    store.dispatch(clearQuestionsAC());
+    store.dispatch(clearQuestionMessagesAC());
+    store.dispatch(clearAnswersAC());
+    store.dispatch(clearAnswerMessagesAC());
+    
+  }, [location.pathname]);
+
   if (loading) {
     return <Spinner animation="grow" />;
   }
 
   if (
     (location.pathname === LOGIN_ROUTE && isAuth) ||
-    (location.pathname === REGISTRATION_ROUTE && isAuth )
+    (location.pathname === REGISTRATION_ROUTE && isAuth)
   ) {
     return <Navigate to={HOME_PAGE_ROUTE} />;
   }
-
 
   return (
     <Routes>

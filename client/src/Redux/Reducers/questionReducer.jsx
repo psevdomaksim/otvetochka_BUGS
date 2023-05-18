@@ -2,6 +2,7 @@ import {
   ADD_QUESTION,
   API_ERROR,
   CLEAR_MSG,
+  CLEAR_QUESTIONS,
   FETCH_ONE_QUESTION,
   FETCH_QUESTIONS,
 } from "../../utils/AC_consts";
@@ -9,6 +10,8 @@ import {
 let initialState = {
   questions: [],
   curQuestion: null,
+  page: 1,
+  limit: 5,
   count: null,
   error: null,
   msg: null,
@@ -16,11 +19,16 @@ let initialState = {
 
 const questionReducer = (state = initialState, action) => {
   switch (action.type) {
+    
     case FETCH_QUESTIONS: {
+
+      const resultQuestions = [...state.questions, ...action.questions.rows];
+
+      state = { ...state, questions: resultQuestions };
+
       state = {
         ...state,
-        questions: action.questions.rows,
-        count: action.questions.count,
+        questions: resultQuestions
       };
       return state;
     }
@@ -35,6 +43,11 @@ const questionReducer = (state = initialState, action) => {
 
     case ADD_QUESTION: {
       state = { ...state, error: null, msg: action.message };
+      return state;
+    }
+
+    case CLEAR_QUESTIONS:{
+      state = { ...state, page: 1, questions: []};
       return state;
     }
 

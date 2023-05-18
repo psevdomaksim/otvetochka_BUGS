@@ -5,7 +5,11 @@ const sequelize = require("../db");
 
 class questionController {
   async getAllQuestions(req, res) {
-    let { categoryId, userId } = req.query;
+    let { categoryId, userId, limit, page } = req.query;
+
+    page = page || 1;
+    limit = +limit || 5;
+    let offset = page * limit - limit;
 
     let questions;
 
@@ -21,7 +25,9 @@ class questionController {
           { model: User, attributes: ["id", "fullname", "avatarImage"] },
           { model: Category, attributes: ["id","name"] },
         ],
-        order: [["createdAt", "DESC"]],
+        order: [["createdAt", "DESC"]], 
+        limit,
+        offset,
       });
     }
 
@@ -29,18 +35,24 @@ class questionController {
       questions = await Question.findAndCountAll({
         where: { categoryId },
         order: [["createdAt", "DESC"]],
+        limit,
+        offset,
       });
     }
     if (!categoryId && userId) {
       questions = await Question.findAndCountAll({
         where: { userId },
         order: [["createdAt", "DESC"]],
+        limit,
+        offset,
       });
     }
     if (categoryId && userId) {
       questions = await Question.findAndCountAll({
         where: { categoryId, userId },
         order: [["createdAt", "DESC"]],
+        limit,
+        offset,
       });
     }
 

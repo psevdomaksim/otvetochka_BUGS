@@ -6,7 +6,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { StoreContext } from "..";
 import s from "../css/NewQuestion.module.css";
 import { fetchCategoriesTC } from "../Redux/ActionCreators/categoryAC";
-import { addNewQuestionTC, clearMessages } from "../Redux/ActionCreators/questionAC";
+import { addNewQuestionTC } from "../Redux/ActionCreators/questionAC";
 
 const NewQuestion = (props) => {
   const store = useContext(StoreContext);
@@ -27,7 +27,6 @@ const NewQuestion = (props) => {
 
   useEffect(() => {
     fetchCategories();
-    store.dispatch(clearMessages());
   }, []);
 
   store.subscribe(() => {

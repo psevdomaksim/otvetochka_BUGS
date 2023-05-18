@@ -8,12 +8,11 @@ import { useEffect } from "react";
 import { fetchOneQuestionTC } from "../Redux/ActionCreators/questionAC";
 import {
   addNewAnswerTC,
-  clearMessages,
   fetchAnswersTC,
 } from "../Redux/ActionCreators/answerAC";
 import { useState } from "react";
 import UserQuestion from "../components/UsersQuestions/UserQuestion";
-import { Button, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 
 const Question = (props) => {
   const { id } = useParams();
@@ -21,9 +20,6 @@ const Question = (props) => {
   const store = useContext(StoreContext);
 
   const [curQuestion, setCurQuestion] = useState(null);
-
-  const [questionAnswers, setQuestionAnswers] = useState(null);
-  const [questionAnswersCount, setQuestionAnswersCount] = useState(null);
   const [bestAnswer, setBestAnswer] = useState(null);
 
   const [body, setBody] = useState("");
@@ -39,16 +35,21 @@ const Question = (props) => {
     store.dispatch(fetchAnswersTC(id, null));
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant"
+    });
+  };
+
   useEffect(() => {
     fetchQuestion();
     fetchQuestionAnswers();
-    store.dispatch(clearMessages());
+    scrollToTop();
   }, []);
 
   store.subscribe(() => {
     setCurQuestion(store.getState().questionPage.curQuestion);
-    setQuestionAnswers(store.getState().answerPage.answers);
-    setQuestionAnswersCount(store.getState().answerPage.count);
     setBestAnswer(store.getState().answerPage.bestAnswer)
     setErrorMsg(store.getState().answerPage.error);
     setSuccessMsg(store.getState().answerPage.msg);
@@ -65,8 +66,9 @@ const Question = (props) => {
   const sendAnswer = () => {
     setBody("");
     store.dispatch(addNewAnswerTC(body, +id));
-  
   };
+
+ 
 
   return (
       <Container className={s.wrapper}>
@@ -93,13 +95,17 @@ const Question = (props) => {
             {" "}
             <b style={{ color: "red" }}>{errorMsg}</b>
           </Row>
-          <Button variant="dark" className="mt-3" onClick={sendAnswer}>
+          <Row >   
+          <Col  md={{ span:10, offset: 9 }}>   <Button variant="dark" className="mt-3" onClick={sendAnswer}>
             Отправить
-          </Button>
+          </Button></Col>
+       
+          </Row>
+       
         </div>
         <div className={s.users_question_wrapper}>
-          <h3>Ответы пользователей</h3>
-          <AnswerList bestAnswer={bestAnswer} answers={questionAnswers}  />
+          <h3 style={{color:"white", marginLeft:"10px"}}>Ответы пользователей</h3>
+          <AnswerList id={id} bestAnswer={bestAnswer}/>
         </div>
       </Container>
   );

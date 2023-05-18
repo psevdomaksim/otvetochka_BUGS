@@ -1,4 +1,4 @@
-import { ADD_ANSWER, API_ERROR, CLEAR_MSG, FETCH_ANSWERS, GET_BEST_ANSWER } from "../../utils/AC_consts";
+import { ADD_ANSWER, API_ERROR, CLEAR_ANSWERS, CLEAR_MSG, DISLIKE_ANSWER, FETCH_ANSWERS, GET_BEST_ANSWER, LIKE_ANSWER } from "../../utils/AC_consts";
 
 let initialState = {
   answers: [],
@@ -40,6 +40,39 @@ const answerReducer = (state = initialState, action) => {
       return state;
     }
 
+    case CLEAR_ANSWERS:{
+      state = { ...state, answers: []};
+      return state;
+    }
+
+    case LIKE_ANSWER:{
+      let answer = state.answers.find((answer) => answer.id === action.data.like.answerId);
+      answer.likeCount++;
+      answer.isLiked=1;
+
+      return {
+        ...state,
+        answers: [
+          ...state.answers.splice(0, state.answers.indexOf(answer)),
+          answer,
+          ...state.answers.splice(state.answers.indexOf(answer) + 1) 
+          ]
+      };
+    }
+
+    case DISLIKE_ANSWER:{
+      let answer = state.answers.find((answer) => answer.id === action.answerId);
+      answer.likeCount--;
+      answer.isLiked=0;
+      return {
+        ...state,
+        answers: [
+          ...state.answers.splice(0, state.answers.indexOf(answer)),
+          answer,
+          ...state.answers.splice(state.answers.indexOf(answer) + 1) 
+          ]
+      };
+    }
 
     default:
       return state;

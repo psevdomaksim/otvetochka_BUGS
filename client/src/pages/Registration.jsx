@@ -75,7 +75,7 @@ const Registration = (props) => {
         <Row className="mb-3" md="16">
           <FormGroup>
             <FormLabel id={s.text}>Имя</FormLabel>
-            <FormControl
+            <Form.Control
               type="text"
               placeholder="Введите имя"
               className={s.input}
@@ -169,7 +169,6 @@ const Registration = (props) => {
               variant="dark"
               id={s.reg_button}
               onClick={registration}
-              type="submit"
             >
               Зарегистрироваться
             </Button>

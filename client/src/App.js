@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter} from "react-router-dom";
 import "./App.css";
 import AppRoutes from "./components/AppRoutes";
 import FooterContainer from "./components/Footer/FooterContainer";
@@ -11,6 +11,8 @@ import { setLoginTC } from "./Redux/ActionCreators/authAC";
 const App = () => {
 
   const store = useContext(StoreContext);
+
+
 
   useEffect(() => {
     store.dispatch((setLoginTC()));

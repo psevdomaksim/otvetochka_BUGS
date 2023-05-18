@@ -1,14 +1,21 @@
 import { addNewAnswer, fetchAnswers } from "../../http/answerAPI";
-import { fetchAnswerLikes } from "../../http/answerLikeAPI";
+import {
+  dislikeAnswer,
+  fetchAnswerLikes,
+  likeAnswer,
+} from "../../http/answerLikeAPI";
 import { fetchOneCategory } from "../../http/categoryAPI";
 import { fetchOneUser } from "../../http/userAPI";
 import {
   ADD_ANSWER,
   API_ERROR,
+  CLEAR_ANSWERS,
   CLEAR_MSG,
   DATE_OPTIONS,
+  DISLIKE_ANSWER,
   FETCH_ANSWERS,
   GET_BEST_ANSWER,
+  LIKE_ANSWER,
 } from "../../utils/AC_consts";
 
 // error
@@ -36,8 +43,13 @@ export const fetchAnswersTC = (questionId, userId) => {
           answer.createdAt = date.toLocaleString("ru", DATE_OPTIONS);
         });
         if (answers.rows.length !== 0) {
-           dispatch(getBestAnswerAC(answers.rows.reduce((prev, current) =>+prev.likeCount > +current.likeCount ? prev : current))
-          )
+          dispatch(
+            getBestAnswerAC(
+              answers.rows.reduce((prev, current) =>
+                +prev.likeCount > +current.likeCount ? prev : current
+              )
+            )
+          );
         } else {
           dispatch(getBestAnswerAC(null));
         }
@@ -58,12 +70,11 @@ export const getBestAnswerAC = (answer) => {
   };
 };
 
-export const clearMessages = () => {
+export const clearAnswerMessagesAC = () => {
   return {
     type: CLEAR_MSG,
   };
 };
-
 
 // add new answer
 
@@ -85,6 +96,56 @@ export const addNewAnswerTC = (body, questionId) => {
       })
       .catch((err) => {
         dispatch(ApiError(err.response.data.message));
+      });
+  };
+};
+
+// like answer
+
+export const likeAnswerAC = (data) => {
+  return {
+    type: LIKE_ANSWER,
+    data: data,
+  };
+};
+
+export const likeAnswerTC = (answerId) => {
+  return (dispatch) => {
+    likeAnswer(answerId)
+      .then((data) => {
+        dispatch(likeAnswerAC(data));
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
+      });
+  };
+};
+///
+
+export const clearAnswersAC = () => {
+  return {
+    type: CLEAR_ANSWERS,
+  };
+};
+
+
+// dislike answer
+
+export const dislikeAnswerAC = (answerId) => {
+  return {
+    type: DISLIKE_ANSWER,
+    answerId: answerId,
+  };
+};
+
+export const dislikeAnswerTC = (answerId) => {
+  return (dispatch) => {
+    dislikeAnswer(answerId)
+      .then((data) => {
+        dispatch(dislikeAnswerAC(answerId));
+      })
+      .catch((err) => {
+        console.log(err.response.data.message);
       });
   };
 };

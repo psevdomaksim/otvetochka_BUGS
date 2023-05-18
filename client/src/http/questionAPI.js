@@ -1,10 +1,12 @@
 import { $host, $authHost } from "./http";
 
-export const fetchQuestions = async (categoryId, userId) => {
+export const fetchQuestions = async (categoryId, userId, limit, page) => {
   const { data } = await $host.get("api/question", {
     params: {
       categoryId: categoryId,
       userId: userId,
+      limit: limit,
+      page: page,
     },
   });
   return data;

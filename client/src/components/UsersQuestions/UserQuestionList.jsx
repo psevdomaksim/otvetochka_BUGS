@@ -6,22 +6,47 @@ import { fetchQuestionsTC } from "../../Redux/ActionCreators/questionAC";
 import { fetchAnswersTC } from "../../Redux/ActionCreators/answerAC";
 import { StoreContext } from "../..";
 import { useEffect } from "react";
+import { useRef } from "react";
 
 const UserQuestionList = (props) => {
   const store = useContext(StoreContext);
 
   const [userQuestions, setUserQuestions] = useState(null);
+  
+  const [limit, setLimit] = useState(store.getState().questionPage?.limit);
+  const [page, setPage] = useState(1);
+  const [loadData, setLoadData] = useState(true);  
 
-  const [userAnswers, setUserAnswers] = useState(null);
-  const [userAnswersCount, setUserAnswersCount] = useState(null);
+  const observer = useRef(null);
 
   const fetchQuestions = () => {
-    store.dispatch(fetchQuestionsTC(null, null));
+    setLoadData(true);
+    store.dispatch(fetchQuestionsTC(null, null, limit, page));
+    setLoadData(false);
   };
 
   const fetchAnswers = () => {
     store.dispatch(fetchAnswersTC(null, null));
   };
+
+  useEffect(() => {
+    if(page!==1) fetchQuestions();
+   }, [page]);
+
+  useEffect(() => {
+    if (!props.trigger && loadData && !page ) return;
+    if (observer.current) observer.current.disconnect();
+    if (page > limit) return;
+    const callback = function (entries, observer) {
+      if (entries[0].isIntersecting) { 
+        console.log(page)
+        setPage(page => page + 1)       
+      }
+    };
+    observer.current = new IntersectionObserver(callback);
+    observer.current.observe(props.trigger.current);
+  }, []);
+
 
   useEffect(() => {
     fetchQuestions();
@@ -30,8 +55,6 @@ const UserQuestionList = (props) => {
 
   store.subscribe(() => {
     setUserQuestions(store.getState().questionPage.questions);
-    setUserAnswers(store.getState().answerPage.answers);
-    setUserAnswersCount(store.getState().answerPage.count);
   });
 
   return (
@@ -39,8 +62,6 @@ const UserQuestionList = (props) => {
       <span id={s.title}>Вопросы пользователей</span>
       <div className={s.items_container}>
         <span>Недавние</span>
-        <span>Популярные</span>
-        <span>Лучшие</span>
       </div>
       <hr />
 

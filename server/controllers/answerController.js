@@ -7,9 +7,8 @@ class answerController {
   async getAllAnswers(req, res, next) {
     let { questionId, userId } = req.query;
 
-    //answer.user = user.fullname;
-    //answer.userAvatar = user.avatarImage;
-    //answer.likeCount = likeCount.count;
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
     let answers;
 
@@ -24,6 +23,12 @@ class answerController {
               "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
             ),
             "likeCount",
+          ],
+          [
+            sequelize.literal(
+              `(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id AND answer_likes.userId = ${decoded.id})`
+            ),
+            "isLiked",
           ],
         ],
         include: [
@@ -46,6 +51,12 @@ class answerController {
               "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
             ),
             "likeCount",
+          ],    
+          [
+            sequelize.literal(
+              `(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id AND answer_likes.userId = ${decoded.id})`
+            ),
+            "isLiked",
           ],
         ],
         include: [
@@ -67,6 +78,12 @@ class answerController {
               "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
             ),
             "likeCount",
+          ],    
+          [
+            sequelize.literal(
+              `(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id AND answer_likes.userId = ${decoded.id})`
+            ),
+            "isLiked",
           ],
         ],
         include: [
@@ -88,6 +105,12 @@ class answerController {
               "(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id)"
             ),
             "likeCount",
+          ],    
+          [
+            sequelize.literal(
+              `(SELECT COUNT(*) FROM answer_likes WHERE answer_likes.answerId = answer.id AND answer_likes.userId = ${decoded.id})`
+            ),
+            "isLiked",
           ],
         ],
         include: [

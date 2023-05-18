@@ -9,6 +9,7 @@ import {
   ADD_QUESTION,
   API_ERROR,
   CLEAR_MSG,
+  CLEAR_QUESTIONS,
   DATE_OPTIONS,
   FETCH_ONE_QUESTION,
   FETCH_QUESTIONS,
@@ -30,9 +31,9 @@ export const fetchQuestionsAC = (questions) => {
   };
 };
 
-export const fetchQuestionsTC = (categoryId, userId) => {
+export const fetchQuestionsTC = (categoryId, userId, limit, page) => {
   return (dispatch) => {
-    fetchQuestions(categoryId, userId)
+    fetchQuestions(categoryId, userId, limit, page)
       .then((questions) => {
         questions.rows.map((question) => {
           const date = new Date(Date.parse(question.createdAt));
@@ -64,7 +65,16 @@ export const fetchOneQuestionTC = (id) => {
   };
 };
 
-export const clearMessages = () => {
+///
+
+export const clearQuestionsAC = () => {
+  return {
+    type: CLEAR_QUESTIONS,
+  };
+};
+
+///
+export const clearQuestionMessagesAC = () => {
   return {
     type: CLEAR_MSG,
   };

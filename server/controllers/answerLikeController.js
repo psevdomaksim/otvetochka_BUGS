@@ -19,24 +19,6 @@ class answerLikeController {
       });
     }
 
-    // if (answerId && !userId) {
-    //   answerLikes = await AnswerLike.findAll({
-    //     raw: true,
-    //     attributes: [
-    //       "answer_like.id",
-    //       "answer_like.answerId",
-    //       [
-    //         sequelize.literal(
-    //           "(SELECT COUNT(*) FROM answers WHERE answers.id = answer_like.answerId)"
-    //         ),
-    //         "likesCount",
-    //       ],
-    //     ],
-       
-    //     order: [[sequelize.literal("likesCount"), "DESC"]],
-    //   })
-    // }
-
 
     if (!answerId && userId) {
       answerLikes = await AnswerLike.findAndCountAll({
@@ -87,10 +69,19 @@ class answerLikeController {
   }
 
   async deleteAnswerLike(req, res, next) {
-    const id = req.params.id;
+
+    const { answerId } = req.query;
+    if (!answerId) {
+      return next(ApiError.errorRequest("Uncorrect data"));
+    }
+
+    const token = req.headers.authorization.split(" ")[1];
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+
     AnswerLike.destroy({
       where: {
-        id: id,
+        answerId: answerId,
+        userId: decoded.id
       },
     })
       .then(() => {

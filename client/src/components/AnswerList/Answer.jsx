@@ -6,9 +6,10 @@ import { FcLike, FcDislike } from "react-icons/fc";
 import { GoReport } from "react-icons/go";
 import { BASE_URL } from "../../utils/baseURL_const";
 import { PROFILE_ROUTE } from "../../utils/routes_consts";
+import { useState } from "react";
 
 const Answer = (props) => {
-  
+
   return (
     <Container className="mb-3">
     <Row className="mb-2">
@@ -36,8 +37,12 @@ const Answer = (props) => {
       <span>{props.answer?.user?.fullname}</span>
       <span>{props.answer?.createdAt}</span>
       <span style={{color:"white", marginRight:"-20px"}}>{props.answer?.likeCount}</span>
-      
-      <FcLike size={24}/>
+      {
+        props.answer?.isLiked === 1 ? 
+        <FcLike style={{cursor:"pointer"}} size={24} onClick={()=>props.dislikeAnswer(props.answer?.id)}/>  :
+        <FcDislike style={{cursor:"pointer"}} size={24} onClick={()=>props.likeAnswer(props.answer?.id)}/>
+      }
+    
     </Stack>
     <hr style={{border: "#747474 2px solid"}} />
     </Row> 

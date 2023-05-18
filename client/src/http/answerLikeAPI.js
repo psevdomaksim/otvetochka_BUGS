@@ -16,17 +16,19 @@ export const fetchOneAnswerLike = async (id) => {
 };
 
 
-export const addLike = async (title, body, categoryId) => {
+export const likeAnswer = async (answerId) => {
   const { data } = await $authHost.post("api/answer-like", {
-    title,
-    body,
-    categoryId,
+    answerId
   });
   return data;
 };
 
 
-export const deleteLike = async (id) => {
-  const { data } = await $authHost.delete("api/answer-like" + id);
+export const dislikeAnswer = async (answerId) => {
+  const { data } = await $authHost.delete("api/answer-like", {
+    params: {
+      answerId: answerId,
+    },
+  });
   return data;
 };

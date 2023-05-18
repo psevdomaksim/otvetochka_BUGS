@@ -7,6 +7,6 @@ const checkBan = require('../middlewares/checkBanMiddleware')
 router.get("/", answerLikeController.getAllAnswerLikes);
 router.get("/:id", answerLikeController.getOneAnswerLike);
 router.post("/",checkBan, answerLikeController.createNewAnswerLike);
-router.delete("/:id",checkBan, answerLikeController.deleteAnswerLike);
+router.delete("/",checkBan, answerLikeController.deleteAnswerLike);
 
 module.exports = router;
