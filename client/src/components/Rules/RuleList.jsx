@@ -75,13 +75,7 @@ const RuleList = (props) => {
             </p>
           </div>
         </div>
-        <button
-          id={s.button_up}
-          type="button"
-          className="btn btn-outline-success"
-        >
-          <i className="bi bi-chevron-up"></i>
-        </button>
+ 
       </div>
     </div>
   );

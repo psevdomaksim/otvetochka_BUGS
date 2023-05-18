@@ -24,11 +24,10 @@ const questionReducer = (state = initialState, action) => {
 
       const resultQuestions = [...state.questions, ...action.questions.rows];
 
-      state = { ...state, questions: resultQuestions };
-
       state = {
         ...state,
-        questions: resultQuestions
+        questions: resultQuestions,
+        count: action.questions.count,
       };
       return state;
     }

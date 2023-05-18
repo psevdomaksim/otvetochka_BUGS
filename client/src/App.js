@@ -19,8 +19,24 @@ const App = () => {
 }, []);
 
 
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' 
+  });
+};
+
+
   return (
     <div className="app_wrapper">
+      <button     
+type="button"
+className="btn btn-outline-success button_up"
+onClick={scrollToTop}
+>
+<i className="bi bi-chevron-up"></i>
+</button>
+
     <BrowserRouter>
      <HeaderContainer />
       <div className="content_wrapper">      

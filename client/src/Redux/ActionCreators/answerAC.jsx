@@ -1,4 +1,4 @@
-import { addNewAnswer, fetchAnswers } from "../../http/answerAPI";
+import { addNewAnswer, fetchAnswers, fetchAnswersCount } from "../../http/answerAPI";
 import {
   dislikeAnswer,
   fetchAnswerLikes,
@@ -14,6 +14,7 @@ import {
   DATE_OPTIONS,
   DISLIKE_ANSWER,
   FETCH_ANSWERS,
+  FETCH_ANSWERS_COUNT,
   GET_BEST_ANSWER,
   LIKE_ANSWER,
 } from "../../utils/AC_consts";
@@ -25,6 +26,9 @@ export const ApiError = (data) => {
     data: data,
   };
 };
+
+
+
 
 // fetch answers
 export const fetchAnswersAC = (data) => {
@@ -60,6 +64,29 @@ export const fetchAnswersTC = (questionId, userId) => {
       });
   };
 };
+
+//
+export const fetchAnswersCountAC = (count) => {
+  return {
+    type: FETCH_ANSWERS_COUNT,
+    count: count,
+  };
+};
+
+
+export const fetchAnswersCountTC = (questionId, userId) => {
+  return (dispatch) => {
+    fetchAnswersCount(questionId, userId)
+      .then((count) => {
+        dispatch(fetchAnswersCountAC(count));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+
 
 //get best answer
 

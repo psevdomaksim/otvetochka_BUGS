@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Spinner } from "react-bootstrap";
 import { StoreContext } from "../..";
 import s from "../../css/AnswerList.module.css";
 import {
@@ -14,10 +15,16 @@ const AnswerList = (props) => {
   const store = useContext(StoreContext);
   const [answers, setAnswers] = useState(null);
   const [isAuth, setAuth] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchQuestionAnswers = () => {
-    store.dispatch(fetchAnswersTC(props.id, null));
+    store.dispatch(fetchAnswersTC(props.questionId, null));
   };
+
+  const fetchProfileAnswers = () => {
+    store.dispatch(fetchAnswersTC(null, props.userId));
+  };
+
 
   const likeAnswer = (answerId) => {
     store.dispatch(likeAnswerTC(answerId));
@@ -27,16 +34,27 @@ const AnswerList = (props) => {
     store.dispatch(dislikeAnswerTC(answerId));
   };
 
-
   useEffect(() => {
-    fetchQuestionAnswers();
+    if (!props.profileAnswers) {
+      fetchQuestionAnswers();
+    }
+
+    if (props.profileAnswers) {
+      fetchProfileAnswers();
+    }
   }, []);
+
 
   store.subscribe(() => {
     setAnswers(store.getState().answerPage.answers);
     setAuth(store.getState().authPage.isAuth);
+    setIsLoading(store.getState().authPage.isLoading);
   });
 
+
+  if(isLoading){
+    return <Spinner/>
+  }
 
   return (
     <>

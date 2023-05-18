@@ -3,8 +3,9 @@
     border: #FFE400 2px solid;
     border-radius: 0.8em;
     color: #fff;
-    width: 45%;
+    width: 100%;
     padding: 2em;
+    margin-top: 15px;
 }
 
 #title {
@@ -21,8 +22,13 @@
 }
 }
 
+<<<<<<< HEAD
 
 @media only screen and (max-width: 768px) {
+=======
+/* 
+@media (max-width: 600px) {
+>>>>>>> e67c0a92cc63921f90a939a7d65371f03302724e
     .list_wrapper {
         width: 85%;
         margin-top: 20px;
@@ -30,6 +36,7 @@
         border-radius: 0.8em;
         padding: 0.7em;
     }
+<<<<<<< HEAD
     
     #title {
         font-size: 28px;
@@ -44,3 +51,6 @@
         color: #D2D2D2;
     }
 }
+=======
+  } */
+>>>>>>> e67c0a92cc63921f90a939a7d65371f03302724e
