@@ -1,8 +1,13 @@
 import { $host, $authHost } from "./http";
 import jwt_token from "jwt-decode";
 
-export const fetchUsers = async () => {
-  const { data } = await $host.get("api/user");
+export const fetchUsers = async (limit, page) => {
+  const { data } = await $authHost.get("api/user",{
+    params:{
+      limit: limit,
+      page: page
+    }
+  });
   return data;
 };
 

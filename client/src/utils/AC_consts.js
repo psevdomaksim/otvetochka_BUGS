@@ -36,6 +36,8 @@ export const CLEAR_ANSWERS = 'CLEAR-ANSWERS'
 export const FETCH_USERS = 'FETCH-USERS'
 export const FETCH_ACTIVE_USERS = 'FETCH-ACTIVE_USERS'
 export const FETCH_ONE_USER = 'FETCH-ONE-USER'
+export const CLEAR_USERS = 'CLEAR-USERS'
+
 
 export const FETCH_RULES = 'FETCH-RULES'
 export const ADD_RULE = 'ADD-RULE'

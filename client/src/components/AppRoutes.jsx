@@ -10,7 +10,6 @@ import { StoreContext } from "..";
 import { Spinner } from "react-bootstrap";
 import {
   clearQuestionMessagesAC,
-  clearQuestions,
   clearQuestionsAC,
 } from "../Redux/ActionCreators/questionAC";
 import { useEffect } from "react";
@@ -18,6 +17,7 @@ import {
   clearAnswerMessagesAC,
   clearAnswersAC,
 } from "../Redux/ActionCreators/answerAC";
+import { clearUsersAC } from "../Redux/ActionCreators/userAC";
 
 const AppRoutes = () => {
   const store = useContext(StoreContext);
@@ -37,6 +37,7 @@ const AppRoutes = () => {
     store.dispatch(clearQuestionMessagesAC());
     store.dispatch(clearAnswersAC());
     store.dispatch(clearAnswerMessagesAC());
+    store.dispatch(clearUsersAC());
   }, [location.pathname]);
 
 

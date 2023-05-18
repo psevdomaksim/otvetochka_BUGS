@@ -7,6 +7,7 @@ import {
     LOGIN_ROUTE, 
     REGISTRATION_ROUTE,
     RULES_PAGE_ROUTE,
+    ADMIN_PAGE_ROUTE,
 } from './utils/routes_consts';
 
 import Home from "./pages/Home"
@@ -17,6 +18,7 @@ import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import NewQuestion from "./pages/NewQuestion";
 import Rules from "./pages/Rules";
+import Admin from './pages/Admin';
 
 export const authRoutes = [
  
@@ -28,6 +30,10 @@ export const authRoutes = [
         path: NEW_QUESTION_ROUTE,
         Component: NewQuestion
     },
+    {
+        path: ADMIN_PAGE_ROUTE,
+        Component: Admin
+    }
 
 ];
 
@@ -51,8 +57,7 @@ export const publicRoutes = [
     {
         path: QUESTION_PAGE_ROUTE + "/:id",
         Component: Question
-    }
-    ,
+    },
     {
         path: RULES_PAGE_ROUTE,
         Component: Rules

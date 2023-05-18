@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  Form,
-  Image,
-  Dropdown,
-  Button,
-} from "react-bootstrap";
+import { Form, Image, Dropdown, Button } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -18,6 +13,7 @@ import {
   RULES_PAGE_ROUTE,
   LOGIN_ROUTE,
   PROFILE_ROUTE,
+  ADMIN_PAGE_ROUTE,
 } from "../../utils/routes_consts";
 import { useContext } from "react";
 import { StoreContext } from "../..";
@@ -65,6 +61,20 @@ const Header = () => {
         <Row>
           {isAuth ? (
             <Col className={s.upper_header}>
+              {curLogin.role === "ADMIN" || curLogin.role === "MODER" ? (
+                <Link to={ADMIN_PAGE_ROUTE}>
+                  <Button
+                    id={s.enter_button}
+                    variant="secondary"
+                    className="me-5"
+                  >
+                    Админка
+                  </Button>
+                </Link>
+              ) : (
+                <></>
+              )}
+
               <Link to={PROFILE_ROUTE + `/${curLogin.id}`}>
                 <Image
                   src={BASE_URL + `/${curLogin?.avatarImage}`}
@@ -72,9 +82,10 @@ const Header = () => {
                   style={{ width: "50px", height: "50px" }}
                   roundedCircle
                 />
-           
               </Link>
-               <Link  className="me-5" to={PROFILE_ROUTE + `/${curLogin.id}`}>{curLogin.fullname}</Link>
+              <Link className="me-5" to={PROFILE_ROUTE + `/${curLogin.id}`}>
+                {curLogin.fullname}
+              </Link>
               <Button
                 id={s.enter_button}
                 variant="success"
@@ -101,24 +112,32 @@ const Header = () => {
             </Link>
           </Col>
           <Col className="mb-2" md={2}>
-            <Link id={s.link} to={NEW_QUESTION_ROUTE}>Спросить</Link>
+            <Link id={s.link} to={NEW_QUESTION_ROUTE}>
+              Спросить
+            </Link>
           </Col>
           <Col className="mb-2" md={2}>
             <Dropdown>
-              <DropdownToggle size="lg" variant="dark" >
+              <DropdownToggle size="lg" variant="dark">
                 Категории
               </DropdownToggle>
               <DropdownMenu variant="dark">
                 {categories.map((category) => (
-                  <DropdownItem id={s.dropdown_text} key={category.id} eventKey={category.id}>
+                  <DropdownItem
+                    id={s.dropdown_text}
+                    key={category.id}
+                    eventKey={category.id}
+                  >
                     {category.name}
                   </DropdownItem>
                 ))}
               </DropdownMenu>
             </Dropdown>
           </Col>
-          <Col >
-            <Link id={s.link} to={RULES_PAGE_ROUTE}>Правила</Link>
+          <Col>
+            <Link id={s.link} to={RULES_PAGE_ROUTE}>
+              Правила
+            </Link>
           </Col>
           <Col className="mb-2" md={4}>
             <Form.Control

@@ -1,12 +1,12 @@
-import { FETCH_ACTIVE_USERS, FETCH_ONE_USER, FETCH_USERS } from "../../utils/AC_consts";
+import { CLEAR_USERS, FETCH_ACTIVE_USERS, FETCH_ONE_USER, FETCH_USERS } from "../../utils/AC_consts";
 import { fetchActiveUsers, fetchOneUser } from "../../http/userAPI";
 import { fetchUsers } from "../../http/userAPI";
 
 // fetch users
-export const fetchUsersAC = (data) => {
+export const fetchUsersAC = (users) => {
   return {
     type: FETCH_USERS,
-    data: data,
+    users: users,
   };
 };
 
@@ -21,6 +21,16 @@ export const fetchUsersTC = (limit, page) => {
       });
   };
 };
+
+
+//////
+
+export const clearUsersAC = () => {
+  return {
+    type: CLEAR_USERS,
+  };
+};
+
 
 // fetch active users
 export const fetchActiveUsersAC = (data) => {
