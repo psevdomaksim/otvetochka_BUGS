@@ -105,6 +105,7 @@ const Header = () => {
             </>
           )}
         </Row>
+        
         <Row className={s.lower_header}>
           <Col className="mb-2" md={2}>
             <Link to={HOME_PAGE_ROUTE}>

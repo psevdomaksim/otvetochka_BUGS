@@ -9,8 +9,6 @@ import { PROFILE_ROUTE, QUESTION_PAGE_ROUTE } from "../../utils/routes_consts";
 import { Link } from "react-router-dom";
 
 const UserQuestion = (props) => {
-
-
   return (
     <Container className={s.wrapper}>
       <Row>
@@ -18,7 +16,7 @@ const UserQuestion = (props) => {
           <Link to={QUESTION_PAGE_ROUTE + `/${props.question?.id}`}>
             <h4>{props.question?.title}</h4>
           </Link>
-       
+
           <GoReport style={{ color: "white" }} size={24} />
         </Col>
       </Row>
@@ -40,15 +38,13 @@ const UserQuestion = (props) => {
         </Col>
       </Row>
 
-      <Stack direction="horizontal" gap={4}>
-        <span className={s.signature}>{props.question?.user?.fullname}</span>
-        <span className={s.signature}>{props.question?.createdAt}</span>
-        <span className={s.signature}>{props.question?.category?.name}</span>
-        <span>
-        <span style={{color:"white", marginRight:"-20px"}}>{props.question?.answersCount}</span>
-        </span>
-        
-        <FaCommentDots style={{ color: "white" }} size={24} />
+      <Stack direction="horizontal" gap={4} className={s.signature_block}>
+        <div>
+          <span className={s.signature}>{props.question?.user?.fullname}</span>
+          <span className={s.signature}>{props.question?.createdAt}</span>
+          <span className={s.signature}>{props.question?.category?.name}</span>
+        </div>
+        <span style={{ color: "white"}}>{props.question?.answersCount} <FaCommentDots style={{ color: "white" }} size={24} /></span>
       </Stack>
     </Container>
   );

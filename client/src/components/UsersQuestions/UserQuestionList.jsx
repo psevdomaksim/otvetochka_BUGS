@@ -69,8 +69,10 @@ const UserQuestionList = (props) => {
 
   return (
     <div className={s.list_wrapper}>
-   
-      <hr />
+      <span id={s.title}>Вопросы пользователей</span>
+      <div className={s.items_container}>
+        <span>Недавние</span>
+      </div>
 
       {userQuestions?.map((question) => (
         <UserQuestion question={question} />

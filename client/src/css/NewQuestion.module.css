@@ -1,3 +1,4 @@
+@media only screen and (min-width: 1024px) {
 .quest_wrapper {
     width: 691px;
     border: 2px solid #FFE400;
@@ -66,4 +67,40 @@
 .row {
     display: flex;
     justify-content: space-evenly;
+}
+}
+
+@media only screen and (max-width: 768px) {
+    .quest_wrapper {
+        border: 2px solid #FFE400;
+        border-radius: 0.6em;
+        color: #fff;
+        padding: 1em;
+        font-size: 1.3em;
+        margin: 2em auto;
+    }
+
+    .input,.input:focus {
+        background: #4B4B4B;
+        border-radius: 0.6em;
+        color: #fff;
+    }
+
+    .textarea, .textarea:focus {
+        background: #4B4B4B;
+        border-radius: 9px;
+        color: #fff;
+        resize: none;
+    }
+
+    .select_list {
+        width: 15em;
+        background: #4B4B4B;
+        border-radius: 9px;
+        color: #fff;
+    }
+
+    .item {
+        margin-bottom: 1em;
+    }    
 }
