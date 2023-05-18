@@ -44,7 +44,6 @@ const Home = (props) => {
       <UserQuestionList trigger={trigger}/>
       <div ref={trigger} className="trigger"></div>
       <div className={style.break}></div>
-    
     </div>
   );
 };

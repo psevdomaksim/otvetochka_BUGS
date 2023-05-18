@@ -5,7 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import evg from "../../img/evg.png";
 import morvus from "../../img/morvus.png";
 import dan from "../../img/dan.png";
-import kerl from "../../img/kerl2.png"
+import kerl from "../../img/kerl2.png";
 import edelweiss from "../../img/edelweiss.png";
 
 const Footer = (props) => {
@@ -13,7 +13,7 @@ const Footer = (props) => {
     <footer className={s.footer}>
       <Container>
         <Row>
-          <Col xs={{span: 2, offset: 0}}  className={s.box_link}>
+          <Col xs={{ span: 2, offset: 0 }} className={s.box_link}>
             <Link to="/">Главная</Link>
             <Link to="/">Создать</Link>
             <Link to="/">Категории</Link>
@@ -28,7 +28,7 @@ const Footer = (props) => {
             личностями случайны. Ответ.by имеет за собой право заблокировать
             пользователя в случае не соблюдения правил проекта.
           </Col>
-          <Col className={s.dev_wrapper} xs={{offset: 2, span: 2}}>
+          <Col className={s.dev_wrapper} xs={{ offset: 2, span: 2 }}>
             Разработчики:
             <div className={s.dev}>
               <img src={evg} />
@@ -41,6 +41,7 @@ const Footer = (props) => {
           </Col>
         </Row>
       </Container>
+      <div className={s.for_phone}>Создано дуралеями :)</div>
     </footer>
   );
 };
