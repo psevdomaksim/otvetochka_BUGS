@@ -24,10 +24,7 @@ const Home = (props) => {
         </div>
         <ActiveUsersList />
       </div>
-      <span id={style.title}>Вопросы пользователей</span>
-      <div className={style.items_container}>
-        <span>Недавние</span>
-      </div>
+      
       <div className={style.questionListwrapper}>
        <UserQuestionList trigger={trigger}/>
       </div>

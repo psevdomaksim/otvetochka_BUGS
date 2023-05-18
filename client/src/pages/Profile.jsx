@@ -1,6 +1,5 @@
 import React from "react";
 import s from "../css/Profile.module.css";
-import ava from "../img/ava.jpg";
 //import ProfileComponent from "../components/Profile/ProfileComponent";
 import { useContext } from "react";
 import { StoreContext } from "..";
@@ -86,6 +85,7 @@ const Profile = (props) => {
                   </p>
                 </Col>
               </Row>
+
               <div className={s.profile}>
                 {store.getState().authPage.currentLogin?.id === +id ? (
                   <Link to={EDIT_PROFILE_ROUTE + `/${id}`}>
@@ -122,13 +122,12 @@ const Profile = (props) => {
                 <Col xs="2">
                   <span
                     className={s.active_span}
-                   
                   >
                     Вопросы
                   </span>
                 </Col>
                 <Col xs="2">
-                  <span  onClick={() => (setIsAnswers(true), store.dispatch(clearQuestionsAC()))}>Ответы</span>
+                  <span id={s.tab} onClick={() => (setIsAnswers(true), store.dispatch(clearQuestionsAC()))}>Ответы</span>
                 </Col>
               </>
             ) : (
@@ -137,12 +136,11 @@ const Profile = (props) => {
                   <span    
                   onClick={() => setIsAnswers(false)}                        
                   >
-                    
                     Вопросы
                   </span>
                 </Col>
                 <Col xs="2">
-                  <span  className={s.active_span} >Ответы</span>
+                  <span id={s.tab} className={s.active_span}>Ответы</span>
                 </Col>
               </>
             )}
