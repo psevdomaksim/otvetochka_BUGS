@@ -34,9 +34,9 @@ const Answer = (props) => {
     </Row>
     <Row className="mb-2">
     <Stack className="mb-2" direction="horizontal" style={{color:"#747474"}} gap={4}>
-      <span>{props.answer?.user?.fullname}</span>
-      <span>{props.answer?.createdAt}</span>
-      <span style={{color:"white", marginRight:"-20px"}}>{props.answer?.likeCount}</span>
+      <Col>{props.answer?.user?.fullname}</Col>
+      <Col>{props.answer?.createdAt}</Col>
+      <Col style={{color:"white", marginRight:"-20px"}}>{props.answer?.likeCount}</Col>
       {
         props.answer?.isLiked === 1 ? 
         <FcLike style={{cursor:"pointer"}} size={24} onClick={()=>props.dislikeAnswer(props.answer?.id)}/>  :

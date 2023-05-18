@@ -95,15 +95,15 @@ const Header = () => {
           )}
         </Row>
         <Row className={s.lower_header}>
-          <Col xs={2}>
+          <Col className="mb-2" md={2}>
             <Link to={HOME_PAGE_ROUTE}>
               <Image src={logo} />
             </Link>
           </Col>
-          <Col xs={2}>
+          <Col className="mb-2" md={2}>
             <Link id={s.link} to={NEW_QUESTION_ROUTE}>Спросить</Link>
           </Col>
-          <Col xs={3}>
+          <Col className="mb-2" md={2}>
             <Dropdown>
               <DropdownToggle size="lg" variant="dark" >
                 Категории
@@ -117,10 +117,10 @@ const Header = () => {
               </DropdownMenu>
             </Dropdown>
           </Col>
-          <Col xs={2}>
+          <Col >
             <Link id={s.link} to={RULES_PAGE_ROUTE}>Правила</Link>
           </Col>
-          <Col xs={3}>
+          <Col className="mb-2" md={4}>
             <Form.Control
               className={s.lower_header_form}
               type="text"

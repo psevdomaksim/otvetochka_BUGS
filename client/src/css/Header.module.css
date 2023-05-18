@@ -24,7 +24,7 @@
     align-items: center;
     background: #151515;
     font-size: 24px;
-    padding: 12px;
+    padding-top: 8px;
 }
 
 .lower_header a{
@@ -59,3 +59,12 @@
     color: #fff;
     border-radius: 0.3em;
 }
+
+
+
+/* 
+@media (max-width: 600px) {
+    .lower_header {
+        flex-direction: column
+    }
+  } */
