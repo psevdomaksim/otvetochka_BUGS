@@ -24,6 +24,11 @@ class banController {
   async createNewBan(req, res, next) {
     const { userId, ruleId } = req.body;
 
+    if (!userId || !ruleId) {
+      return next(ApiError.errorRequest("Uncrorrect request"));
+    }
+
+
      await User.findOne({
       where: { id: userId },
     }).then( async (user) =>{
@@ -48,11 +53,15 @@ class banController {
   }
 
   async deleteBan(req, res, next) {
-    const { id } = req.params;
-    //const { userId } = req.body;
+
+    const { userId } = req.query;
+    if (!userId) {
+      return next(ApiError.errorRequest("Uncorrect data"));
+    }
+    
     Ban.destroy({
       where: {
-        id,
+        userId,
       },
     })
       .then(() => {

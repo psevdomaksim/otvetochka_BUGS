@@ -44,7 +44,7 @@ const Profile = (props) => {
   useEffect(() => {
     fetchUser();
     fetchProfileAnswers();
-  }, []);
+  }, [id]);
 
 
 

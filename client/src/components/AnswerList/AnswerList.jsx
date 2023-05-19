@@ -9,6 +9,7 @@ import {
   fetchAnswersTC,
   likeAnswerTC,
 } from "../../Redux/ActionCreators/answerAC";
+import { addReportTC } from "../../Redux/ActionCreators/reportAC";
 import Answer from "./Answer";
 
 const AnswerList = (props) => {
@@ -51,6 +52,12 @@ const AnswerList = (props) => {
     setIsLoading(store.getState().authPage.isLoading);
   });
 
+  const addReport = (answerId) => {
+    if ( window.confirm("Пожаловаться на ответ?")) {
+      store.dispatch(addReportTC(answerId, null));
+    }
+  };
+
 
   if(isLoading){
     return <Spinner/>
@@ -66,6 +73,7 @@ const AnswerList = (props) => {
               <Answer
                 likeAnswer={likeAnswer}
                 dislikeAnswer={dislikeAnswer}
+                addReport={addReport}
                 key={props.bestAnswer?.id}
                 answer={props.bestAnswer}
               />
@@ -76,7 +84,7 @@ const AnswerList = (props) => {
 
           <>
             {answers?.map((answer) => (
-              <Answer likeAnswer={likeAnswer} dislikeAnswer={dislikeAnswer} key={answer.id} answer={answer} />
+              <Answer addReport={addReport} likeAnswer={likeAnswer} dislikeAnswer={dislikeAnswer} key={answer.id} answer={answer} />
             ))}
           </>
         </>

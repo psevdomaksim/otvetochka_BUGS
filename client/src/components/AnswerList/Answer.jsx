@@ -24,14 +24,14 @@ const Answer = (props) => {
 
         <Col className={s.quest_title}>
           <p>{props.answer?.body}</p>{" "}
-          <GoReport style={{ color: "white" }} size={24} />
+          <GoReport onClick={()=>props.addReport(props.answer?.id)} style={{ color: "white", cursor:"pointer" }} size={24} />
         </Col>
       </Row>
       <Row className="mb-2">
-        <Stack style={{ color: "#747474" }}>
+        <Stack style={{ color: "#747474" }} direction="horizontal">
 
-            <Col>{props.answer?.user?.fullname}</Col>
-            <Col>{props.answer?.createdAt}</Col>
+            <Col xs={2}>{props.answer?.user?.fullname}</Col>
+            <Col xs={9}>{props.answer?.createdAt}</Col>
 
             <Col style={{ color: "white" }}>{props.answer?.likeCount}</Col>
             {props.answer?.isLiked === 1 ? (

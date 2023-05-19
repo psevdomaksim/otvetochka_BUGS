@@ -5,6 +5,7 @@ import {
   LOG_OUT,
   SET_LOADING,
   UPDATE_PROFILE_DATA,
+  CLEAR_MSG,
 } from "../../utils/AC_consts";
 
 let initialState = {
@@ -56,6 +57,11 @@ const authReducer = (state = initialState, action) => {
     case API_ERROR: {
       
       state = { ...state, error: action.data, msg:null };
+      return state;
+    }
+
+    case CLEAR_MSG:{
+      state = { ...state, error: null, msg: null };
       return state;
     }
 

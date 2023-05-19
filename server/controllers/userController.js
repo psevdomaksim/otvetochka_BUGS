@@ -108,12 +108,44 @@ class userController {
     const { id } = req.params;
     const user = await User.findOne({
       where: { id },
+      attributes: [
+        "id",
+        "fullname",
+        "email",
+        "avatarImage",
+        "status",
+        "role",
+        "createdAt",    
+        [
+          sequelize.literal(
+            `(SELECT COUNT(*) FROM bans WHERE bans.userId = user.id)`
+          ),
+          "isBanned",
+        ],
+      ],
     });
     return res.json(user);
   }
 
   async getAllUsers(req, res, next) {
-    User.findAll({ raw: true })
+    User.findAll({ 
+      raw: true,
+      attributes: [
+        "id",
+        "fullname",
+        "email",
+        "avatarImage",
+        "status",
+        "role",
+        "createdAt",    
+        [
+          sequelize.literal(
+            `(SELECT COUNT(*) FROM bans WHERE bans.userId = user.id)`
+          ),
+          "isBanned",
+        ],
+      ],
+     })
       .then((users) => {
         res.send(users);
       })

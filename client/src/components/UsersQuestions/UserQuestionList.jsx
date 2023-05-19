@@ -7,6 +7,7 @@ import { fetchAnswersTC } from "../../Redux/ActionCreators/answerAC";
 import { StoreContext } from "../..";
 import { useEffect } from "react";
 import { useRef } from "react";
+import { addReportTC } from "../../Redux/ActionCreators/reportAC";
 
 const UserQuestionList = (props) => {
   const store = useContext(StoreContext);
@@ -53,29 +54,21 @@ const UserQuestionList = (props) => {
     observer.current.observe(props.trigger.current);
   }, []);
 
-  useEffect(() => {
-    if (!props.profileQuestions && !props.profileAnswers) {
-      fetchQuestions();
-    }
-
-    if (props.profileQuestions && props.profileAnswers) {
-      fetchProfileQuestions();
-    }
-  }, []);
-
   store.subscribe(() => {
     setUserQuestions(store.getState().questionPage.questions);
   });
 
+
+  const addReport = (questionId) => {
+    if (window.confirm("Пожаловаться на вопрос?")) {
+      store.dispatch(addReportTC(null, questionId));
+    }
+  };
+
   return (
     <div className={s.list_wrapper}>
-      <span id={s.title}>Вопросы пользователей</span>
-      <div className={s.items_container}>
-        <span>Недавние</span>
-      </div>
-
       {userQuestions?.map((question) => (
-        <UserQuestion question={question} />
+        <UserQuestion addReport={addReport} question={question} />
       ))}
     </div>
   );

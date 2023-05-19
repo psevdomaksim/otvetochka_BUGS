@@ -107,7 +107,7 @@ const Header = () => {
         </Row>
         
         <Row className={s.lower_header}>
-          <Col className="mb-2" md={2}>
+          <Col className="mb-2" md={3}>
             <Link to={HOME_PAGE_ROUTE}>
               <Image src={logo} />
             </Link>
@@ -140,14 +140,14 @@ const Header = () => {
               Правила
             </Link>
           </Col>
-          <Col className="mb-2" md={4}>
+          {/* <Col className="mb-2" md={4}>
             <Form.Control
               className={s.lower_header_form}
               type="text"
               id="name"
               placeholder="Введите свой вопрос"
             />
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </header>

@@ -17,7 +17,7 @@ const UserQuestion = (props) => {
             <h4>{props.question?.title}</h4>
           </Link>
 
-          <GoReport style={{ color: "white" }} size={24} />
+          <GoReport onClick={()=>props.addReport(props.question?.id)} style={{ color: "white", cursor:"pointer" }} size={24} />
         </Col>
       </Row>
 
@@ -39,12 +39,10 @@ const UserQuestion = (props) => {
       </Row>
 
       <Stack direction="horizontal" gap={4} className={s.signature_block}>
-        <div>
           <span className={s.signature}>{props.question?.user?.fullname}</span>
           <span className={s.signature}>{props.question?.createdAt}</span>
           <span className={s.signature}>{props.question?.category?.name}</span>
-        </div>
-        <span style={{ color: "white"}}>{props.question?.answersCount} <FaCommentDots style={{ color: "white" }} size={24} /></span>
+        <span style={{ color: "white"}}>{props.question?.answersCount} <FaCommentDots  style={{ color: "white" }} size={24} /></span>
       </Stack>
     </Container>
   );

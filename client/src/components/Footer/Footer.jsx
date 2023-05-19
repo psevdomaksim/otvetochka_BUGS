@@ -13,14 +13,7 @@ const Footer = (props) => {
     <footer className={s.footer}>
       <Container>
         <Row>
-          <Col xs={{ span: 2, offset: 0 }} className={s.box_link}>
-            <Link to="/">Главная</Link>
-            <Link to="/">Создать</Link>
-            <Link to="/">Категории</Link>
-            <Link to="/">Правила</Link>
-            <Link to="/">Пользователь</Link>
-          </Col>
-          <Col xs="8" className={s.desc}>
+          <Col xs="10" className={s.desc}>
             Ответ.by - сайт, созданный в мае 2023 года, с целью актуализации
             сайтов по поиску вопросов и ответов на различные темы, а так же
             перестроения их на современный лад. Проект Ответ.by создан

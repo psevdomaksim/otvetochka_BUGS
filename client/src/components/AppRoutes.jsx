@@ -18,6 +18,7 @@ import {
   clearAnswersAC,
 } from "../Redux/ActionCreators/answerAC";
 import { clearUsersAC } from "../Redux/ActionCreators/userAC";
+import { clearAuthMessagesAC } from "../Redux/ActionCreators/authAC";
 
 const AppRoutes = () => {
   const store = useContext(StoreContext);
@@ -38,6 +39,7 @@ const AppRoutes = () => {
     store.dispatch(clearAnswersAC());
     store.dispatch(clearAnswerMessagesAC());
     store.dispatch(clearUsersAC());
+    store.dispatch(clearAuthMessagesAC());
   }, [location.pathname]);
 
 

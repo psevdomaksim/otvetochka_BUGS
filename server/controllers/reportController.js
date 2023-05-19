@@ -9,22 +9,22 @@ class reportController {
     let reports;
 
     if (!answerId && !userId && !questionId) {
-      reports = await Report.findAndCountAll({
+      reports = await Report.findAll({
         attributes: ["id", "createdAt"],
         include: [
-          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+          { model: User, attributes: ["id", "fullname"] },
           {
             model: Answer,
             attributes: ["id", "body"],
             include: [
-              { model: User, attributes: ["id", "fullname", "avatarImage"] },
+              { model: User, attributes: ["id", "fullname"] },
             ],
           },
           {
             model: Question,
             attributes: ["id", "title"],
             include: [
-              { model: User, attributes: ["id", "fullname", "avatarImage"] },
+              { model: User, attributes: ["id", "fullname"] },
             ],
           },
         ],
@@ -33,35 +33,35 @@ class reportController {
     }
 
     if (!answerId && userId && !questionId) {
-      reports = await Report.findAndCountAll({
+      reports = await Report.findAll({
         where: { userId },
       });
       return res.json(reports);
     }
 
     if (answerId && !userId && !questionId) {
-      reports = await Report.findAndCountAll({
+      reports = await Report.findAll({
         where: { answerId },
       });
       return res.json(reports);
     }
 
     if (answerId && userId && !questionId) {
-      reports = await Report.findAndCountAll({
+      reports = await Report.findAll({
         where: { answerId, userId },
       });
       return res.json(reports);
     }
 
     if (questionId && !userId && !answerId) {
-      reports = await Report.findAndCountAll({
+      reports = await Report.findAll({
         where: { questionId },
       });
       return res.json(reports);
     }
 
     if (questionId && userId && !answerId) {
-      reports = await Report.findAndCountAll({
+      reports = await Report.findAll({
         where: { questionId, userId },
       });
       return res.json(reports);
@@ -70,15 +70,15 @@ class reportController {
 
   async getQuestionsReports(req, res) {
   
-      let reports = await Report.findAndCountAll({
+      let reports = await Report.findAll({
         attributes: ["id", "createdAt"],
         include: [
-          { model: User, attributes: ["id", "fullname", "avatarImage"] },
+          { model: User, attributes: ["id", "email"] },
           {
             model: Question,
             attributes: ["id", "title"],
             include: [
-              { model: User, attributes: ["id", "fullname", "avatarImage"] },
+              { model: User, attributes: ["id", "email"] },
             ],
           },
         ],
@@ -92,15 +92,15 @@ class reportController {
 
   async getAnswersReports(req, res) {
   
-    let reports = await Report.findAndCountAll({
+    let reports = await Report.findAll({
       attributes: ["id", "createdAt"],
       include: [
-        { model: User, attributes: ["id", "fullname", "avatarImage"] },
+        { model: User, attributes: ["id", "email",] },
         {
           model: Answer,
           attributes: ["id", "body"],
           include: [
-            { model: User, attributes: ["id", "fullname", "avatarImage"] },
+            { model: User, attributes: ["id", "email",] },
           ],
         },
       ],

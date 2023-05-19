@@ -14,6 +14,7 @@ import { useState } from "react";
 import UserQuestion from "../components/UsersQuestions/UserQuestion";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useRef } from "react";
+import { addReportTC } from "../Redux/ActionCreators/reportAC";
 
 const Question = (props) => {
   const { id } = useParams();
@@ -71,11 +72,14 @@ const Question = (props) => {
     store.dispatch(addNewAnswerTC(body, +id));
   };
 
- 
+  const addReport = (questionId) => {
+    store.dispatch(addReportTC(null, questionId));
+  };
 
   return (
       <Container className={s.wrapper}>
         <UserQuestion
+          addReport={addReport}
           key={curQuestion?.id}
           question={curQuestion}
         />

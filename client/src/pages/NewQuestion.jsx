@@ -114,9 +114,6 @@ const NewQuestion = (props) => {
             Опубликовать
           </Button>
         </Col>
-        <Col className={s.col}>
-          <Button id={s.return}>Вернуть</Button>
-        </Col>
       </Row>
     </Container>
   );

@@ -1,4 +1,4 @@
-@media only screen and (min-width: 1024px) {
+
 .list_wrapper {
     border: #FFE400 2px solid;
     border-radius: 0.8em;
@@ -8,19 +8,7 @@
     margin-top: 15px;
 }
 
-#title {
-    font-size: 28px;
-    color: #D2D2D2;
-    display: inline-block;
-    margin-bottom: 1em;
-}
 
-.items_container span {
-    margin-right: 1em;
-    font-size: 1.5em;
-    color: #D2D2D2;
-}
-}
 
 @media only screen and (max-width: 768px) {
     .list_wrapper {

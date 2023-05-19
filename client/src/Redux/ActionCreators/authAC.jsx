@@ -7,6 +7,7 @@ import {
   LOG_OUT,
   SET_LOADING,
   UPDATE_PROFILE_DATA,
+  CLEAR_MSG,
 } from "../../utils/AC_consts";
 
 // error
@@ -14,6 +15,15 @@ export const ApiError = (data) => {
   return {
     type: API_ERROR,
     data: data,
+  };
+};
+
+
+
+/////
+export const clearAuthMessagesAC = () => {
+  return {
+    type: CLEAR_MSG,
   };
 };
 

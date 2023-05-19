@@ -2,9 +2,22 @@
 .home_page_wrapper {
     background: #1F1F1F;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     margin: 3em auto;
+    width: 100%;
+}
+
+#title {
+    font-size: 28px;
+    color: #D2D2D2;
+    display: inline-block;
+    margin-bottom: 1em;
+}
+
+.items_container span {
+    margin-right: 1em;
+    font-size: 1.5em;
+    color: #D2D2D2;
 }
 
 .wrapper {
@@ -25,7 +38,7 @@
 }
 
 .questionList_wrapper{
-    width: 45%;
+    width: 60%;
 }
 .break {
     flex-basis: 100%;
